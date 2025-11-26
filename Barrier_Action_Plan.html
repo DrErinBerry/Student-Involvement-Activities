@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Barrier Action Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .part-container {
+            background: #f8f9fa;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .part-header {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .section-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .barrier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .barrier-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .barrier-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .barrier-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .barrier-table input[type="text"] {
+            margin-bottom: 0;
+        }
+        
+        .barrier-table select {
+            margin-bottom: 0;
+        }
+        
+        .barrier-name {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .priority-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #ffc107;
+        }
+        
+        .priority-section h4 {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+        
+        .radio-option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .communication-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            display: none;
+        }
+        
+        .communication-section.active {
+            display: block;
+        }
+        
+        .help-text {
+            background: #d1ecf1;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid #0c5460;
+            font-size: 0.95em;
+            color: #0c5460;
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .timeline-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .timeline-table td {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        .timeline-table textarea {
+            min-height: 80px;
+            font-size: 0.9em;
+        }
+        
+        .month-header {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .save-indicator {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .save-indicator.show {
+            opacity: 1;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .header {
+                background: #667eea !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .button-group {
+                display: none;
+            }
+            
+            .part-container {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .barrier-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Comprehensive Barrier Action Plan</h1>
+            <p>Create Your Roadmap for Student IEP Involvement</p>
+        </div>
+        
+        <div class="content">
+            <form id="actionPlanForm" aria-label="Barrier Action Plan">
+                
+                <!-- PART 1: Barrier Assessment -->
+                <div class="part-container">
+                    <div class="part-header">Part 1: Barrier Assessment</div>
+                    
+                    <p style="margin-bottom: 20px;">Complete a comprehensive assessment of the five common barriers in your specific educational setting.</p>
+                    
+                    <div class="help-text">
+                        <strong>The Five Barriers from Module 3:</strong><br>
+                        1. Students are too young to be involved<br>
+                        2. Students need to know all about their disability label<br>
+                        3. There's not enough time to prepare students<br>
+                        4. Students with significant disabilities can't participate<br>
+                        5. I will lose too much control
+                    </div>
+                    
+                    <table class="barrier-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Barrier</th>
+                                <th style="width: 20%;">Prevalence</th>
+                                <th style="width: 55%;">Evidence/Specific Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="barrier-name">1. "Students are too young"</td>
+                                <td>
+                                    <select id="barrier1-prev" aria-label="Barrier 1 prevalence">
+                                        <option value="">Select...</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                        <option value="not-present">Not Present</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" id="barrier1-evidence" placeholder="Example: Elementary teachers say students are too young to understand IEPs..." aria-label="Barrier 1 evidence">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="barrier-name">2. "Must know disability label"</td>
+                                <td>
+                                    <select id="barrier2-prev" aria-label="Barrier 2 prevalence">
+                                        <option value="">Select...</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                        <option value="not-present">Not Present</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" id="barrier2-evidence" placeholder="Example: Parents don't want their child to know about their disability..." aria-label="Barrier 2 evidence">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="barrier-name">3. "Not enough time"</td>
+                                <td>
+                                    <select id="barrier3-prev" aria-label="Barrier 3 prevalence">
+                                        <option value="">Select...</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                        <option value="not-present">Not Present</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" id="barrier3-evidence" placeholder="Example: Case managers have 25+ students and no prep time..." aria-label="Barrier 3 evidence">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="barrier-name">4. "Significant disabilities prevent participation"</td>
+                                <td>
+                                    <select id="barrier4-prev" aria-label="Barrier 4 prevalence">
+                                        <option value="">Select...</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                        <option value="not-present">Not Present</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" id="barrier4-evidence" placeholder="Example: Teams assume non-verbal students can't contribute..." aria-label="Barrier 4 evidence">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="barrier-name">5. "Loss of control"</td>
+                                <td>
+                                    <select id="barrier5-prev" aria-label="Barrier 5 prevalence">
+                                        <option value="">Select...</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                        <option value="not-present">Not Present</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" id="barrier5-evidence" placeholder="Example: Teachers worry meetings won't cover required components..." aria-label="Barrier 5 evidence">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="priority-section">
+                        <h4>⭐ Your Top 2 Priority Barriers to Address</h4>
+                        <p style="margin-bottom: 15px;">Based on your assessment above, identify the two barriers that are most prevalent or most urgent to address in your setting:</p>
+                        
+                        <label for="priority1">Priority Barrier #1:</label>
+                        <input type="text" id="priority1" placeholder="Example: Not enough time to prepare students">
+                        
+                        <label for="priority1-why">Why this is a priority (explain your reasoning):</label>
+                        <textarea id="priority1-why" placeholder="Explain why you selected this as a top priority..."></textarea>
+                        
+                        <label for="priority2">Priority Barrier #2:</label>
+                        <input type="text" id="priority2" placeholder="Example: Students with significant disabilities can't participate">
+                        
+                        <label for="priority2-why">Why this is a priority (explain your reasoning):</label>
+                        <textarea id="priority2-why" placeholder="Explain why you selected this as a top priority..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- PART 2: Stakeholder Communication Plan -->
+                <div class="part-container">
+                    <div class="part-header">Part 2: Stakeholder Communication Plan</div>
+                    
+                    <p style="margin-bottom: 20px;">Develop communication materials to address ONE of your priority barriers. Choose the option that best fits your needs:</p>
+                    
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="communication-type" value="parent-letter" id="option-parent">
+                            <div>
+                                <strong>Option 1: Parent Letter/Email</strong><br>
+                                Write a 150-word letter to parents explaining the importance of student involvement, addressing your selected barrier, proposing solutions, and requesting partnership.
+                            </div>
+                        </label>
+                        
+                        <label class="radio-option">
+                            <input type="radio" name="communication-type" value="admin-proposal" id="option-admin">
+                            <div>
+                                <strong>Option 2: Administrator Proposal</strong><br>
+                                Create a one-page proposal for administrators including an executive summary, research-based rationale, resource needs, expected outcomes, and timeline.
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <!-- Parent Letter Section -->
+                    <div class="communication-section" id="parent-letter-section">
+                        <h3 style="color: #667eea; margin-bottom: 15px;">Parent Letter/Email Template</h3>
+                        
+                        <label for="parent-barrier">Which barrier are you addressing?</label>
+                        <input type="text" id="parent-barrier" placeholder="Example: Parents don't want their child to know about their disability">
+                        
+                        <label for="parent-letter">Your Parent Letter (150+ words):</label>
+                        <div class="help-text">
+                            Include: (1) Importance of student involvement, (2) Address the barrier, (3) Propose solutions, (4) Request partnership
+                        </div>
+                        <textarea 
+                            id="parent-letter" 
+                            style="min-height: 200px;"
+                            placeholder="Dear [Parent Name],&#10;&#10;I am writing to share some exciting information about how we can involve [Student Name] more actively in their IEP meetings..."></textarea>
+                        <div id="char-count-parent" class="char-count" aria-live="polite">0 characters (suggest 150+ words / ~900+ characters)</div>
+                    </div>
+                    
+                    <!-- Administrator Proposal Section -->
+                    <div class="communication-section" id="admin-proposal-section">
+                        <h3 style="color: #667eea; margin-bottom: 15px;">Administrator Proposal Template</h3>
+                        
+                        <label for="admin-barrier">Which barrier are you addressing?</label>
+                        <input type="text" id="admin-barrier" placeholder="Example: Not enough time to prepare students for IEP meetings">
+                        
+                        <label for="exec-summary">Executive Summary (2-3 sentences):</label>
+                        <textarea id="exec-summary" placeholder="Brief overview of the proposal and what you're requesting..."></textarea>
+                        
+                        <label for="rationale">Research-Based Rationale:</label>
+                        <div class="help-text">
+                            Reference research from the modules (e.g., Marcus's case study, Powers et al., Prince et al.)
+                        </div>
+                        <textarea id="rationale" placeholder="Explain WHY student involvement matters, using research and data..."></textarea>
+                        
+                        <label for="resources">Resource Needs:</label>
+                        <textarea id="resources" placeholder="What do you need? (time, materials, training, personnel, etc.)"></textarea>
+                        
+                        <label for="outcomes">Expected Outcomes:</label>
+                        <textarea id="outcomes" placeholder="What results do you expect to see? How will you measure success?"></textarea>
+                        
+                        <label for="timeline-admin">Implementation Timeline:</label>
+                        <textarea id="timeline-admin" placeholder="When will you start? What are the phases? When will you see results?"></textarea>
+                    </div>
+                </div>
+                
+                <!-- PART 3: Implementation Timeline -->
+                <div class="part-container">
+                    <div class="part-header">Part 3: Semester-Long Implementation Timeline</div>
+                    
+                    <p style="margin-bottom: 20px;">Create a realistic, actionable plan for the next four months:</p>
+                    
+                    <table class="timeline-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Month</th>
+                                <th style="width: 35%;">Actions</th>
+                                <th style="width: 25%;">Resources Needed</th>
+                                <th style="width: 25%;">Success Indicators</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="month-header">Month 1</td>
+                                <td><textarea id="month1-actions" placeholder="What will you DO in month 1?"></textarea></td>
+                                <td><textarea id="month1-resources" placeholder="What do you NEED?"></textarea></td>
+                                <td><textarea id="month1-success" placeholder="How will you know it's working?"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="month-header">Month 2</td>
+                                <td><textarea id="month2-actions" placeholder="What will you DO in month 2?"></textarea></td>
+                                <td><textarea id="month2-resources" placeholder="What do you NEED?"></textarea></td>
+                                <td><textarea id="month2-success" placeholder="How will you know it's working?"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="month-header">Month 3</td>
+                                <td><textarea id="month3-actions" placeholder="What will you DO in month 3?"></textarea></td>
+                                <td><textarea id="month3-resources" placeholder="What do you NEED?"></textarea></td>
+                                <td><textarea id="month3-success" placeholder="How will you know it's working?"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="month-header">Month 4</td>
+                                <td><textarea id="month4-actions" placeholder="What will you DO in month 4?"></textarea></td>
+                                <td><textarea id="month4-resources" placeholder="What do you NEED?"></textarea></td>
+                                <td><textarea id="month4-success" placeholder="How will you know it's working?"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn-primary" onclick="emailActionPlan()">📧 Email to Myself</button>
+                    <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print</button>
+                    <button type="button" class="btn-success" onclick="saveProgress()">💾 Save Progress</button>
+                    <span id="saveIndicator" class="save-indicator">✓ Saved!</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-save functionality
+        let autoSaveTimer;
+        const AUTOSAVE_DELAY = 3000;
+        
+        // Handle communication type selection
+        document.querySelectorAll('input[name="communication-type"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Update visual selection
+                document.querySelectorAll('.radio-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                this.closest('.radio-option').classList.add('selected');
+                
+                // Show appropriate section
+                document.querySelectorAll('.communication-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                if (this.value === 'parent-letter') {
+                    document.getElementById('parent-letter-section').classList.add('active');
+                } else if (this.value === 'admin-proposal') {
+                    document.getElementById('admin-proposal-section').classList.add('active');
+                }
+                
+                scheduleAutoSave();
+            });
+        });
+        
+        // Character counting for parent letter
+        const parentLetter = document.getElementById('parent-letter');
+        const parentCounter = document.getElementById('char-count-parent');
+        
+        if (parentLetter) {
+            parentLetter.addEventListener('input', () => {
+                const count = parentLetter.value.length;
+                const wordCount = parentLetter.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                parentCounter.textContent = `${count} characters (approximately ${wordCount} words / suggest 150+ words)`;
+                scheduleAutoSave();
+            });
+        }
+        
+        // Set up auto-save for all inputs
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('input', scheduleAutoSave);
+            field.addEventListener('change', scheduleAutoSave);
+        });
+        
+        function scheduleAutoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(saveProgress, AUTOSAVE_DELAY);
+        }
+        
+        function saveProgress() {
+            try {
+                const formData = {
+                    // Barrier assessment
+                    barrier1Prev: document.getElementById('barrier1-prev').value,
+                    barrier1Evidence: document.getElementById('barrier1-evidence').value,
+                    barrier2Prev: document.getElementById('barrier2-prev').value,
+                    barrier2Evidence: document.getElementById('barrier2-evidence').value,
+                    barrier3Prev: document.getElementById('barrier3-prev').value,
+                    barrier3Evidence: document.getElementById('barrier3-evidence').value,
+                    barrier4Prev: document.getElementById('barrier4-prev').value,
+                    barrier4Evidence: document.getElementById('barrier4-evidence').value,
+                    barrier5Prev: document.getElementById('barrier5-prev').value,
+                    barrier5Evidence: document.getElementById('barrier5-evidence').value,
+                    // Priorities
+                    priority1: document.getElementById('priority1').value,
+                    priority1Why: document.getElementById('priority1-why').value,
+                    priority2: document.getElementById('priority2').value,
+                    priority2Why: document.getElementById('priority2-why').value,
+                    // Communication type
+                    communicationType: document.querySelector('input[name="communication-type"]:checked')?.value || '',
+                    // Parent letter
+                    parentBarrier: document.getElementById('parent-barrier').value,
+                    parentLetter: document.getElementById('parent-letter').value,
+                    // Admin proposal
+                    adminBarrier: document.getElementById('admin-barrier').value,
+                    execSummary: document.getElementById('exec-summary').value,
+                    rationale: document.getElementById('rationale').value,
+                    resources: document.getElementById('resources').value,
+                    outcomes: document.getElementById('outcomes').value,
+                    timelineAdmin: document.getElementById('timeline-admin').value,
+                    // Implementation timeline
+                    month1Actions: document.getElementById('month1-actions').value,
+                    month1Resources: document.getElementById('month1-resources').value,
+                    month1Success: document.getElementById('month1-success').value,
+                    month2Actions: document.getElementById('month2-actions').value,
+                    month2Resources: document.getElementById('month2-resources').value,
+                    month2Success: document.getElementById('month2-success').value,
+                    month3Actions: document.getElementById('month3-actions').value,
+                    month3Resources: document.getElementById('month3-resources').value,
+                    month3Success: document.getElementById('month3-success').value,
+                    month4Actions: document.getElementById('month4-actions').value,
+                    month4Resources: document.getElementById('month4-resources').value,
+                    month4Success: document.getElementById('month4-success').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('barrierActionPlan', JSON.stringify(formData));
+                
+                // Show save indicator
+                const indicator = document.getElementById('saveIndicator');
+                indicator.classList.add('show');
+                setTimeout(() => indicator.classList.remove('show'), 2000);
+                
+            } catch (e) {
+                console.warn('Could not save to browser storage:', e);
+            }
+        }
+        
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('barrierActionPlan');
+                if (saved) {
+                    const formData = JSON.parse(saved);
+                    
+                    // Restore all fields
+                    Object.keys(formData).forEach(key => {
+                        if (key !== 'timestamp' && key !== 'communicationType') {
+                            const field = document.getElementById(key.replace(/([A-Z])/g, '-$1').toLowerCase());
+                            if (field) {
+                                field.value = formData[key];
+                            }
+                        }
+                    });
+                    
+                    // Restore communication type
+                    if (formData.communicationType) {
+                        const radio = document.querySelector(`input[value="${formData.communicationType}"]`);
+                        if (radio) {
+                            radio.checked = true;
+                            radio.dispatchEvent(new Event('change'));
+                        }
+                    }
+                    
+                    // Update character count
+                    if (parentLetter && formData.parentLetter) {
+                        const count = formData.parentLetter.length;
+                        const wordCount = formData.parentLetter.trim().split(/\s+/).filter(word => word.length > 0).length;
+                        parentCounter.textContent = `${count} characters (approximately ${wordCount} words / suggest 150+ words)`;
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not load saved progress:', e);
+            }
+        }
+        
+        function emailActionPlan() {
+            const commType = document.querySelector('input[name="communication-type"]:checked');
+            
+            // Gather barrier assessment data
+            const barriers = [];
+            for (let i = 1; i <= 5; i++) {
+                const prev = document.getElementById(`barrier${i}-prev`).value;
+                const evidence = document.getElementById(`barrier${i}-evidence`).value;
+                if (prev && evidence) {
+                    const barrierNames = [
+                        'Students are too young',
+                        'Must know disability label',
+                        'Not enough time',
+                        'Significant disabilities prevent participation',
+                        'Loss of control'
+                    ];
+                    barriers.push(`${barrierNames[i-1]}: ${prev.toUpperCase()} - ${evidence}`);
+                }
+            }
+            
+            const priority1 = document.getElementById('priority1').value;
+            const priority1Why = document.getElementById('priority1-why').value;
+            const priority2 = document.getElementById('priority2').value;
+            const priority2Why = document.getElementById('priority2-why').value;
+            
+            // Communication plan
+            let communicationPlan = '';
+            if (commType && commType.value === 'parent-letter') {
+                const parentBarrier = document.getElementById('parent-barrier').value;
+                const parentLetter = document.getElementById('parent-letter').value;
+                communicationPlan = `PARENT LETTER\n\nBarrier Addressed: ${parentBarrier}\n\n${parentLetter}`;
+            } else if (commType && commType.value === 'admin-proposal') {
+                const adminBarrier = document.getElementById('admin-barrier').value;
+                const execSummary = document.getElementById('exec-summary').value;
+                const rationale = document.getElementById('rationale').value;
+                const resources = document.getElementById('resources').value;
+                const outcomes = document.getElementById('outcomes').value;
+                const timelineAdmin = document.getElementById('timeline-admin').value;
+                communicationPlan = `ADMINISTRATOR PROPOSAL\n\nBarrier Addressed: ${adminBarrier}\n\nExecutive Summary:\n${execSummary}\n\nRationale:\n${rationale}\n\nResources Needed:\n${resources}\n\nExpected Outcomes:\n${outcomes}\n\nTimeline:\n${timelineAdmin}`;
+            }
+            
+            // Timeline
+            const timeline = [];
+            for (let i = 1; i <= 4; i++) {
+                const actions = document.getElementById(`month${i}-actions`).value;
+                const resources = document.getElementById(`month${i}-resources`).value;
+                const success = document.getElementById(`month${i}-success`).value;
+                timeline.push(`MONTH ${i}:\nActions: ${actions}\nResources: ${resources}\nSuccess Indicators: ${success}`);
+            }
+            
+            const subject = encodeURIComponent('Barrier Action Plan - Module 3');
+            const body = encodeURIComponent(
+                `COMPREHENSIVE BARRIER ACTION PLAN\n` +
+                `Module 3: Barriers and Facilitators\n` +
+                `Date: ${new Date().toLocaleDateString()}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `PART 1: BARRIER ASSESSMENT\n\n` +
+                `${barriers.join('\n\n')}\n\n` +
+                `PRIORITY BARRIERS:\n\n` +
+                `Priority #1: ${priority1}\n${priority1Why}\n\n` +
+                `Priority #2: ${priority2}\n${priority2Why}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `PART 2: STAKEHOLDER COMMUNICATION PLAN\n\n` +
+                `${communicationPlan}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `PART 3: IMPLEMENTATION TIMELINE\n\n` +
+                `${timeline.join('\n\n')}`
+            );
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+        
+        // Load saved progress when page loads
+        window.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>

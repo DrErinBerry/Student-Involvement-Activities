@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Lesson Planning Activity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        .content-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .instructions h2 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+        .section-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section-container h3 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .char-count {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .checkbox-group {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .checkbox-item {
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .checkbox-item label {
+            display: inline;
+            margin: 0;
+            font-weight: normal;
+        }
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+        }
+        .auto-save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+        .example-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .example-box strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="auto-save-indicator" id="autoSaveIndicator">Changes Saved ✓</div>
+    
+    <div class="header">
+        <h1>Mini Lesson Planning Activity</h1>
+        <p>Planning Your Mini Lesson Implementation</p>
+    </div>
+
+    <div class="content-box">
+        <div class="instructions">
+            <h2>Activity Instructions</h2>
+            <p>You've just learned about many different mini lesson options—from Strength-Based Bingo to Transition Treasure Maps to podcasts and structured lesson plans. Now it's time to get practical and create YOUR implementation plan.</p>
+            <p><strong>Your task:</strong> Select 2-3 mini lessons you want to try THIS SEMESTER and plan the logistics for implementing them with your students.</p>
+            <p><strong>Note:</strong> Your responses are automatically saved as you type. Use the buttons at the bottom to email yourself a copy or download as PDF.</p>
+        </div>
+    </div>
+
+    <form id="activityForm">
+        <!-- SECTION 1: Your Setting -->
+        <div class="section-container">
+            <h3>Section 1: Your Setting</h3>
+            
+            <label for="grade-level">What grade level(s) do you work with?</label>
+            <select id="grade-level" name="grade-level" aria-describedby="grade-help">
+                <option value="">Select grade level...</option>
+                <option value="early-elem">Early Elementary (K-2nd)</option>
+                <option value="later-elem">Later Elementary (3rd-5th)</option>
+                <option value="middle">Middle School (6th-8th)</option>
+                <option value="high">High School (9th-12th)</option>
+                <option value="mixed">Mixed Ages</option>
+            </select>
+            
+            <label for="num-students">How many students do you work with?</label>
+            <input 
+                type="text" 
+                id="num-students" 
+                name="num-students"
+                placeholder="e.g., 12 students on my caseload, or 25 students per class period..."
+            >
+            
+            <label for="schedule">Describe your schedule/setting:</label>
+            <textarea 
+                id="schedule" 
+                name="schedule" 
+                aria-describedby="char-count-schedule"
+                placeholder="e.g., I see students in a resource room for 45 minutes daily, or I co-teach in general education classes, or I have a self-contained transition classroom..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-schedule" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 2: Mini Lesson Selection -->
+        <div class="section-container">
+            <h3>Section 2: Select Your Mini Lessons</h3>
+            <p style="margin-bottom: 20px;">Choose 2-3 mini lessons from the module that you want to implement this semester. Be specific!</p>
+            
+            <div class="checkbox-group">
+                <p style="font-weight: bold; margin-top: 0;">Available Mini Lessons:</p>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="strength-bingo" name="mini-lessons" value="Strength-Based Lesson & Bingo">
+                    <label for="strength-bingo">Strength-Based Lesson & Bingo</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="treasure-map" name="mini-lessons" value="Transition Treasure Map">
+                    <label for="treasure-map">Transition Treasure Map</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="literature" name="mini-lessons" value="Literature & Self-Determination">
+                    <label for="literature">Literature & Self-Determination Integration</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="podcasts" name="mini-lessons" value="Podcasts">
+                    <label for="podcasts">Podcasts (Big Fib, LowDOWN, Disability Visibility)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tagg" name="mini-lessons" value="TAGG Lesson Plans">
+                    <label for="tagg">TAGG High School Lesson Plans</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="skills-bills" name="mini-lessons" value="Skills to Pay the Bills">
+                    <label for="skills-bills">Skills to Pay the Bills</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="one-pagers" name="mini-lessons" value="One-Pagers">
+                    <label for="one-pagers">One-Pagers (various types)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="other" name="mini-lessons" value="Other">
+                    <label for="other">Other (specify below)</label>
+                </div>
+            </div>
+            
+            <label for="other-specify">If you selected "Other," please specify:</label>
+            <textarea 
+                id="other-specify" 
+                name="other-specify" 
+                placeholder="Describe any other mini lessons you plan to use..."
+                style="min-height: 60px;"
+            ></textarea>
+        </div>
+
+        <!-- SECTION 3: Implementation Plan for Each Mini Lesson -->
+        <div class="section-container">
+            <h3>Section 3: Implementation Plan - Mini Lesson #1</h3>
+            
+            <label for="lesson1-name">Mini Lesson #1 Name:</label>
+            <input 
+                type="text" 
+                id="lesson1-name" 
+                name="lesson1-name"
+                placeholder="e.g., Strength-Based Bingo"
+            >
+            
+            <label for="lesson1-when">WHEN will you implement this? (Be specific about week/month)</label>
+            <textarea 
+                id="lesson1-when" 
+                name="lesson1-when" 
+                aria-describedby="char-count-lesson1-when"
+                placeholder="e.g., Week of December 4-8, or Every Monday in November, or First week back from winter break..."
+                style="min-height: 60px;"
+            ></textarea>
+            <div id="char-count-lesson1-when" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="lesson1-how">HOW will you integrate it into your schedule?</label>
+            <textarea 
+                id="lesson1-how" 
+                name="lesson1-how" 
+                aria-describedby="char-count-lesson1-how"
+                placeholder="e.g., Replace my current bell ringer, Use as an extension activity for early finishers, Dedicate 20 minutes during my Friday transition class..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-lesson1-how" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="lesson1-materials">WHAT materials or resources do you need to gather first?</label>
+            <textarea 
+                id="lesson1-materials" 
+                name="lesson1-materials" 
+                aria-describedby="char-count-lesson1-materials"
+                placeholder="e.g., Download and print Bingo cards, Create free Teachers Pay Teachers account, Make copies for all students, Set up projector for slideshow..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-lesson1-materials" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <div class="section-container">
+            <h3>Section 3 (continued): Implementation Plan - Mini Lesson #2</h3>
+            
+            <label for="lesson2-name">Mini Lesson #2 Name:</label>
+            <input 
+                type="text" 
+                id="lesson2-name" 
+                name="lesson2-name"
+                placeholder="e.g., Transition Treasure Map"
+            >
+            
+            <label for="lesson2-when">WHEN will you implement this?</label>
+            <textarea 
+                id="lesson2-when" 
+                name="lesson2-when" 
+                aria-describedby="char-count-lesson2-when"
+                placeholder="Be specific about week/month..."
+                style="min-height: 60px;"
+            ></textarea>
+            <div id="char-count-lesson2-when" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="lesson2-how">HOW will you integrate it into your schedule?</label>
+            <textarea 
+                id="lesson2-how" 
+                name="lesson2-how" 
+                aria-describedby="char-count-lesson2-how"
+                placeholder="Describe how this fits into your existing schedule..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-lesson2-how" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="lesson2-materials">WHAT materials or resources do you need?</label>
+            <textarea 
+                id="lesson2-materials" 
+                name="lesson2-materials" 
+                aria-describedby="char-count-lesson2-materials"
+                placeholder="List specific materials, downloads, or preparations needed..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-lesson2-materials" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <div class="section-container">
+            <h3>Section 3 (continued): Implementation Plan - Mini Lesson #3 (Optional)</h3>
+            
+            <label for="lesson3-name">Mini Lesson #3 Name:</label>
+            <input 
+                type="text" 
+                id="lesson3-name" 
+                name="lesson3-name"
+                placeholder="Leave blank if you're only implementing 2 mini lessons"
+            >
+            
+            <label for="lesson3-when">WHEN will you implement this?</label>
+            <textarea 
+                id="lesson3-when" 
+                name="lesson3-when" 
+                aria-describedby="char-count-lesson3-when"
+                placeholder="Be specific about week/month..."
+                style="min-height: 60px;"
+            ></textarea>
+            <div id="char-count-lesson3-when" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="lesson3-how">HOW will you integrate it into your schedule?</label>
+            <textarea 
+                id="lesson3-how" 
+                name="lesson3-how" 
+                aria-describedby="char-count-lesson3-how"
+                placeholder="Describe how this fits into your existing schedule..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-lesson3-how" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="lesson3-materials">WHAT materials or resources do you need?</label>
+            <textarea 
+                id="lesson3-materials" 
+                name="lesson3-materials" 
+                aria-describedby="char-count-lesson3-materials"
+                placeholder="List specific materials, downloads, or preparations needed..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-lesson3-materials" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 4: Potential Challenges -->
+        <div class="section-container">
+            <h3>Section 4: Anticipate Challenges</h3>
+            
+            <label for="obstacles">What obstacles might you face in implementing these mini lessons?</label>
+            <textarea 
+                id="obstacles" 
+                name="obstacles" 
+                aria-describedby="char-count-obstacles"
+                placeholder="e.g., Limited time in my schedule, Student resistance to new activities, Need administrator approval, Technology limitations, Student skill levels vary widely..."
+                style="min-height: 100px;"
+            ></textarea>
+            <div id="char-count-obstacles" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="solutions">How will you address these challenges?</label>
+            <textarea 
+                id="solutions" 
+                name="solutions" 
+                aria-describedby="char-count-solutions"
+                placeholder="e.g., Start with just one activity and add more later, Preview activities with students and explain the purpose, Schedule a meeting with principal to share research, Have printed backup materials ready, Differentiate activities for various skill levels..."
+                style="min-height: 100px;"
+            ></textarea>
+            <div id="char-count-solutions" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 5: Commitment Statement -->
+        <div class="section-container">
+            <h3>Section 5: Your Commitment</h3>
+            
+            <div class="example-box">
+                <strong>Example:</strong> "I commit to implementing Strength-Based Bingo during the week of December 4th and Transition Treasure Maps before winter break. I will download all materials by December 1st and preview them with my students on December 3rd."
+            </div>
+            
+            <label for="commitment">Write your commitment statement:</label>
+            <textarea 
+                id="commitment" 
+                name="commitment" 
+                aria-describedby="char-count-commitment"
+                placeholder="I commit to..."
+                style="min-height: 100px;"
+            ></textarea>
+            <div id="char-count-commitment" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="accountability">Who will you share this plan with for accountability?</label>
+            <textarea 
+                id="accountability" 
+                name="accountability" 
+                aria-describedby="char-count-accountability"
+                placeholder="e.g., My mentor teacher, My department head, My professional learning community, A colleague who's also implementing these activities..."
+                style="min-height: 60px;"
+            ></textarea>
+            <div id="char-count-accountability" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+            <button type="button" onclick="emailResults()">📧 Email My Plan</button>
+            <button type="button" onclick="downloadPDF()">📄 Download as PDF</button>
+            <button type="button" onclick="printForm()">🖨️ Print</button>
+        </div>
+    </form>
+
+    <div class="content-box" style="margin-top: 30px;">
+        <h3>Submission Instructions</h3>
+        <p>Save your completed plan using one of the buttons above, then submit according to your instructor's directions in Canvas.</p>
+        <p><strong>Remember:</strong> This isn't hypothetical—this is your actual implementation plan. Put dates on your calendar and commit to trying these activities!</p>
+    </div>
+
+    <script>
+        // Character counters
+        document.querySelectorAll('textarea').forEach(textarea => {
+            const counterId = `char-count-${textarea.id}`;
+            const counter = document.getElementById(counterId);
+            if (counter) {
+                textarea.addEventListener('input', () => {
+                    counter.textContent = `${textarea.value.length} characters`;
+                });
+            }
+        });
+
+        // Auto-save functionality
+        let saveTimeout;
+        const formElements = document.querySelectorAll('input, textarea, select');
+        
+        formElements.forEach(element => {
+            element.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveToLocalStorage, 1000);
+            });
+        });
+
+        function saveToLocalStorage() {
+            const formData = {};
+            formElements.forEach(element => {
+                if (element.type === 'checkbox') {
+                    if (!formData[element.name]) formData[element.name] = [];
+                    if (element.checked) formData[element.name].push(element.value);
+                } else {
+                    formData[element.id] = element.value;
+                }
+            });
+            localStorage.setItem('miniLessonPlan', JSON.stringify(formData));
+            showSaveIndicator();
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('miniLessonPlan');
+            if (saved) {
+                const formData = JSON.parse(saved);
+                Object.keys(formData).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        if (element.type === 'checkbox') {
+                            element.checked = formData[key].includes(element.value);
+                        } else {
+                            element.value = formData[key];
+                        }
+                    }
+                });
+            }
+        }
+
+        function showSaveIndicator() {
+            const indicator = document.getElementById('autoSaveIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 2000);
+        }
+
+        function getFormContent() {
+            let content = 'MINI LESSON PLANNING ACTIVITY\n';
+            content += '='.repeat(50) + '\n\n';
+            
+            content += 'SECTION 1: YOUR SETTING\n';
+            content += '-'.repeat(50) + '\n';
+            content += `Grade Level: ${document.getElementById('grade-level').options[document.getElementById('grade-level').selectedIndex].text}\n`;
+            content += `Number of Students: ${document.getElementById('num-students').value}\n`;
+            content += `Schedule/Setting: ${document.getElementById('schedule').value}\n\n`;
+            
+            content += 'SECTION 2: MINI LESSON SELECTION\n';
+            content += '-'.repeat(50) + '\n';
+            const checkboxes = document.querySelectorAll('input[name="mini-lessons"]:checked');
+            content += 'Selected Mini Lessons:\n';
+            checkboxes.forEach(cb => content += `  • ${cb.value}\n`);
+            if (document.getElementById('other-specify').value) {
+                content += `Other: ${document.getElementById('other-specify').value}\n`;
+            }
+            content += '\n';
+            
+            for (let i = 1; i <= 3; i++) {
+                const name = document.getElementById(`lesson${i}-name`).value;
+                if (name) {
+                    content += `MINI LESSON #${i}: ${name}\n`;
+                    content += '-'.repeat(50) + '\n';
+                    content += `When: ${document.getElementById(`lesson${i}-when`).value}\n`;
+                    content += `How: ${document.getElementById(`lesson${i}-how`).value}\n`;
+                    content += `Materials: ${document.getElementById(`lesson${i}-materials`).value}\n\n`;
+                }
+            }
+            
+            content += 'SECTION 4: CHALLENGES AND SOLUTIONS\n';
+            content += '-'.repeat(50) + '\n';
+            content += `Potential Obstacles: ${document.getElementById('obstacles').value}\n`;
+            content += `Solutions: ${document.getElementById('solutions').value}\n\n`;
+            
+            content += 'SECTION 5: COMMITMENT\n';
+            content += '-'.repeat(50) + '\n';
+            content += `My Commitment: ${document.getElementById('commitment').value}\n`;
+            content += `Accountability Partner: ${document.getElementById('accountability').value}\n`;
+            
+            return content;
+        }
+
+        function emailResults() {
+            const content = getFormContent();
+            const subject = 'Mini Lesson Planning Activity - My Implementation Plan';
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function downloadPDF() {
+            window.print();
+        }
+
+        function printForm() {
+            window.print();
+        }
+
+        // Load saved data on page load
+        window.addEventListener('load', loadFromLocalStorage);
+    </script>
+</body>
+</html>

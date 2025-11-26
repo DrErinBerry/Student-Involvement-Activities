@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Communication Planning Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .content-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .instructions h2 {
+            margin-top: 0;
+            color: #1565c0;
+        }
+        .section-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section-container h3 {
+            color: #1976d2;
+            border-bottom: 2px solid #1976d2;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #1976d2;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .char-count {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .checkbox-group {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .checkbox-item {
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .checkbox-item label {
+            display: inline;
+            margin: 0;
+            font-weight: normal;
+        }
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
+        }
+        .auto-save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+        .resource-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .resource-card h4 {
+            color: #1976d2;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .resource-card p {
+            margin: 5px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+        .family-entry {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .family-entry h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        .concern-response {
+            background: #fce4ec;
+            border-left: 4px solid #e91e63;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        @media print {
+            .button-container, .auto-save-indicator {
+                display: none;
+            }
+            body {
+                background: white;
+            }
+            .section-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="autoSaveIndicator" class="auto-save-indicator">✓ Auto-saved</div>
+
+    <div class="header">
+        <h1>Parent Communication Planning Tool</h1>
+        <p>Build Family Partnerships for Student Involvement Success</p>
+    </div>
+
+    <form id="parentCommForm">
+        <div class="instructions">
+            <h2>Activity Instructions</h2>
+            <p>This tool helps you plan how to communicate with families about student involvement in IEPs. You'll identify which resources to share with which families and prepare responses for common concerns.</p>
+            <p><strong>Your responses auto-save</strong> as you type. Use the buttons at the bottom to email your plan to yourself, download as PDF, or print.</p>
+            <p><strong>Time needed:</strong> 10-15 minutes</p>
+            <p><strong>Note:</strong> This activity is for your own professional planning. It does not need to be submitted.</p>
+        </div>
+
+        <!-- SECTION 1: Resource Quick Reference -->
+        <div class="section-container">
+            <h3>Part 1: Parent Resource Quick Reference</h3>
+            <p>Review these resources and check the ones you plan to use with families:</p>
+            
+            <div class="resource-card">
+                <h4>📚 Parent Center Hub</h4>
+                <p><strong>Best for:</strong> Parents who want comprehensive understanding of transition</p>
+                <p><strong>Format:</strong> Website (English and Spanish)</p>
+                <p><strong>Key topics:</strong> IDEA definition, transition services, five domains of adult life, activities families can do at home</p>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="use-pch" name="resources-to-use" value="Parent Center Hub">
+                    <label for="use-pch">I will use this resource</label>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🎓 PACER National Parent Center</h4>
+                <p><strong>Best for:</strong> Parents of middle/high school students who want structured learning</p>
+                <p><strong>Format:</strong> Online learning modules</p>
+                <p><strong>Key topics:</strong> Understanding IDEA/IEPs, supporting the IEP team, college and employment planning</p>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="use-pacer" name="resources-to-use" value="PACER National Parent Center">
+                    <label for="use-pacer">I will use this resource</label>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <h4>📄 Parent Guide to Transition Planning (PDF)</h4>
+                <p><strong>Best for:</strong> Parents who prefer printable materials they can reference</p>
+                <p><strong>Format:</strong> Downloadable PDF</p>
+                <p><strong>Key topics:</strong> Four domains, parent's role as advocate/mentor/life coach, common concerns</p>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="use-guide" name="resources-to-use" value="Parent Guide to Transition Planning">
+                    <label for="use-guide">I will use this resource</label>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <h4>📚 Transition Resources for Parents (NASET)</h4>
+                <p><strong>Best for:</strong> Parents who want comprehensive coverage of multiple transition topics</p>
+                <p><strong>Format:</strong> Web-based resource collection with links</p>
+                <p><strong>Key topics:</strong> Age of Majority, employment, postsecondary education, SSI/Social Security, self-determination, testing accommodations</p>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="use-naset" name="resources-to-use" value="Transition Resources for Parents (NASET)">
+                    <label for="use-naset">I will use this resource</label>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🎬 I'm Determined Parent Video Series</h4>
+                <p><strong>Best for:</strong> All parents; especially those who prefer video over reading</p>
+                <p><strong>Format:</strong> Short videos (under 5 minutes each)</p>
+                <p><strong>Key topics:</strong> Why student involvement matters, supporting self-determination, partnering with schools</p>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="use-video" name="resources-to-use" value="I'm Determined Parent Videos">
+                    <label for="use-video">I will use this resource</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Family Planning -->
+        <div class="section-container">
+            <h3>Part 2: Plan for Specific Families</h3>
+            <p>Think about 2-3 families on your caseload. What resources would benefit each? (Do not include identifying information.)</p>
+            
+            <div class="family-entry">
+                <h4>Family #1</h4>
+                <label for="family1-desc">Describe this family's situation (no names):</label>
+                <textarea 
+                    id="family1-desc" 
+                    name="family1-desc"
+                    placeholder="e.g., Parent of a 9th grader who is very involved but unsure how to support student independence. Prefers reading materials..."
+                    style="min-height: 80px;"
+                ></textarea>
+                
+                <label for="family1-resources">Which resource(s) will you share with them?</label>
+                <textarea 
+                    id="family1-resources" 
+                    name="family1-resources"
+                    placeholder="e.g., Parent Guide to Transition Planning PDF (they like printables) and I'm Determined video on supporting self-determination..."
+                    style="min-height: 60px;"
+                ></textarea>
+                
+                <label for="family1-when">When/how will you share it?</label>
+                <input 
+                    type="text" 
+                    id="family1-when" 
+                    name="family1-when"
+                    placeholder="e.g., Email before the annual IEP meeting next month"
+                >
+            </div>
+            
+            <div class="family-entry">
+                <h4>Family #2</h4>
+                <label for="family2-desc">Describe this family's situation (no names):</label>
+                <textarea 
+                    id="family2-desc" 
+                    name="family2-desc"
+                    placeholder="e.g., Parent of an 11th grader who is hesitant about student involvement. Worried their child will be overwhelmed..."
+                    style="min-height: 80px;"
+                ></textarea>
+                
+                <label for="family2-resources">Which resource(s) will you share with them?</label>
+                <textarea 
+                    id="family2-resources" 
+                    name="family2-resources"
+                    placeholder="e.g., I'm Determined video series (short and reassuring) to address their concerns about starting small..."
+                    style="min-height: 60px;"
+                ></textarea>
+                
+                <label for="family2-when">When/how will you share it?</label>
+                <input 
+                    type="text" 
+                    id="family2-when" 
+                    name="family2-when"
+                    placeholder="e.g., Phone call this week to discuss, then follow up with video link"
+                >
+            </div>
+            
+            <div class="family-entry">
+                <h4>Family #3 (Optional)</h4>
+                <label for="family3-desc">Describe this family's situation (no names):</label>
+                <textarea 
+                    id="family3-desc" 
+                    name="family3-desc"
+                    placeholder="e.g., Spanish-speaking family who wants their child to be more independent after high school..."
+                    style="min-height: 80px;"
+                ></textarea>
+                
+                <label for="family3-resources">Which resource(s) will you share with them?</label>
+                <textarea 
+                    id="family3-resources" 
+                    name="family3-resources"
+                    placeholder="e.g., Parent Center Hub (available in Spanish) for comprehensive transition information..."
+                    style="min-height: 60px;"
+                ></textarea>
+                
+                <label for="family3-when">When/how will you share it?</label>
+                <input 
+                    type="text" 
+                    id="family3-when" 
+                    name="family3-when"
+                    placeholder="e.g., During the upcoming parent conference with interpreter present"
+                >
+            </div>
+        </div>
+
+        <!-- SECTION 3: Addressing Concerns -->
+        <div class="section-container">
+            <h3>Part 3: Prepare for Common Concerns</h3>
+            <p>Practice your responses to concerns families might raise:</p>
+            
+            <div class="concern-response">
+                <label for="concern1"><strong>Concern: "My child is too shy to participate."</strong></label>
+                <textarea 
+                    id="concern1" 
+                    name="concern1"
+                    placeholder="Write your response... (e.g., We can start small—maybe just reading a prepared statement or sharing one strength. We'll practice beforehand in a comfortable setting...)"
+                ></textarea>
+            </div>
+            
+            <div class="concern-response">
+                <label for="concern2"><strong>Concern: "This seems like too much pressure on my child."</strong></label>
+                <textarea 
+                    id="concern2" 
+                    name="concern2"
+                    placeholder="Write your response... (e.g., We take a gradual approach—we start with what your child is comfortable with and build from there. The goal is empowerment, not stress...)"
+                ></textarea>
+            </div>
+            
+            <div class="concern-response">
+                <label for="concern3"><strong>Concern: "Will important information be missed if my child leads?"</strong></label>
+                <textarea 
+                    id="concern3" 
+                    name="concern3"
+                    placeholder="Write your response... (e.g., All legal requirements will still be covered. Adults guide the process—students participate, they don't replace the team. This actually adds information...)"
+                ></textarea>
+            </div>
+            
+            <div class="concern-response">
+                <label for="concern4"><strong>Concern: "My child doesn't understand their disability."</strong></label>
+                <textarea 
+                    id="concern4" 
+                    name="concern4"
+                    placeholder="Write your response... (e.g., That's exactly why we teach self-awareness! We start with strengths and build understanding gradually. Knowing themselves helps them advocate better...)"
+                ></textarea>
+            </div>
+            
+            <div class="concern-response">
+                <label for="concern5"><strong>Other concern you anticipate:</strong></label>
+                <input 
+                    type="text" 
+                    id="concern5-question" 
+                    name="concern5-question"
+                    placeholder="Write the concern..."
+                    style="margin-bottom: 10px;"
+                >
+                <textarea 
+                    id="concern5" 
+                    name="concern5"
+                    placeholder="Write your response..."
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Communication Plan -->
+        <div class="section-container">
+            <h3>Part 4: Your Communication Action Plan</h3>
+            
+            <div class="tip-box">
+                <strong>Tip:</strong> The best time to share parent resources is BEFORE the IEP meeting, so families have time to review and prepare questions.
+            </div>
+            
+            <label for="first-action">What is the FIRST communication action you will take?</label>
+            <textarea 
+                id="first-action" 
+                name="first-action"
+                placeholder="e.g., This week, I will email the I'm Determined video link to all families with upcoming IEP meetings..."
+                style="min-height: 80px;"
+            ></textarea>
+            
+            <label for="ongoing-plan">How will you incorporate parent communication into your ongoing practice?</label>
+            <textarea 
+                id="ongoing-plan" 
+                name="ongoing-plan"
+                placeholder="e.g., I will include a parent resource in every IEP meeting reminder email. I will share one parent video per quarter in my newsletter..."
+            ></textarea>
+            
+            <label for="track-success">How will you know your parent communication is working?</label>
+            <textarea 
+                id="track-success" 
+                name="track-success"
+                placeholder="e.g., Parents ask questions about student involvement. Parents practice skills at home. Parents express support for student participation at meetings..."
+                style="min-height: 80px;"
+            ></textarea>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+            <button type="button" onclick="emailResults()">📧 Email My Plan</button>
+            <button type="button" onclick="downloadPDF()">📄 Download as PDF</button>
+            <button type="button" onclick="printForm()">🖨️ Print</button>
+        </div>
+    </form>
+
+    <div class="content-box" style="margin-top: 30px;">
+        <h3>Using This Tool</h3>
+        <p>This planning tool is for your own professional use. Keep it handy as you communicate with families about student involvement.</p>
+        <p><strong>Remember:</strong> Parents are partners, not obstacles. Most families WANT their children to be more independent—they just need guidance on how to help!</p>
+    </div>
+
+    <script>
+        // Auto-save functionality
+        let saveTimeout;
+        const formElements = document.querySelectorAll('input, textarea, select');
+        
+        formElements.forEach(element => {
+            element.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveToLocalStorage, 1000);
+            });
+            element.addEventListener('change', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveToLocalStorage, 1000);
+            });
+        });
+
+        function saveToLocalStorage() {
+            const formData = {};
+            formElements.forEach(element => {
+                if (element.type === 'checkbox') {
+                    if (!formData.checkboxes) formData.checkboxes = {};
+                    formData.checkboxes[element.id] = element.checked;
+                } else {
+                    formData[element.id] = element.value;
+                }
+            });
+            localStorage.setItem('parentCommPlan', JSON.stringify(formData));
+            showSaveIndicator();
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('parentCommPlan');
+            if (saved) {
+                const formData = JSON.parse(saved);
+                Object.keys(formData).forEach(key => {
+                    if (key === 'checkboxes') {
+                        Object.keys(formData.checkboxes).forEach(cbId => {
+                            const checkbox = document.getElementById(cbId);
+                            if (checkbox) checkbox.checked = formData.checkboxes[cbId];
+                        });
+                    } else {
+                        const element = document.getElementById(key);
+                        if (element) element.value = formData[key];
+                    }
+                });
+            }
+        }
+
+        function showSaveIndicator() {
+            const indicator = document.getElementById('autoSaveIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 2000);
+        }
+
+        function getFormContent() {
+            let content = 'PARENT COMMUNICATION PLANNING TOOL\n';
+            content += '='.repeat(50) + '\n\n';
+            
+            content += 'PART 1: RESOURCES I WILL USE\n';
+            content += '-'.repeat(50) + '\n';
+            const resources = document.querySelectorAll('input[name="resources-to-use"]:checked');
+            if (resources.length > 0) {
+                resources.forEach(cb => content += `✓ ${cb.value}\n`);
+            } else {
+                content += '(None selected)\n';
+            }
+            content += '\n';
+            
+            content += 'PART 2: FAMILY PLANNING\n';
+            content += '-'.repeat(50) + '\n';
+            content += 'Family #1:\n';
+            content += `  Situation: ${document.getElementById('family1-desc').value}\n`;
+            content += `  Resources: ${document.getElementById('family1-resources').value}\n`;
+            content += `  When/How: ${document.getElementById('family1-when').value}\n\n`;
+            
+            content += 'Family #2:\n';
+            content += `  Situation: ${document.getElementById('family2-desc').value}\n`;
+            content += `  Resources: ${document.getElementById('family2-resources').value}\n`;
+            content += `  When/How: ${document.getElementById('family2-when').value}\n\n`;
+            
+            if (document.getElementById('family3-desc').value) {
+                content += 'Family #3:\n';
+                content += `  Situation: ${document.getElementById('family3-desc').value}\n`;
+                content += `  Resources: ${document.getElementById('family3-resources').value}\n`;
+                content += `  When/How: ${document.getElementById('family3-when').value}\n\n`;
+            }
+            
+            content += 'PART 3: RESPONSES TO CONCERNS\n';
+            content += '-'.repeat(50) + '\n';
+            content += `"My child is too shy":\n${document.getElementById('concern1').value}\n\n`;
+            content += `"Too much pressure":\n${document.getElementById('concern2').value}\n\n`;
+            content += `"Will information be missed?":\n${document.getElementById('concern3').value}\n\n`;
+            content += `"Doesn't understand disability":\n${document.getElementById('concern4').value}\n\n`;
+            if (document.getElementById('concern5-question').value) {
+                content += `"${document.getElementById('concern5-question').value}":\n${document.getElementById('concern5').value}\n\n`;
+            }
+            
+            content += 'PART 4: ACTION PLAN\n';
+            content += '-'.repeat(50) + '\n';
+            content += `First Action: ${document.getElementById('first-action').value}\n\n`;
+            content += `Ongoing Plan: ${document.getElementById('ongoing-plan').value}\n\n`;
+            content += `Measure Success: ${document.getElementById('track-success').value}\n`;
+            
+            return content;
+        }
+
+        function emailResults() {
+            const content = getFormContent();
+            const subject = 'My Parent Communication Plan for Student Involvement';
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function downloadPDF() {
+            window.print();
+        }
+
+        function printForm() {
+            window.print();
+        }
+
+        // Load saved data on page load
+        window.addEventListener('load', loadFromLocalStorage);
+    </script>
+</body>
+</html>

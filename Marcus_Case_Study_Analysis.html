@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcus Case Study Analysis - Self-Determination in Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .alert-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .alert-box h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .alert-box p {
+            color: #0c5460;
+            margin-bottom: 8px;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+        
+        .alert-box strong {
+            font-weight: 600;
+        }
+        
+        .section-container {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .section-container h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+        
+        .radio-option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        #analysis {
+            min-height: 300px;
+        }
+        
+        #strategies, #action-plan {
+            min-height: 150px;
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .guided-questions {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .guided-questions h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .guided-questions ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .guided-questions li {
+            margin-bottom: 8px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .save-indicator {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .save-indicator.show {
+            opacity: 1;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .header {
+                background: #667eea !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .button-group {
+                display: none;
+            }
+            
+            .alert-box {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Marcus Case Study Analysis</h1>
+            <p>Self-Determination in Practice - Module 2</p>
+        </div>
+        
+        <div class="content">
+            <div class="alert-box">
+                <h3>📖 IMPORTANT: Read Marcus's Case Study First!</h3>
+                <p><strong>Before completing this activity, you MUST read Marcus's complete case study on page 3 of your Module 2 notes.</strong></p>
+                <p>Marcus's journey demonstrates the power of explicit self-determination instruction. His transformation from 0% IEP participation to leading 40% of his meeting shows what's possible when students receive systematic support.</p>
+                <p><strong>Key Data Points to Reference:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px; color: #0c5460;">
+                    <li>AIR Scale: 42% → 78% (Low to Moderate-High range)</li>
+                    <li>IEP Participation: 0% → 40% meeting leadership</li>
+                    <li>GPA: 2.1 → 3.2 (with accommodations)</li>
+                    <li>Self-Advocacy: 0 → 23 documented incidents</li>
+                    <li>Post-Secondary Goals: "I don't know" → Specific career plan</li>
+                </ul>
+            </div>
+            
+            <form id="analysisForm" aria-label="Marcus Case Study Analysis">
+                
+                <!-- STEP 1: Choose Prompt -->
+                <div class="section-container">
+                    <h3>Step 1: Choose Your Analysis Focus</h3>
+                    <p style="margin-bottom: 20px;">Select ONE prompt to analyze Marcus's journey (you'll write 300+ words):</p>
+                    
+                    <div class="radio-group" role="radiogroup" aria-labelledby="prompt-selection">
+                        <label class="radio-option">
+                            <input type="radio" name="prompt" value="mindset-shift" id="prompt1">
+                            <div>
+                                <strong>Prompt 1: Mindset Shift</strong><br>
+                                Marcus demonstrated a dramatic shift from external control (0% participation) to self-determined actions (leading 40% of his IEP). Describe a student you've worked with who showed a similar transformation. What changed? What supported this shift? How did their outcomes compare to Marcus's results?
+                            </div>
+                        </label>
+                        
+                        <label class="radio-option">
+                            <input type="radio" name="prompt" value="skill-development" id="prompt2">
+                            <div>
+                                <strong>Prompt 2: Skill Development</strong><br>
+                                Marcus's journey included learning specific self-determination skills through the ChoiceMaker curriculum. Select one skill from the module (e.g., self-advocacy, goal-setting, self-awareness) that you see reflected in Marcus's progress. How could you explicitly teach this skill in your setting? Include at least 2 specific strategies and explain how you'd measure progress like Marcus's data shows.
+                            </div>
+                        </label>
+                        
+                        <label class="radio-option">
+                            <input type="radio" name="prompt" value="barriers-analysis" id="prompt3">
+                            <div>
+                                <strong>Prompt 3: Barriers Analysis</strong><br>
+                                Despite Marcus's success, many students face barriers he might have overcome. What barriers could have prevented Marcus from developing from 42% to 78% on the AIR Scale? Identify 2-3 barriers in your educational setting that might stop a "Marcus" from succeeding and suggest solutions.
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Guided Questions (Dynamic based on selection) -->
+                <div class="guided-questions" id="guidedQuestions" style="display: none;">
+                    <h4>💡 Consider These Questions as You Write:</h4>
+                    <ul id="questionsList"></ul>
+                </div>
+                
+                <!-- STEP 2: Your Analysis -->
+                <div class="section-container">
+                    <h3>Step 2: Your Detailed Analysis</h3>
+                    <p style="margin-bottom: 15px;">Write your response to the prompt you selected above. Aim for at least 300 words with specific examples.</p>
+                    
+                    <label for="analysis">Your Analysis:</label>
+                    <textarea 
+                        id="analysis" 
+                        name="analysis" 
+                        aria-describedby="char-count-analysis"
+                        placeholder="Start writing your analysis here. Reference specific data from Marcus's case study and connect it to your own experiences or setting..."
+                    ></textarea>
+                    <div id="char-count-analysis" class="char-count" aria-live="polite">0 characters (suggest 300+ words / ~1800+ characters)</div>
+                </div>
+                
+                <!-- STEP 3: Strategies -->
+                <div class="section-container">
+                    <h3>Step 3: Practical Strategies</h3>
+                    <p style="margin-bottom: 15px;">Based on Marcus's success and your analysis, what specific strategies could you implement?</p>
+                    
+                    <label for="strategies">Your Strategies (list at least 2 specific approaches):</label>
+                    <textarea 
+                        id="strategies" 
+                        name="strategies" 
+                        aria-describedby="char-count-strategies"
+                        placeholder="Example: Use the AIR Self-Determination Scale as a baseline assessment, implement weekly 45-minute ChoiceMaker lessons, create one-pagers for students to explain their learning needs..."
+                    ></textarea>
+                    <div id="char-count-strategies" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- STEP 4: Action Plan -->
+                <div class="section-container">
+                    <h3>Step 4: Your Action Plan</h3>
+                    <p style="margin-bottom: 15px;">How will you apply what you learned from Marcus's journey?</p>
+                    
+                    <label for="action-plan">Concrete Next Steps:</label>
+                    <textarea 
+                        id="action-plan" 
+                        name="action-plan" 
+                        aria-describedby="char-count-action"
+                        placeholder="What will you do in the next week? Month? How will you measure progress like Marcus's team did?"
+                    ></textarea>
+                    <div id="char-count-action" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn-primary" onclick="emailResponses()">📧 Email to Myself</button>
+                    <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print</button>
+                    <button type="button" class="btn-success" onclick="saveProgress()">💾 Save Progress</button>
+                    <span id="saveIndicator" class="save-indicator">✓ Saved!</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-save functionality
+        let autoSaveTimer;
+        const AUTOSAVE_DELAY = 3000;
+        
+        // Guided questions for each prompt
+        const guidedQuestions = {
+            'mindset-shift': [
+                'What was your student\'s starting point? (Consider participation, self-advocacy, academics)',
+                'What specific interventions or supports did you provide?',
+                'How long did the transformation take?',
+                'What data do you have to show progress (like Marcus\'s AIR Scale scores)?',
+                'What barriers did you have to overcome?',
+                'How did this change impact the student\'s life beyond school?'
+            ],
+            'skill-development': [
+                'Which specific self-determination skill are you focusing on? (self-advocacy, goal-setting, self-awareness, etc.)',
+                'How is this skill reflected in Marcus\'s progress data?',
+                'What curriculum or materials would you use to teach this skill?',
+                'How would you scaffold instruction for different student needs?',
+                'What baseline assessment would you use (like Marcus\'s AIR Scale)?',
+                'How would you measure progress over time?',
+                'What supports would students need to practice this skill authentically?'
+            ],
+            'barriers-analysis': [
+                'What barriers might Marcus have faced that aren\'t mentioned in his case study?',
+                'Which barriers in your setting are most similar to potential Marcus barriers?',
+                'Are these barriers related to: time, resources, student factors, family factors, or systemic issues?',
+                'For each barrier, what worked in Marcus\'s case that could be adapted?',
+                'What additional solutions would you need in your specific context?',
+                'How would you know if your solutions are working?'
+            ]
+        };
+        
+        // Character counting
+        function updateCharCount(textareaId, counterId) {
+            const textarea = document.getElementById(textareaId);
+            const counter = document.getElementById(counterId);
+            const count = textarea.value.length;
+            const wordCount = textarea.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+            
+            if (textareaId === 'analysis') {
+                counter.textContent = `${count} characters (approximately ${wordCount} words / suggest 300+ words)`;
+            } else {
+                counter.textContent = `${count} characters`;
+            }
+        }
+        
+        // Set up character counting
+        ['analysis', 'strategies', 'action-plan'].forEach(id => {
+            const textarea = document.getElementById(id);
+            const counterId = `char-count-${id === 'action-plan' ? 'action' : id}`;
+            
+            textarea.addEventListener('input', () => {
+                updateCharCount(id, counterId);
+                scheduleAutoSave();
+            });
+        });
+        
+        // Handle prompt selection
+        document.querySelectorAll('input[name="prompt"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Update visual selection
+                document.querySelectorAll('.radio-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                this.closest('.radio-option').classList.add('selected');
+                
+                // Show guided questions
+                const questionsContainer = document.getElementById('guidedQuestions');
+                const questionsList = document.getElementById('questionsList');
+                const selectedPrompt = this.value;
+                
+                questionsList.innerHTML = '';
+                guidedQuestions[selectedPrompt].forEach(question => {
+                    const li = document.createElement('li');
+                    li.textContent = question;
+                    questionsList.appendChild(li);
+                });
+                
+                questionsContainer.style.display = 'block';
+                scheduleAutoSave();
+            });
+        });
+        
+        // Auto-save to browser storage (with warning about limitations)
+        function scheduleAutoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(saveProgress, AUTOSAVE_DELAY);
+        }
+        
+        function saveProgress() {
+            try {
+                const formData = {
+                    prompt: document.querySelector('input[name="prompt"]:checked')?.value || '',
+                    analysis: document.getElementById('analysis').value,
+                    strategies: document.getElementById('strategies').value,
+                    actionPlan: document.getElementById('action-plan').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('marcusAnalysis', JSON.stringify(formData));
+                
+                // Show save indicator
+                const indicator = document.getElementById('saveIndicator');
+                indicator.classList.add('show');
+                setTimeout(() => indicator.classList.remove('show'), 2000);
+                
+            } catch (e) {
+                console.warn('Could not save to browser storage:', e);
+            }
+        }
+        
+        // Load saved progress
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('marcusAnalysis');
+                if (saved) {
+                    const formData = JSON.parse(saved);
+                    
+                    // Restore prompt selection
+                    if (formData.prompt) {
+                        const radio = document.querySelector(`input[value="${formData.prompt}"]`);
+                        if (radio) {
+                            radio.checked = true;
+                            radio.dispatchEvent(new Event('change'));
+                        }
+                    }
+                    
+                    // Restore text fields
+                    if (formData.analysis) {
+                        document.getElementById('analysis').value = formData.analysis;
+                        updateCharCount('analysis', 'char-count-analysis');
+                    }
+                    if (formData.strategies) {
+                        document.getElementById('strategies').value = formData.strategies;
+                        updateCharCount('strategies', 'char-count-strategies');
+                    }
+                    if (formData.actionPlan) {
+                        document.getElementById('action-plan').value = formData.actionPlan;
+                        updateCharCount('action-plan', 'char-count-action');
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not load saved progress:', e);
+            }
+        }
+        
+        // Email functionality
+        function emailResponses() {
+            const promptElement = document.querySelector('input[name="prompt"]:checked');
+            if (!promptElement) {
+                alert('Please select a prompt first!');
+                return;
+            }
+            
+            const promptLabel = promptElement.closest('.radio-option').querySelector('strong').textContent;
+            const analysis = document.getElementById('analysis').value;
+            const strategies = document.getElementById('strategies').value;
+            const actionPlan = document.getElementById('action-plan').value;
+            
+            if (!analysis.trim()) {
+                alert('Please complete your analysis before emailing!');
+                return;
+            }
+            
+            const subject = encodeURIComponent('Marcus Case Study Analysis - Module 2');
+            const body = encodeURIComponent(
+                `MARCUS CASE STUDY ANALYSIS\n` +
+                `Module 2: Self-Determination in Practice\n` +
+                `Date: ${new Date().toLocaleDateString()}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `SELECTED PROMPT:\n${promptLabel}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `MY ANALYSIS:\n${analysis}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `PRACTICAL STRATEGIES:\n${strategies}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `ACTION PLAN:\n${actionPlan}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `Remember: Marcus's journey from 42% to 78% on the AIR Scale shows that systematic self-determination instruction works!`
+            );
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+        
+        // Load any saved progress when page loads
+        window.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>

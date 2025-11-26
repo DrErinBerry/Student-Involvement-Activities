@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barriers and Solutions - Student IEP Involvement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .alert-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .alert-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .alert-box p {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .alert-box ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .info-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .info-box h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .info-box p {
+            color: #0c5460;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+        
+        .instructions {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .instructions h2 {
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #1565C0;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .section-container {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .section-container h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        .prompt-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .prompt-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .prompt-box p {
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .radio-group {
+            margin: 20px 0;
+        }
+        
+        .radio-option {
+            display: block;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .radio-option:hover {
+            border-color: #667eea;
+            background-color: #f8f9ff;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .radio-option.selected {
+            border-color: #667eea;
+            background-color: #f0f4ff;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #dee2e6;
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .status-message {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .print-only {
+            display: none;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .alert-box, .info-box, .instructions {
+                page-break-inside: avoid;
+            }
+            
+            .button-group, .char-count {
+                display: none;
+            }
+            
+            .print-only {
+                display: block;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 2px solid #333;
+            }
+            
+            textarea {
+                border: 1px solid #333;
+                min-height: 150px;
+            }
+            
+            .section-container {
+                page-break-inside: avoid;
+                margin-bottom: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Barriers and Solutions</h1>
+            <p>Student Involvement in IEP - Module 1 Reflection</p>
+        </header>
+        
+        <main class="content">
+            <div class="alert-box" role="alert" aria-labelledby="browser-warning">
+                <h3 id="browser-warning">⚠️ Important: Browser Storage Notice</h3>
+                <p><strong>Your responses are saved automatically in your browser's local storage.</strong> However, please be aware:</p>
+                <ul>
+                    <li>Data is stored locally in THIS browser on THIS device only</li>
+                    <li>Clearing browser data/cache will delete your saved responses</li>
+                    <li>Using private/incognito mode may not save your work</li>
+                    <li>Switching browsers or devices will not transfer your responses</li>
+                </ul>
+                <p><strong>Recommendation:</strong> Use the "Email to Self" button regularly to save a copy of your work!</p>
+            </div>
+            
+            <div class="info-box" role="complementary" aria-labelledby="accessible-version">
+                <h3 id="accessible-version">📄 Accessible Format Available</h3>
+                <p><strong>Need a Word document version?</strong> An accessible Microsoft Word format of this activity is available in the "Accessible Activities" section of your module for participants who may need alternative formats.</p>
+            </div>
+            
+            <section class="instructions" aria-labelledby="instructions-heading">
+                <h2 id="instructions-heading">Instructions</h2>
+                <ol>
+                    <li><strong>Choose ONE reflection prompt</strong> that resonates most with your experience.</li>
+                    <li><strong>Write a thoughtful response</strong> of at least 250 words reflecting on your current practice.</li>
+                    <li><strong>Identify specific barriers</strong> you face in your setting.</li>
+                    <li><strong>Develop practical solutions</strong> you can implement.</li>
+                    <li><strong>Create an action plan</strong> with concrete next steps.</li>
+                    <li><strong>Your work auto-saves</strong> as you type. Email yourself a copy for your records!</li>
+                </ol>
+            </section>
+            
+            <form id="reflectionForm" aria-label="Barriers and Solutions Reflection">
+                
+                <!-- STEP 1: Choose Your Prompt -->
+                <div class="section-container">
+                    <h3>Step 1: Choose Your Reflection Prompt</h3>
+                    <p style="margin-bottom: 20px;">Select ONE prompt to focus on for this activity:</p>
+                    
+                    <div class="radio-group" role="radiogroup" aria-labelledby="prompt-selection">
+                        <label class="radio-option">
+                            <input type="radio" name="prompt" value="current-practice" id="prompt1">
+                            <div>
+                                <strong>Current Practice Analysis:</strong> Describe who currently speaks the most and least at IEP meetings in your experience. How does this align with best practices for student involvement?
+                            </div>
+                        </label>
+                        
+                        <label class="radio-option">
+                            <input type="radio" name="prompt" value="barrier-identification" id="prompt2">
+                            <div>
+                                <strong>Barrier Identification:</strong> What prevents students from being involved in their IEP planning and meetings in your setting? Choose one barrier and explain why it exists.
+                            </div>
+                        </label>
+                        
+                        <label class="radio-option">
+                            <input type="radio" name="prompt" value="success-story" id="prompt3">
+                            <div>
+                                <strong>Success Story:</strong> Share an example of successful student involvement you've witnessed or implemented. What made it work?
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- STEP 2: Initial Reflection -->
+                <div class="section-container">
+                    <h3>Step 2: Your Initial Reflection</h3>
+                    <p style="margin-bottom: 15px;">Write your response to the prompt you selected above. Aim for at least 250 words.</p>
+                    
+                    <label for="reflection">Your Reflection:</label>
+                    <textarea 
+                        id="reflection" 
+                        name="reflection" 
+                        aria-describedby="char-count-reflection"
+                        placeholder="Start writing your reflection here. Think about specific examples from your experience, what you've observed, and what you've learned from Module 1..."
+                    ></textarea>
+                    <div id="char-count-reflection" class="char-count" aria-live="polite">0 characters (suggest 250+ words / ~1500+ characters)</div>
+                </div>
+                
+                <!-- STEP 3: Barrier Analysis -->
+                <div class="section-container">
+                    <h3>Step 3: Identify Key Barriers</h3>
+                    <p style="margin-bottom: 15px;">Based on your reflection and what you've learned, what are the main barriers to student involvement in YOUR setting?</p>
+                    
+                    <label for="barriers">Key Barriers (list 2-3):</label>
+                    <textarea 
+                        id="barriers" 
+                        name="barriers" 
+                        aria-describedby="char-count-barriers"
+                        placeholder="Example: Limited time for preparation, lack of parent buy-in, students don't know about their disability, etc."
+                        style="min-height: 100px;"
+                    ></textarea>
+                    <div id="char-count-barriers" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- STEP 4: Solution Development -->
+                <div class="section-container">
+                    <h3>Step 4: Develop Practical Solutions</h3>
+                    <p style="margin-bottom: 15px;">For each barrier you identified, what solutions could you implement? Think about strategies from Module 1.</p>
+                    
+                    <label for="solutions">Potential Solutions:</label>
+                    <textarea 
+                        id="solutions" 
+                        name="solutions" 
+                        aria-describedby="char-count-solutions"
+                        placeholder="Be specific! Example: Use bell ringers to build disability awareness over time, start with one-pagers as a low-prep entry point, share research data with parents about post-school outcomes..."
+                    ></textarea>
+                    <div id="char-count-solutions" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- STEP 5: Action Plan -->
+                <div class="section-container">
+                    <h3>Step 5: Create Your Action Plan</h3>
+                    <p style="margin-bottom: 15px;">What are your concrete next steps? Be specific about WHAT you'll do and WHEN.</p>
+                    
+                    <label for="action-immediate">This Week (What's one small thing you can do immediately?):</label>
+                    <textarea 
+                        id="action-immediate" 
+                        name="action-immediate" 
+                        aria-describedby="char-count-immediate"
+                        placeholder="Example: Download the TAGG assessment and review the student version, choose 3 students to start with for one-pagers..."
+                        style="min-height: 80px;"
+                    ></textarea>
+                    <div id="char-count-immediate" class="char-count" aria-live="polite">0 characters</div>
+                    
+                    <label for="action-month" style="margin-top: 20px;">This Month (What will you implement in the next 30 days?):</label>
+                    <textarea 
+                        id="action-month" 
+                        name="action-month" 
+                        aria-describedby="char-count-month"
+                        placeholder="Example: Have all students complete at least one transition assessment, create one-pagers with 5 students, schedule a meeting with administration to discuss student-led IEPs..."
+                        style="min-height: 80px;"
+                    ></textarea>
+                    <div id="char-count-month" class="char-count" aria-live="polite">0 characters</div>
+                    
+                    <label for="action-year" style="margin-top: 20px;">This School Year (What's your long-term goal?):</label>
+                    <textarea 
+                        id="action-year" 
+                        name="action-year" 
+                        aria-describedby="char-count-year"
+                        placeholder="Example: Have at least 50% of students actively participating in their IEP meetings, implement student-led IEPs for all transition-age students, establish a routine for using assessments..."
+                        style="min-height: 80px;"
+                    ></textarea>
+                    <div id="char-count-year" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- STEP 6: Accountability -->
+                <div class="section-container">
+                    <h3>Step 6: Accountability and Support</h3>
+                    <p style="margin-bottom: 15px;">Who will help you stay accountable? What support do you need?</p>
+                    
+                    <label for="accountability">My Accountability Partner/Support System:</label>
+                    <textarea 
+                        id="accountability" 
+                        name="accountability" 
+                        aria-describedby="char-count-accountability"
+                        placeholder="Example: I'll share my action plan with my special education director and set up a monthly check-in. I'll join the I'm Determined community for resources and support..."
+                        style="min-height: 80px;"
+                    ></textarea>
+                    <div id="char-count-accountability" class="char-count" aria-live="polite">0 characters</div>
+                    
+                    <label for="support" style="margin-top: 20px;">Support/Resources I Need:</label>
+                    <textarea 
+                        id="support" 
+                        name="support" 
+                        aria-describedby="char-count-support"
+                        placeholder="Example: Professional development time, access to TAGG assessments, parent education materials, release time to observe student-led IEPs..."
+                        style="min-height: 80px;"
+                    ></textarea>
+                    <div id="char-count-support" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn-primary" id="emailBtn" aria-label="Email your reflection to yourself">
+                        📧 Email to Self
+                    </button>
+                    <button type="button" class="btn-secondary" id="printBtn" aria-label="Print your reflection">
+                        🖨️ Print
+                    </button>
+                    <button type="button" class="btn-success" id="clearBtn" aria-label="Clear all responses">
+                        🔄 Clear All
+                    </button>
+                </div>
+                
+                <div id="statusMessage" class="status-message" role="status" aria-live="polite"></div>
+            </form>
+            
+            <div class="print-only">
+                <p><strong>Name:</strong> _________________________________</p>
+                <p><strong>Date:</strong> _________________________________</p>
+                <p><strong>Module:</strong> Student Involvement in IEP - Barriers and Solutions Reflection</p>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        const STORAGE_KEY = 'barriersAndSolutions';
+        
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSavedData();
+            setupEventListeners();
+        });
+        
+        function setupEventListeners() {
+            // Radio buttons
+            document.querySelectorAll('input[name="prompt"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    document.querySelectorAll('.radio-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    if (this.checked) {
+                        this.closest('.radio-option').classList.add('selected');
+                    }
+                    saveData();
+                });
+            });
+            
+            // Textareas
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    updateCharCount(this);
+                    saveData();
+                });
+                updateCharCount(textarea);
+            });
+            
+            // Buttons
+            document.getElementById('emailBtn').addEventListener('click', emailToSelf);
+            document.getElementById('printBtn').addEventListener('click', printForm);
+            document.getElementById('clearBtn').addEventListener('click', confirmClear);
+        }
+        
+        function updateCharCount(textarea) {
+            const count = textarea.value.length;
+            const countId = textarea.getAttribute('aria-describedby');
+            const countElement = document.getElementById(countId);
+            if (countElement) {
+                let text = `${count} characters`;
+                if (textarea.id === 'reflection') {
+                    const wordCount = textarea.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+                    text = `${count} characters (~${wordCount} words)`;
+                    if (wordCount < 250) {
+                        text += ` - suggest 250+ words`;
+                    }
+                }
+                countElement.textContent = text;
+            }
+        }
+        
+        function saveData() {
+            const formData = {
+                prompt: document.querySelector('input[name="prompt"]:checked')?.value || '',
+                reflection: document.getElementById('reflection').value,
+                barriers: document.getElementById('barriers').value,
+                solutions: document.getElementById('solutions').value,
+                actionImmediate: document.getElementById('action-immediate').value,
+                actionMonth: document.getElementById('action-month').value,
+                actionYear: document.getElementById('action-year').value,
+                accountability: document.getElementById('accountability').value,
+                support: document.getElementById('support').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+                console.log('Data auto-saved successfully');
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+                showStatus('Warning: Unable to auto-save. Please email your responses to yourself.', 'error');
+            }
+        }
+        
+        function loadSavedData() {
+            try {
+                const savedData = localStorage.getItem(STORAGE_KEY);
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    
+                    if (data.prompt) {
+                        const radio = document.querySelector(`input[name="prompt"][value="${data.prompt}"]`);
+                        if (radio) {
+                            radio.checked = true;
+                            radio.closest('.radio-option').classList.add('selected');
+                        }
+                    }
+                    
+                    document.getElementById('reflection').value = data.reflection || '';
+                    document.getElementById('barriers').value = data.barriers || '';
+                    document.getElementById('solutions').value = data.solutions || '';
+                    document.getElementById('action-immediate').value = data.actionImmediate || '';
+                    document.getElementById('action-month').value = data.actionMonth || '';
+                    document.getElementById('action-year').value = data.actionYear || '';
+                    document.getElementById('accountability').value = data.accountability || '';
+                    document.getElementById('support').value = data.support || '';
+                    
+                    document.querySelectorAll('textarea').forEach(updateCharCount);
+                    console.log('Previous responses loaded');
+                }
+            } catch (e) {
+                console.error('Error loading from localStorage:', e);
+            }
+        }
+        
+        function emailToSelf() {
+            const promptValue = document.querySelector('input[name="prompt"]:checked')?.value || 'none';
+            const promptTexts = {
+                'current-practice': 'Current Practice Analysis',
+                'barrier-identification': 'Barrier Identification',
+                'success-story': 'Success Story'
+            };
+            const promptName = promptTexts[promptValue] || 'Not selected';
+            
+            const reflection = document.getElementById('reflection').value;
+            const barriers = document.getElementById('barriers').value;
+            const solutions = document.getElementById('solutions').value;
+            const actionImmediate = document.getElementById('action-immediate').value;
+            const actionMonth = document.getElementById('action-month').value;
+            const actionYear = document.getElementById('action-year').value;
+            const accountability = document.getElementById('accountability').value;
+            const support = document.getElementById('support').value;
+            
+            const subject = encodeURIComponent('Barriers and Solutions Reflection - Module 1');
+            const body = encodeURIComponent(
+                'BARRIERS AND SOLUTIONS REFLECTION\n' +
+                'Student Involvement in IEP Training - Module 1\n' +
+                'Date: ' + new Date().toLocaleDateString() + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'SELECTED PROMPT:\n' + promptName + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'MY REFLECTION:\n' + (reflection || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'KEY BARRIERS:\n' + (barriers || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'POTENTIAL SOLUTIONS:\n' + (solutions || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'ACTION PLAN\n\n' +
+                'This Week:\n' + (actionImmediate || '[No response provided]') + '\n\n' +
+                'This Month:\n' + (actionMonth || '[No response provided]') + '\n\n' +
+                'This School Year:\n' + (actionYear || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'ACCOUNTABILITY & SUPPORT\n\n' +
+                'Accountability Partner/Support System:\n' + (accountability || '[No response provided]') + '\n\n' +
+                'Support/Resources Needed:\n' + (support || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'End of Reflection\n'
+            );
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+            showStatus('Opening your email client... If nothing happens, please check your browser settings.', 'success');
+        }
+        
+        function printForm() {
+            window.print();
+            showStatus('Print dialog opened. Your responses will be included in the printed version.', 'success');
+        }
+        
+        function confirmClear() {
+            if (confirm('Are you sure you want to clear all your responses? This action cannot be undone.\n\nTip: Consider emailing your responses to yourself before clearing.')) {
+                document.querySelectorAll('input[name="prompt"]').forEach(radio => {
+                    radio.checked = false;
+                });
+                document.querySelectorAll('.radio-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                document.querySelectorAll('textarea').forEach(textarea => {
+                    textarea.value = '';
+                    updateCharCount(textarea);
+                });
+                
+                try {
+                    localStorage.removeItem(STORAGE_KEY);
+                    showStatus('All responses have been cleared.', 'success');
+                } catch (e) {
+                    console.error('Error clearing localStorage:', e);
+                }
+            }
+        }
+        
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status-message status-${type}`;
+            statusEl.style.display = 'block';
+            
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        window.addEventListener('beforeunload', function(e) {
+            const hasContent = Array.from(document.querySelectorAll('textarea')).some(ta => ta.value.trim().length > 0);
+            if (hasContent) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
+</body>
+</html>

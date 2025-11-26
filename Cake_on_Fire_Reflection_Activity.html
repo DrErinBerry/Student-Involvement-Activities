@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"Cake on Fire" Article Reflection - Student IEP Involvement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .alert-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .alert-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .alert-box p {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .alert-box ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .info-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .info-box h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .info-box p {
+            color: #0c5460;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+        
+        .instructions {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .instructions h2 {
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #1565C0;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .question-container {
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .question-container h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .question-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #dee2e6;
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .status-message {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .print-only {
+            display: none;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .alert-box, .info-box, .instructions {
+                page-break-inside: avoid;
+            }
+            
+            .button-group, .char-count {
+                display: none;
+            }
+            
+            .print-only {
+                display: block;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 2px solid #333;
+            }
+            
+            textarea {
+                border: 1px solid #333;
+                min-height: 150px;
+            }
+            
+            .question-container {
+                page-break-inside: avoid;
+                margin-bottom: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>"Cake on Fire" Article Reflection</h1>
+            <p>Essential Questions for Student IEP Involvement</p>
+        </header>
+        
+        <main class="content">
+            <div class="alert-box" role="alert" aria-labelledby="browser-warning">
+                <h3 id="browser-warning">⚠️ Important: Browser Storage Notice</h3>
+                <p><strong>Your responses are saved automatically in your browser's local storage.</strong> However, please be aware:</p>
+                <ul>
+                    <li>Data is stored locally in THIS browser on THIS device only</li>
+                    <li>Clearing browser data/cache will delete your saved responses</li>
+                    <li>Using private/incognito mode may not save your work</li>
+                    <li>Switching browsers or devices will not transfer your responses</li>
+                </ul>
+                <p><strong>Recommendation:</strong> Use the "Email to Self" button regularly to save a copy of your work!</p>
+            </div>
+            
+            <div class="info-box" role="complementary" aria-labelledby="accessible-version">
+                <h3 id="accessible-version">📄 Accessible Format Available</h3>
+                <p><strong>Need a Word document version?</strong> An accessible Microsoft Word format of this activity is available in the "Accessible Activities" section of your module for participants who may need alternative formats.</p>
+            </div>
+            
+            <section class="instructions" aria-labelledby="instructions-heading">
+                <h2 id="instructions-heading">Instructions</h2>
+                <ol>
+                    <li><strong>Read each question carefully.</strong> These questions come from the "Cake on Fire" article and address critical aspects of student involvement in the IEP process.</li>
+                    <li><strong>Reflect on your current practice.</strong> Think honestly about your experiences with student IEP involvement in your setting.</li>
+                    <li><strong>Type your responses</strong> in the text boxes provided. There is no minimum or maximum length - write what feels meaningful to you.</li>
+                    <li><strong>Your work auto-saves</strong> as you type (in your browser's local storage).</li>
+                    <li><strong>Email yourself a copy</strong> using the button at the bottom - this ensures you have a backup!</li>
+                    <li><strong>You can also print</strong> your completed responses for your records.</li>
+                </ol>
+            </section>
+            
+            <form id="reflectionForm" aria-label="Cake on Fire Reflection Questions">
+                
+                <!-- Question 1 -->
+                <div class="question-container">
+                    <h3>Question 1</h3>
+                    <label for="question1" class="question-label">
+                        Do we encourage students to become involved in their IEP meetings?
+                    </label>
+                    <textarea 
+                        id="question1" 
+                        name="question1" 
+                        aria-describedby="char-count-1"
+                        placeholder="Reflect on how you currently encourage (or could encourage) student involvement in IEP meetings..."
+                    ></textarea>
+                    <div id="char-count-1" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="question-container">
+                    <h3>Question 2</h3>
+                    <label for="question2" class="question-label">
+                        Does this involvement begin at an early age?
+                    </label>
+                    <textarea 
+                        id="question2" 
+                        name="question2" 
+                        aria-describedby="char-count-2"
+                        placeholder="Consider at what age or grade level student involvement begins in your setting..."
+                    ></textarea>
+                    <div id="char-count-2" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="question-container">
+                    <h3>Question 3</h3>
+                    <label for="question3" class="question-label">
+                        Do we encourage students to become involved in designing the "themes" of their IEPs?
+                    </label>
+                    <textarea 
+                        id="question3" 
+                        name="question3" 
+                        aria-describedby="char-count-3"
+                        placeholder="Think about how students contribute to the overall direction and focus of their IEPs..."
+                    ></textarea>
+                    <div id="char-count-3" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="question-container">
+                    <h3>Question 4</h3>
+                    <label for="question4" class="question-label">
+                        Do we allow students to help decide whom to invite to their IEP meetings?
+                    </label>
+                    <textarea 
+                        id="question4" 
+                        name="question4" 
+                        aria-describedby="char-count-4"
+                        placeholder="Reflect on whether and how students have input on IEP meeting attendees..."
+                    ></textarea>
+                    <div id="char-count-4" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="question-container">
+                    <h3>Question 5</h3>
+                    <label for="question5" class="question-label">
+                        Do we give students opportunities to be responsible for the goals in their IEPs?
+                    </label>
+                    <textarea 
+                        id="question5" 
+                        name="question5" 
+                        aria-describedby="char-count-5"
+                        placeholder="Consider how students take ownership of their IEP goals..."
+                    ></textarea>
+                    <div id="char-count-5" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="question-container">
+                    <h3>Question 6</h3>
+                    <label for="question6" class="question-label">
+                        Do students know that the IEP meetings are for them and that the intent of the IEP process is to design a plan—a blueprint—that will help them be successful in school and in life?
+                    </label>
+                    <textarea 
+                        id="question6" 
+                        name="question6" 
+                        aria-describedby="char-count-6"
+                        placeholder="Reflect on students' understanding of the purpose and importance of their IEPs..."
+                    ></textarea>
+                    <div id="char-count-6" class="char-count" aria-live="polite">0 characters</div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn-primary" id="emailBtn" aria-label="Email responses to yourself">
+                        📧 Email to Self
+                    </button>
+                    <button type="button" class="btn-secondary" id="printBtn" aria-label="Print your responses">
+                        🖨️ Print
+                    </button>
+                    <button type="button" class="btn-success" id="clearBtn" aria-label="Clear all responses">
+                        🔄 Clear All
+                    </button>
+                </div>
+                
+                <div id="statusMessage" class="status-message" role="status" aria-live="polite"></div>
+            </form>
+            
+            <div class="print-only">
+                <p><strong>Name:</strong> _________________________________</p>
+                <p><strong>Date:</strong> _________________________________</p>
+                <p><strong>Module:</strong> Student Involvement in IEP - "Cake on Fire" Reflection</p>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Auto-save functionality
+        const STORAGE_KEY = 'cakeOnFireReflection';
+        
+        // Load saved data on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSavedData();
+            setupEventListeners();
+        });
+        
+        function setupEventListeners() {
+            // Auto-save on input
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    updateCharCount(this);
+                    saveData();
+                });
+                
+                updateCharCount(textarea);
+            });
+            
+            document.getElementById('emailBtn').addEventListener('click', emailToSelf);
+            document.getElementById('printBtn').addEventListener('click', printForm);
+            document.getElementById('clearBtn').addEventListener('click', confirmClear);
+        }
+        
+        function updateCharCount(textarea) {
+            const count = textarea.value.length;
+            const countId = textarea.getAttribute('aria-describedby');
+            const countElement = document.getElementById(countId);
+            if (countElement) {
+                countElement.textContent = `${count} character${count !== 1 ? 's' : ''}`;
+            }
+        }
+        
+        function saveData() {
+            const formData = {
+                question1: document.getElementById('question1').value,
+                question2: document.getElementById('question2').value,
+                question3: document.getElementById('question3').value,
+                question4: document.getElementById('question4').value,
+                question5: document.getElementById('question5').value,
+                question6: document.getElementById('question6').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+                console.log('Data auto-saved successfully');
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+                showStatus('Warning: Unable to auto-save. Please email your responses to yourself.', 'error');
+            }
+        }
+        
+        function loadSavedData() {
+            try {
+                const savedData = localStorage.getItem(STORAGE_KEY);
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    document.getElementById('question1').value = data.question1 || '';
+                    document.getElementById('question2').value = data.question2 || '';
+                    document.getElementById('question3').value = data.question3 || '';
+                    document.getElementById('question4').value = data.question4 || '';
+                    document.getElementById('question5').value = data.question5 || '';
+                    document.getElementById('question6').value = data.question6 || '';
+                    
+                    document.querySelectorAll('textarea').forEach(updateCharCount);
+                    console.log('Previous responses loaded');
+                }
+            } catch (e) {
+                console.error('Error loading from localStorage:', e);
+            }
+        }
+        
+        function emailToSelf() {
+            const q1 = document.getElementById('question1').value;
+            const q2 = document.getElementById('question2').value;
+            const q3 = document.getElementById('question3').value;
+            const q4 = document.getElementById('question4').value;
+            const q5 = document.getElementById('question5').value;
+            const q6 = document.getElementById('question6').value;
+            
+            const subject = encodeURIComponent('"Cake on Fire" Article Reflection - My Responses');
+            const body = encodeURIComponent(
+                '"CAKE ON FIRE" ARTICLE REFLECTION\n' +
+                'Student Involvement in IEP Training\n' +
+                'Date: ' + new Date().toLocaleDateString() + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'QUESTION 1:\n' +
+                'Do we encourage students to become involved in their IEP meetings?\n\n' +
+                'MY RESPONSE:\n' + (q1 || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'QUESTION 2:\n' +
+                'Does this involvement begin at an early age?\n\n' +
+                'MY RESPONSE:\n' + (q2 || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'QUESTION 3:\n' +
+                'Do we encourage students to become involved in designing the "themes" of their IEPs?\n\n' +
+                'MY RESPONSE:\n' + (q3 || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'QUESTION 4:\n' +
+                'Do we allow students to help decide whom to invite to their IEP meetings?\n\n' +
+                'MY RESPONSE:\n' + (q4 || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'QUESTION 5:\n' +
+                'Do we give students opportunities to be responsible for the goals in their IEPs?\n\n' +
+                'MY RESPONSE:\n' + (q5 || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'QUESTION 6:\n' +
+                'Do students know that the IEP meetings are for them and that the intent of the IEP process is to design a plan—a blueprint—that will help them be successful in school and in life?\n\n' +
+                'MY RESPONSE:\n' + (q6 || '[No response provided]') + '\n\n' +
+                '═══════════════════════════════════════════\n\n' +
+                'End of Reflection\n'
+            );
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+            showStatus('Opening your email client... If nothing happens, please check your browser settings.', 'success');
+        }
+        
+        function printForm() {
+            window.print();
+            showStatus('Print dialog opened. Your responses will be included in the printed version.', 'success');
+        }
+        
+        function confirmClear() {
+            if (confirm('Are you sure you want to clear all your responses? This action cannot be undone.\n\nTip: Consider emailing your responses to yourself before clearing.')) {
+                document.querySelectorAll('textarea').forEach(textarea => {
+                    textarea.value = '';
+                    updateCharCount(textarea);
+                });
+                
+                try {
+                    localStorage.removeItem(STORAGE_KEY);
+                    showStatus('All responses have been cleared.', 'success');
+                } catch (e) {
+                    console.error('Error clearing localStorage:', e);
+                }
+            }
+        }
+        
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status-message status-${type}`;
+            statusEl.style.display = 'block';
+            
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        window.addEventListener('beforeunload', function(e) {
+            const hasContent = Array.from(document.querySelectorAll('textarea')).some(ta => ta.value.trim().length > 0);
+            if (hasContent) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
+</body>
+</html>

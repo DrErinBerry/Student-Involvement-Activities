@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Tool Selection & Planning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        main {
+            padding: 40px;
+        }
+        
+        .intro-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        
+        .section-container {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .section-container h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tool-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tool-card.selected {
+            background: #e8eaf6;
+            border-color: #667eea;
+            border-width: 3px;
+        }
+        
+        .tool-card input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .tool-card label {
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .tool-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 8px;
+            margin-left: 28px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .student-planning {
+            margin-top: 20px;
+        }
+        
+        .student-row {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .student-row input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        .student-row input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+        
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .add-student-btn {
+            background: #17a2b8;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+        
+        .add-student-btn:hover {
+            background: #138496;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { 
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .icon {
+            font-size: 1.3em;
+        }
+        
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .timeline-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Assessment Tool Selection & Planning</h1>
+            <p>Module 4: Practical Tools and Implementation</p>
+        </div>
+        
+        <main>
+            <div class="intro-box">
+                <p><strong>Time to Get Strategic!</strong></p>
+                <p>You've just learned about numerous assessment tools. Now it's time to think critically about which tools you'll actually use with your students. This activity helps you create a concrete assessment plan tailored to your specific caseload.</p>
+                <p style="margin-top: 10px;"><strong>Estimated Time:</strong> 15-20 minutes</p>
+            </div>
+            
+            <!-- PART 1: Tool Familiarization -->
+            <div class="section-container">
+                <h3><span class="icon">🔍</span> Part 1: Which Tools Will You Use?</h3>
+                <p style="margin-bottom: 20px;">Select the assessment tools you plan to implement. Check all that apply:</p>
+                
+                <div class="tool-grid">
+                    <div class="tool-card" onclick="toggleTool(this, 'tig')">
+                        <label>
+                            <input type="checkbox" id="tig" onchange="updateSelections()">
+                            <span>Transition Interview Generator</span>
+                        </label>
+                        <div class="tool-description">Quick 10-20 min survey generates customized interview questions</div>
+                    </div>
+                    
+
+                    <div class="tool-card" onclick="toggleTool(this, 'onet')">
+                        <label>
+                            <input type="checkbox" id="onet" onchange="updateSelections()">
+                            <span>O*NET Interest Profiler</span>
+                        </label>
+                        <div class="tool-description">Career exploration based on student interests</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'okcollegestart')">
+                        <label>
+                            <input type="checkbox" id="okcollegestart" onchange="updateSelections()">
+                            <span>OK College Start</span>
+                        </label>
+                        <div class="tool-description">College search and exploration for Oklahoma institutions</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'thinkcollege')">
+                        <label>
+                            <input type="checkbox" id="thinkcollege" onchange="updateSelections()">
+                            <span>Think College</span>
+                        </label>
+                        <div class="tool-description">Post-secondary programs for students with intellectual disabilities</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'me')">
+                        <label>
+                            <input type="checkbox" id="me" onchange="updateSelections()">
+                            <span>Me! Scale Pre-Assessment</span>
+                        </label>
+                        <div class="tool-description">Brief self-awareness and self-advocacy baseline</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'checklist')">
+                        <label>
+                            <input type="checkbox" id="checklist" onchange="updateSelections()">
+                            <span>Student Involvement Checklist</span>
+                        </label>
+                        <div class="tool-description">Quick screening of current IEP involvement level</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'arc')">
+                        <label>
+                            <input type="checkbox" id="arc" onchange="updateSelections()">
+                            <span>ARC Self-Determination Scale</span>
+                        </label>
+                        <div class="tool-description">Comprehensive assessment across 4 domains</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'air')">
+                        <label>
+                            <input type="checkbox" id="air" onchange="updateSelections()">
+                            <span>AIR Self-Determination Scale</span>
+                        </label>
+                        <div class="tool-description">Student, parent, & educator versions for multiple perspectives</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'tagg')">
+                        <label>
+                            <input type="checkbox" id="tagg" onchange="updateSelections()">
+                            <span>TAGG Assessment Suite</span>
+                        </label>
+                        <div class="tool-description">$3 per credit - generates IEP content automatically</div>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleTool(this, 'sdi')">
+                        <label>
+                            <input type="checkbox" id="sdi" onchange="updateSelections()">
+                            <span>Self-Determination Inventory</span>
+                        </label>
+                        <div class="tool-description">Free 1-time use, comprehensive feedback</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PART 2: Implementation Planning -->
+            <div class="section-container">
+                <h3><span class="icon">📅</span> Part 2: When Will You Use These Tools?</h3>
+                <p style="margin-bottom: 15px;">Create a timeline for implementation. Be realistic about what you can accomplish!</p>
+                
+                <div class="timeline-item">
+                    <strong>This Month:</strong>
+                    <textarea id="thisMonth" placeholder="Which assessment(s) will you try first? With which student(s)?"></textarea>
+                </div>
+                
+                <div class="timeline-item">
+                    <strong>This Semester:</strong>
+                    <textarea id="thisSemester" placeholder="What's your plan for rolling out assessments across your caseload?"></textarea>
+                </div>
+                
+                <div class="timeline-item">
+                    <strong>This Year:</strong>
+                    <textarea id="thisYear" placeholder="What assessment routine do you want established by the end of the school year?"></textarea>
+                </div>
+            </div>
+            
+            <!-- PART 3: Student-Specific Planning -->
+            <div class="section-container">
+                <h3><span class="icon">👥</span> Part 3: Match Students to Tools</h3>
+                <p style="margin-bottom: 15px;">Think about 3-5 specific students. Which assessment tools would be most beneficial for each?</p>
+                
+                <div class="student-planning" id="studentPlanningContainer">
+                    <div class="student-row">
+                        <input type="text" placeholder="Student initials or identifier" class="student-name">
+                        <textarea class="student-tools" placeholder="Which tools would benefit this student and why? Consider their age, disability, current skill level, and upcoming transition needs."></textarea>
+                    </div>
+                    
+                    <div class="student-row">
+                        <input type="text" placeholder="Student initials or identifier" class="student-name">
+                        <textarea class="student-tools" placeholder="Which tools would benefit this student and why? Consider their age, disability, current skill level, and upcoming transition needs."></textarea>
+                    </div>
+                    
+                    <div class="student-row">
+                        <input type="text" placeholder="Student initials or identifier" class="student-name">
+                        <textarea class="student-tools" placeholder="Which tools would benefit this student and why? Consider their age, disability, current skill level, and upcoming transition needs."></textarea>
+                    </div>
+                </div>
+                
+                <button class="add-student-btn" onclick="addStudentRow()">+ Add Another Student</button>
+            </div>
+            
+            <!-- PART 4: Reflection -->
+            <div class="section-container">
+                <h3><span class="icon">💭</span> Part 4: Critical Reflection</h3>
+                
+                <p style="margin-bottom: 10px;"><strong>What support or resources do you need to implement these assessments effectively?</strong></p>
+                <textarea id="support" placeholder="Consider: time, training, technology access, administrator support, parent communication, etc."></textarea>
+                
+                <p style="margin-bottom: 10px; margin-top: 20px;"><strong>What's your biggest concern about implementing these assessments?</strong></p>
+                <textarea id="concern" placeholder="Be honest! What worries you? Time? Student capability? Data management? Something else?"></textarea>
+                
+                <p style="margin-bottom: 10px; margin-top: 20px;"><strong>How will you use assessment results to inform IEP goals and student involvement?</strong></p>
+                <textarea id="useResults" placeholder="Think about the connection between assessment data and actionable IEP content. How will results translate to student participation?"></textarea>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-success" onclick="saveWork()">💾 Save My Plan</button>
+                <button class="btn-secondary" onclick="emailPlan()">📧 Email to Self</button>
+                <button class="btn-secondary" onclick="printPlan()">🖨️ Print</button>
+                <button class="btn-primary" onclick="viewSummary()">📊 View Summary</button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🎉 Plan Saved!</h2>
+            <p id="summaryText" style="margin-top: 20px;"></p>
+            <div style="margin-top: 20px;">
+                <button class="btn-primary" onclick="closeModal()">Continue Learning</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-save functionality
+        function saveData() {
+            const data = {
+                selectedTools: getSelectedTools(),
+                thisMonth: document.getElementById('thisMonth').value,
+                thisSemester: document.getElementById('thisSemester').value,
+                thisYear: document.getElementById('thisYear').value,
+                students: getStudentPlans(),
+                support: document.getElementById('support').value,
+                concern: document.getElementById('concern').value,
+                useResults: document.getElementById('useResults').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('assessmentPlan', JSON.stringify(data));
+        }
+        
+        function loadSavedData() {
+            const saved = localStorage.getItem('assessmentPlan');
+            if (saved) {
+                const data = JSON.parse(saved);
+                
+                // Restore tool selections
+                if (data.selectedTools) {
+                    data.selectedTools.forEach(toolId => {
+                        const checkbox = document.getElementById(toolId);
+                        if (checkbox) {
+                            checkbox.checked = true;
+                            checkbox.parentElement.parentElement.classList.add('selected');
+                        }
+                    });
+                }
+                
+                // Restore timeline
+                document.getElementById('thisMonth').value = data.thisMonth || '';
+                document.getElementById('thisSemester').value = data.thisSemester || '';
+                document.getElementById('thisYear').value = data.thisYear || '';
+                
+                // Restore reflections
+                document.getElementById('support').value = data.support || '';
+                document.getElementById('concern').value = data.concern || '';
+                document.getElementById('useResults').value = data.useResults || '';
+                
+                // Restore student plans
+                if (data.students && data.students.length > 0) {
+                    const container = document.getElementById('studentPlanningContainer');
+                    container.innerHTML = '';
+                    data.students.forEach((student, index) => {
+                        addStudentRow();
+                        const rows = container.querySelectorAll('.student-row');
+                        const row = rows[index];
+                        row.querySelector('.student-name').value = student.name || '';
+                        row.querySelector('.student-tools').value = student.tools || '';
+                    });
+                }
+            }
+        }
+        
+        function getSelectedTools() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            return Array.from(checkboxes).map(cb => cb.id);
+        }
+        
+        function getStudentPlans() {
+            const rows = document.querySelectorAll('.student-row');
+            return Array.from(rows).map(row => ({
+                name: row.querySelector('.student-name').value,
+                tools: row.querySelector('.student-tools').value
+            }));
+        }
+        
+        function toggleTool(card, toolId) {
+            const checkbox = document.getElementById(toolId);
+            checkbox.checked = !checkbox.checked;
+            updateSelections();
+        }
+        
+        function updateSelections() {
+            const cards = document.querySelectorAll('.tool-card');
+            cards.forEach(card => {
+                const checkbox = card.querySelector('input[type="checkbox"]');
+                if (checkbox.checked) {
+                    card.classList.add('selected');
+                } else {
+                    card.classList.remove('selected');
+                }
+            });
+            saveData();
+        }
+        
+        function addStudentRow() {
+            const container = document.getElementById('studentPlanningContainer');
+            const newRow = document.createElement('div');
+            newRow.className = 'student-row';
+            newRow.innerHTML = `
+                <input type="text" placeholder="Student initials or identifier" class="student-name">
+                <textarea class="student-tools" placeholder="Which tools would benefit this student and why? Consider their age, disability, current skill level, and upcoming transition needs."></textarea>
+            `;
+            container.appendChild(newRow);
+        }
+        
+        function saveWork() {
+            saveData();
+            viewSummary();
+        }
+        
+        function viewSummary() {
+            const selectedTools = getSelectedTools();
+            const studentPlans = getStudentPlans();
+            
+            let summary = `<strong>Your Assessment Implementation Plan:</strong><br><br>`;
+            summary += `<strong>Tools Selected:</strong> ${selectedTools.length > 0 ? selectedTools.length : 'None yet'}<br>`;
+            summary += `<strong>Students Planned:</strong> ${studentPlans.filter(s => s.name).length}<br><br>`;
+            summary += `<strong>Next Steps:</strong><br>`;
+            summary += `1. Review your timeline for this month<br>`;
+            summary += `2. Gather necessary materials and links<br>`;
+            summary += `3. Communicate with students and families<br>`;
+            summary += `4. Start with your first assessment!<br><br>`;
+            summary += `<em>Your plan has been saved. You can return to it anytime.</em>`;
+            
+            document.getElementById('summaryText').innerHTML = summary;
+            document.getElementById('successModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        
+        function emailPlan() {
+            const selectedTools = getSelectedTools().join(', ') || 'None selected';
+            const thisMonth = document.getElementById('thisMonth').value || 'Not specified';
+            const thisSemester = document.getElementById('thisSemester').value || 'Not specified';
+            const thisYear = document.getElementById('thisYear').value || 'Not specified';
+            
+            const subject = encodeURIComponent('My Assessment Tool Implementation Plan');
+            const body = encodeURIComponent(
+                `ASSESSMENT TOOL IMPLEMENTATION PLAN\n` +
+                `Module 4: Practical Tools\n` +
+                `Date: ${new Date().toLocaleDateString()}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `SELECTED TOOLS:\n${selectedTools}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `TIMELINE:\n\n` +
+                `This Month:\n${thisMonth}\n\n` +
+                `This Semester:\n${thisSemester}\n\n` +
+                `This Year:\n${thisYear}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `STUDENT PLANS:\n` +
+                `${getStudentPlans().map((s, i) => 
+                    `Student ${i + 1}: ${s.name || 'Not specified'}\n${s.tools || 'No plan yet'}\n`
+                ).join('\n')}\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `SUPPORT NEEDED:\n${document.getElementById('support').value || 'Not specified'}\n\n` +
+                `CONCERNS:\n${document.getElementById('concern').value || 'Not specified'}\n\n` +
+                `HOW I'LL USE RESULTS:\n${document.getElementById('useResults').value || 'Not specified'}`
+            );
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+        
+        function printPlan() {
+            window.print();
+        }
+        
+        // Auto-save on input
+        document.addEventListener('input', saveData);
+        
+        // Load saved data when page loads
+        window.addEventListener('DOMContentLoaded', loadSavedData);
+        
+        // Warning about browser storage
+        if (typeof(Storage) === "undefined") {
+            alert("Warning: Your browser doesn't support local storage. Your work won't be saved automatically. Please email or print your plan to save it.");
+        }
+    </script>
+</body>
+</html>

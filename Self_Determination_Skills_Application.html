@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Determination Skills Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .part-container {
+            background: #f8f9fa;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .part-header {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .section-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        select:focus, input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .t-chart-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .t-chart-column {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+        }
+        
+        .t-chart-column h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .example-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .example-item input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .example-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .lesson-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .lesson-section h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .time-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .help-text {
+            background: #fff3cd;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+            font-size: 0.95em;
+            color: #856404;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .save-indicator {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .save-indicator.show {
+            opacity: 1;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .header {
+                background: #667eea !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .button-group {
+                display: none;
+            }
+            
+            .part-container {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .t-chart-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Self-Determination Skills Application</h1>
+            <p>Design a Mini-Lesson to Teach Self-Determination</p>
+        </div>
+        
+        <div class="content">
+            <form id="skillsForm" aria-label="Self-Determination Skills Application">
+                
+                <!-- PART 1: Skill Analysis -->
+                <div class="part-container">
+                    <div class="part-header">Part 1: Skill Analysis</div>
+                    
+                    <label class="section-label" for="skill-select">Select ONE Self-Determination Skill:</label>
+                    <select id="skill-select" name="skill" aria-describedby="skill-help">
+                        <option value="">-- Choose a skill --</option>
+                        <option value="self-advocacy">Self-Advocacy (Speaking up for your needs)</option>
+                        <option value="goal-setting">Goal-Setting (Creating and working toward goals)</option>
+                        <option value="self-awareness">Self-Awareness (Understanding strengths and needs)</option>
+                        <option value="decision-making">Decision-Making (Making informed choices)</option>
+                        <option value="problem-solving">Problem-Solving (Finding solutions to challenges)</option>
+                        <option value="self-regulation">Self-Regulation (Managing emotions and behavior)</option>
+                        <option value="self-evaluation">Self-Evaluation (Assessing your own progress)</option>
+                    </select>
+                    <div id="skill-help" class="help-text">
+                        💡 Choose the skill you want to teach. Consider which skill your students need most or which connects best to IEP participation.
+                    </div>
+                    
+                    <label class="section-label">T-Chart: What Does This Skill Look Like?</label>
+                    <p style="margin-bottom: 15px; color: #666;">Provide 5 specific examples for each context:</p>
+                    
+                    <div class="t-chart-container">
+                        <div class="t-chart-column">
+                            <h4>📚 In General Education</h4>
+                            <div id="genedExamples">
+                                <div class="example-item">
+                                    <span class="example-number">1</span>
+                                    <input type="text" id="gened1" placeholder="Example: Student asks teacher for clarification...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">2</span>
+                                    <input type="text" id="gened2" placeholder="Enter example 2...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">3</span>
+                                    <input type="text" id="gened3" placeholder="Enter example 3...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">4</span>
+                                    <input type="text" id="gened4" placeholder="Enter example 4...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">5</span>
+                                    <input type="text" id="gened5" placeholder="Enter example 5...">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="t-chart-column">
+                            <h4>📋 In IEP Meetings</h4>
+                            <div id="iepExamples">
+                                <div class="example-item">
+                                    <span class="example-number">1</span>
+                                    <input type="text" id="iep1" placeholder="Example: Student shares their strengths...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">2</span>
+                                    <input type="text" id="iep2" placeholder="Enter example 2...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">3</span>
+                                    <input type="text" id="iep3" placeholder="Enter example 3...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">4</span>
+                                    <input type="text" id="iep4" placeholder="Enter example 4...">
+                                </div>
+                                <div class="example-item">
+                                    <span class="example-number">5</span>
+                                    <input type="text" id="iep5" placeholder="Enter example 5...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PART 2: Lesson Planning -->
+                <div class="part-container">
+                    <div class="part-header">Part 2: 20-Minute Mini-Lesson Design</div>
+                    
+                    <div class="lesson-section">
+                        <h4>🎯 Measurable Objective</h4>
+                        <label for="objective" style="font-weight: normal; color: #666; font-size: 0.95em;">Write a clear, measurable objective (What will students be able to do by the end?):</label>
+                        <textarea id="objective" placeholder="Example: By the end of this lesson, students will be able to identify their top 3 strengths and explain how one strength helps them in school, with 80% accuracy."></textarea>
+                    </div>
+                    
+                    <div class="lesson-section">
+                        <h4>📦 Materials Needed</h4>
+                        <label for="materials" style="font-weight: normal; color: #666; font-size: 0.95em;">List all resources you'll need:</label>
+                        <textarea id="materials" placeholder="Example: One-pager template, markers, anchor chart, student journals, self-assessment checklist..."></textarea>
+                    </div>
+                    
+                    <div class="lesson-section">
+                        <h4>🎣 Introduction<span class="time-badge">3 minutes</span></h4>
+                        <label for="introduction" style="font-weight: normal; color: #666; font-size: 0.95em;">Hook/engagement activity to grab attention:</label>
+                        <textarea id="introduction" placeholder="How will you engage students and introduce the skill? What question will you ask? What story will you tell?"></textarea>
+                    </div>
+                    
+                    <div class="lesson-section">
+                        <h4>👨‍🏫 Direct Instruction<span class="time-badge">7 minutes</span></h4>
+                        <label for="instruction" style="font-weight: normal; color: #666; font-size: 0.95em;">How you'll explicitly teach the skill:</label>
+                        <textarea id="instruction" placeholder="Explain step-by-step: What will you model? What examples will you show? How will you break down the skill into clear steps?"></textarea>
+                    </div>
+                    
+                    <div class="lesson-section">
+                        <h4>✏️ Guided Practice<span class="time-badge">7 minutes</span></h4>
+                        <label for="practice" style="font-weight: normal; color: #666; font-size: 0.95em;">Student practice activity with your support:</label>
+                        <textarea id="practice" placeholder="What will students DO to practice the skill? How will you scaffold? What supports will you provide?"></textarea>
+                    </div>
+                    
+                    <div class="lesson-section">
+                        <h4>🎬 Closure<span class="time-badge">3 minutes</span></h4>
+                        <label for="closure" style="font-weight: normal; color: #666; font-size: 0.95em;">Assessment and reflection:</label>
+                        <textarea id="closure" placeholder="How will you check for understanding? What question will you ask for reflection? How will students demonstrate learning?"></textarea>
+                    </div>
+                </div>
+                
+                <!-- PART 3: Implementation Reflection -->
+                <div class="part-container">
+                    <div class="part-header">Part 3: Implementation Reflection</div>
+                    
+                    <div class="help-text">
+                        💭 Address these points in your 250-word reflection:
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>How this skill connects to IEP involvement</li>
+                            <li>Potential challenges in teaching this skill</li>
+                            <li>How you'll measure student progress</li>
+                            <li>Connections to post-school outcomes</li>
+                        </ul>
+                    </div>
+                    
+                    <label for="reflection" class="section-label">Your Reflection (250+ words):</label>
+                    <textarea 
+                        id="reflection" 
+                        style="min-height: 200px;"
+                        placeholder="Write your reflection here, addressing all four points above. Think about real students, real challenges, and real-world applications..."
+                    ></textarea>
+                    <div id="char-count-reflection" class="char-count" aria-live="polite">0 characters (suggest 250+ words / ~1500+ characters)</div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn-primary" onclick="emailResponses()">📧 Email to Myself</button>
+                    <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Print</button>
+                    <button type="button" class="btn-success" onclick="saveProgress()">💾 Save Progress</button>
+                    <span id="saveIndicator" class="save-indicator">✓ Saved!</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-save functionality
+        let autoSaveTimer;
+        const AUTOSAVE_DELAY = 3000;
+        
+        // Character counting for reflection
+        const reflectionField = document.getElementById('reflection');
+        const reflectionCounter = document.getElementById('char-count-reflection');
+        
+        reflectionField.addEventListener('input', () => {
+            const count = reflectionField.value.length;
+            const wordCount = reflectionField.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+            reflectionCounter.textContent = `${count} characters (approximately ${wordCount} words / suggest 250+ words)`;
+            scheduleAutoSave();
+        });
+        
+        // Set up auto-save for all inputs
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('input', scheduleAutoSave);
+            field.addEventListener('change', scheduleAutoSave);
+        });
+        
+        function scheduleAutoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(saveProgress, AUTOSAVE_DELAY);
+        }
+        
+        function saveProgress() {
+            try {
+                const formData = {
+                    skill: document.getElementById('skill-select').value,
+                    // T-Chart examples
+                    gened1: document.getElementById('gened1').value,
+                    gened2: document.getElementById('gened2').value,
+                    gened3: document.getElementById('gened3').value,
+                    gened4: document.getElementById('gened4').value,
+                    gened5: document.getElementById('gened5').value,
+                    iep1: document.getElementById('iep1').value,
+                    iep2: document.getElementById('iep2').value,
+                    iep3: document.getElementById('iep3').value,
+                    iep4: document.getElementById('iep4').value,
+                    iep5: document.getElementById('iep5').value,
+                    // Lesson plan
+                    objective: document.getElementById('objective').value,
+                    materials: document.getElementById('materials').value,
+                    introduction: document.getElementById('introduction').value,
+                    instruction: document.getElementById('instruction').value,
+                    practice: document.getElementById('practice').value,
+                    closure: document.getElementById('closure').value,
+                    // Reflection
+                    reflection: document.getElementById('reflection').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('skillsApplication', JSON.stringify(formData));
+                
+                // Show save indicator
+                const indicator = document.getElementById('saveIndicator');
+                indicator.classList.add('show');
+                setTimeout(() => indicator.classList.remove('show'), 2000);
+                
+            } catch (e) {
+                console.warn('Could not save to browser storage:', e);
+            }
+        }
+        
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('skillsApplication');
+                if (saved) {
+                    const formData = JSON.parse(saved);
+                    
+                    // Restore all fields
+                    Object.keys(formData).forEach(key => {
+                        if (key !== 'timestamp') {
+                            const field = document.getElementById(key === 'skill' ? 'skill-select' : key);
+                            if (field) {
+                                field.value = formData[key];
+                            }
+                        }
+                    });
+                    
+                    // Update character count
+                    const count = reflectionField.value.length;
+                    const wordCount = reflectionField.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    reflectionCounter.textContent = `${count} characters (approximately ${wordCount} words / suggest 250+ words)`;
+                }
+            } catch (e) {
+                console.warn('Could not load saved progress:', e);
+            }
+        }
+        
+        function emailResponses() {
+            const skill = document.getElementById('skill-select');
+            if (!skill.value) {
+                alert('Please select a self-determination skill first!');
+                return;
+            }
+            
+            const skillName = skill.options[skill.selectedIndex].text;
+            
+            // Gather all data
+            const genedExamples = [1,2,3,4,5].map(i => 
+                `${i}. ${document.getElementById('gened' + i).value}`
+            ).join('\n');
+            
+            const iepExamples = [1,2,3,4,5].map(i => 
+                `${i}. ${document.getElementById('iep' + i).value}`
+            ).join('\n');
+            
+            const objective = document.getElementById('objective').value;
+            const materials = document.getElementById('materials').value;
+            const introduction = document.getElementById('introduction').value;
+            const instruction = document.getElementById('instruction').value;
+            const practice = document.getElementById('practice').value;
+            const closure = document.getElementById('closure').value;
+            const reflection = document.getElementById('reflection').value;
+            
+            const subject = encodeURIComponent('Self-Determination Skills Application');
+            const body = encodeURIComponent(
+                `SELF-DETERMINATION SKILLS APPLICATION\n` +
+                `Date: ${new Date().toLocaleDateString()}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `PART 1: SKILL ANALYSIS\n\n` +
+                `Selected Skill: ${skillName}\n\n` +
+                `T-CHART: In General Education\n${genedExamples}\n\n` +
+                `T-CHART: In IEP Meetings\n${iepExamples}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `PART 2: 20-MINUTE MINI-LESSON\n\n` +
+                `OBJECTIVE:\n${objective}\n\n` +
+                `MATERIALS:\n${materials}\n\n` +
+                `INTRODUCTION (3 minutes):\n${introduction}\n\n` +
+                `DIRECT INSTRUCTION (7 minutes):\n${instruction}\n\n` +
+                `GUIDED PRACTICE (7 minutes):\n${practice}\n\n` +
+                `CLOSURE (3 minutes):\n${closure}\n\n` +
+                `${'-'.repeat(60)}\n\n` +
+                `PART 3: IMPLEMENTATION REFLECTION\n\n${reflection}`
+            );
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+        
+        // Load saved progress when page loads
+        window.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>

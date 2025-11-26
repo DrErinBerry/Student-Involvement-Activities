@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Think & Share: Barriers and Facilitators Activity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .timer-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .timer-fill {
+            background: white;
+            height: 100%;
+            width: 100%;
+            border-radius: 4px;
+            transition: width 1s linear;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        
+        .instructions h2 {
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .columns-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .column {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .column:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .column.facilitators {
+            border-top: 4px solid #4caf50;
+        }
+        
+        .column.barriers {
+            border-top: 4px solid #f44336;
+        }
+        
+        .column h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .column.facilitators h3 {
+            color: #2e7d32;
+        }
+        
+        .column.barriers h3 {
+            color: #c62828;
+        }
+        
+        .icon {
+            font-size: 1.5em;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .input-field {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .add-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .items-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .item {
+            background: white;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .item-text {
+            flex: 1;
+            margin-right: 10px;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .item-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+        }
+        
+        .edit-btn {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .edit-btn:hover {
+            background: #ffe0b2;
+        }
+        
+        .delete-btn {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .delete-btn:hover {
+            background: #ffcdd2;
+        }
+        
+        .counter {
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+        
+        .suggestions {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff8e1;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .suggestions h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+        
+        .suggestion-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .suggestion {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #ffc107;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+        }
+        
+        .suggestion:hover {
+            background: #ffc107;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .reflection-section {
+            background: #f3e5f5;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .reflection-section h3 {
+            color: #6a1b9a;
+            margin-bottom: 15px;
+        }
+        
+        .reflection-prompt {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .reflection-prompt p {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #9c27b0;
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .timer-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: #667eea;
+            display: none;
+        }
+        
+        .timer-display.active {
+            display: block;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .columns-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-display {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media print {
+            .button-group, .timer-display, .input-group {
+                display: none;
+            }
+            
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-display" id="timerDisplay">
+        ⏱️ <span id="timeRemaining">10:00</span>
+    </div>
+    
+    <div class="container">
+        <header class="header">
+            <h1>🤔 Think & Share: Barriers and Facilitators</h1>
+            <p>What helps and what hinders student involvement in the IEP?</p>
+            <div class="timer-bar">
+                <div class="timer-fill" id="timerBar"></div>
+            </div>
+        </header>
+        
+        <main class="content">
+            <div class="instructions">
+                <h2>📝 Instructions</h2>
+                <p><strong>Time: 10 minutes</strong></p>
+                <p>Reflect on your own experiences with student IEP involvement. Add items to each column below. Be specific to your setting - every school is different!</p>
+            </div>
+            
+            <div class="columns-container">
+                <!-- Facilitators Column -->
+                <div class="column facilitators">
+                    <h3><span class="icon">✅</span> Facilitators</h3>
+                    <p style="margin-bottom: 15px; color: #666; font-size: 0.95em;">What HELPS students be involved?</p>
+                    
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="facilitatorInput" 
+                               placeholder="Enter a facilitator..." 
+                               onkeypress="if(event.key === 'Enter') addItem('facilitator')">
+                        <button class="add-btn" onclick="addItem('facilitator')">+ Add</button>
+                    </div>
+                    
+                    <div class="items-list" id="facilitatorsList"></div>
+                    <div class="counter" id="facilitatorCount">0 items added</div>
+                    
+                    <div class="suggestions">
+                        <h4>💡 Consider These:</h4>
+                        <div class="suggestion-pills">
+                            <span class="suggestion" onclick="quickAdd('facilitator', 'Supportive administration')">Supportive administration</span>
+                            <span class="suggestion" onclick="quickAdd('facilitator', 'Parent buy-in')">Parent buy-in</span>
+                            <span class="suggestion" onclick="quickAdd('facilitator', 'Student preparation time')">Student preparation time</span>
+                            <span class="suggestion" onclick="quickAdd('facilitator', 'Visual supports')">Visual supports</span>
+                            <span class="suggestion" onclick="quickAdd('facilitator', 'Practice opportunities')">Practice opportunities</span>
+                            <span class="suggestion" onclick="quickAdd('facilitator', 'Peer models')">Peer models</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Barriers Column -->
+                <div class="column barriers">
+                    <h3><span class="icon">🚧</span> Barriers</h3>
+                    <p style="margin-bottom: 15px; color: #666; font-size: 0.95em;">What PREVENTS student involvement?</p>
+                    
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="barrierInput" 
+                               placeholder="Enter a barrier..." 
+                               onkeypress="if(event.key === 'Enter') addItem('barrier')">
+                        <button class="add-btn" onclick="addItem('barrier')">+ Add</button>
+                    </div>
+                    
+                    <div class="items-list" id="barriersList"></div>
+                    <div class="counter" id="barrierCount">0 items added</div>
+                    
+                    <div class="suggestions">
+                        <h4>💡 Common Barriers:</h4>
+                        <div class="suggestion-pills">
+                            <span class="suggestion" onclick="quickAdd('barrier', 'Limited time')">Limited time</span>
+                            <span class="suggestion" onclick="quickAdd('barrier', 'Student anxiety')">Student anxiety</span>
+                            <span class="suggestion" onclick="quickAdd('barrier', 'Parent resistance')">Parent resistance</span>
+                            <span class="suggestion" onclick="quickAdd('barrier', 'Lack of training')">Lack of training</span>
+                            <span class="suggestion" onclick="quickAdd('barrier', 'System constraints')">System constraints</span>
+                            <span class="suggestion" onclick="quickAdd('barrier', 'Low expectations')">Low expectations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reflection-section">
+                <h3>💭 Reflection Questions</h3>
+                
+                <div class="reflection-prompt">
+                    <p><strong>Looking at your lists, what patterns do you notice?</strong></p>
+                    <textarea id="reflection1" placeholder="What themes emerge? Are there more barriers or facilitators?"></textarea>
+                </div>
+                
+                <div class="reflection-prompt">
+                    <p><strong>Which barrier would have the biggest impact if you could remove it?</strong></p>
+                    <textarea id="reflection2" placeholder="Consider both immediate and long-term effects..."></textarea>
+                </div>
+                
+                <div class="reflection-prompt">
+                    <p><strong>Which facilitator could you strengthen or implement right away?</strong></p>
+                    <textarea id="reflection3" placeholder="Think about quick wins and low-hanging fruit..."></textarea>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-success" onclick="startTimer()">⏱️ Start 10-Minute Timer</button>
+                <button class="btn-primary" onclick="saveWork()">💾 Save My Work</button>
+                <button class="btn-secondary" onclick="emailResults()">📧 Email to Self</button>
+                <button class="btn-secondary" onclick="printResults()">🖨️ Print</button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🎉 Great Work!</h2>
+            <p>Your reflection has been saved. You've identified:</p>
+            <ul id="summaryList"></ul>
+            <p>Use these insights to guide your implementation of student involvement strategies!</p>
+        </div>
+    </div>
+    
+    <script>
+        let facilitators = [];
+        let barriers = [];
+        let timerInterval = null;
+        let timeLeft = 600; // 10 minutes in seconds
+        
+        // Load saved data on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSavedData();
+        });
+        
+        function addItem(type) {
+            const input = document.getElementById(type === 'facilitator' ? 'facilitatorInput' : 'barrierInput');
+            const value = input.value.trim();
+            
+            if (value) {
+                const item = {
+                    id: Date.now(),
+                    text: value
+                };
+                
+                if (type === 'facilitator') {
+                    facilitators.push(item);
+                    renderFacilitators();
+                } else {
+                    barriers.push(item);
+                    renderBarriers();
+                }
+                
+                input.value = '';
+                saveData();
+                
+                // Animate addition
+                const lists = document.querySelectorAll('.items-list');
+                lists.forEach(list => {
+                    const lastItem = list.lastElementChild;
+                    if (lastItem && lastItem.classList.contains('item')) {
+                        lastItem.style.animation = 'slideIn 0.3s ease';
+                    }
+                });
+            }
+        }
+        
+        function quickAdd(type, text) {
+            const item = {
+                id: Date.now(),
+                text: text
+            };
+            
+            if (type === 'facilitator') {
+                // Check if already exists
+                if (!facilitators.some(f => f.text === text)) {
+                    facilitators.push(item);
+                    renderFacilitators();
+                }
+            } else {
+                if (!barriers.some(b => b.text === text)) {
+                    barriers.push(item);
+                    renderBarriers();
+                }
+            }
+            
+            saveData();
+        }
+        
+        function deleteItem(type, id) {
+            if (type === 'facilitator') {
+                facilitators = facilitators.filter(item => item.id !== id);
+                renderFacilitators();
+            } else {
+                barriers = barriers.filter(item => item.id !== id);
+                renderBarriers();
+            }
+            saveData();
+        }
+        
+        function editItem(type, id) {
+            const items = type === 'facilitator' ? facilitators : barriers;
+            const item = items.find(i => i.id === id);
+            if (item) {
+                const newText = prompt('Edit item:', item.text);
+                if (newText && newText.trim()) {
+                    item.text = newText.trim();
+                    if (type === 'facilitator') {
+                        renderFacilitators();
+                    } else {
+                        renderBarriers();
+                    }
+                    saveData();
+                }
+            }
+        }
+        
+        function renderFacilitators() {
+            const list = document.getElementById('facilitatorsList');
+            const count = document.getElementById('facilitatorCount');
+            
+            list.innerHTML = '';
+            facilitators.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `
+                    <span class="item-text">${item.text}</span>
+                    <div class="item-actions">
+                        <button class="item-btn edit-btn" onclick="editItem('facilitator', ${item.id})">✏️</button>
+                        <button class="item-btn delete-btn" onclick="deleteItem('facilitator', ${item.id})">🗑️</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            
+            count.textContent = `${facilitators.length} item${facilitators.length !== 1 ? 's' : ''} added`;
+        }
+        
+        function renderBarriers() {
+            const list = document.getElementById('barriersList');
+            const count = document.getElementById('barrierCount');
+            
+            list.innerHTML = '';
+            barriers.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `
+                    <span class="item-text">${item.text}</span>
+                    <div class="item-actions">
+                        <button class="item-btn edit-btn" onclick="editItem('barrier', ${item.id})">✏️</button>
+                        <button class="item-btn delete-btn" onclick="deleteItem('barrier', ${item.id})">🗑️</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            
+            count.textContent = `${barriers.length} item${barriers.length !== 1 ? 's' : ''} added`;
+        }
+        
+        function startTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            timeLeft = 600; // Reset to 10 minutes
+            document.getElementById('timerDisplay').classList.add('active');
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('⏰ Time\'s up! Take a moment to review your lists and complete the reflection questions.');
+                    document.getElementById('timerDisplay').classList.remove('active');
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timeRemaining').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            const percentage = (timeLeft / 600) * 100;
+            document.getElementById('timerBar').style.width = percentage + '%';
+            
+            // Change color as time runs out
+            const timerBar = document.getElementById('timerBar');
+            if (percentage > 50) {
+                timerBar.style.background = 'white';
+            } else if (percentage > 25) {
+                timerBar.style.background = '#ffd700';
+            } else {
+                timerBar.style.background = '#ff6b6b';
+            }
+        }
+        
+        function saveData() {
+            const data = {
+                facilitators: facilitators,
+                barriers: barriers,
+                reflection1: document.getElementById('reflection1').value,
+                reflection2: document.getElementById('reflection2').value,
+                reflection3: document.getElementById('reflection3').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('barriersAndFacilitators', JSON.stringify(data));
+        }
+        
+        function loadSavedData() {
+            const saved = localStorage.getItem('barriersAndFacilitators');
+            if (saved) {
+                const data = JSON.parse(saved);
+                facilitators = data.facilitators || [];
+                barriers = data.barriers || [];
+                document.getElementById('reflection1').value = data.reflection1 || '';
+                document.getElementById('reflection2').value = data.reflection2 || '';
+                document.getElementById('reflection3').value = data.reflection3 || '';
+                
+                renderFacilitators();
+                renderBarriers();
+            }
+        }
+        
+        function saveWork() {
+            saveData();
+            
+            // Show summary modal
+            const summaryList = document.getElementById('summaryList');
+            summaryList.innerHTML = `
+                <li>${facilitators.length} facilitators that help student involvement</li>
+                <li>${barriers.length} barriers that prevent student involvement</li>
+                <li>3 reflection responses completed</li>
+            `;
+            
+            document.getElementById('successModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        
+        function emailResults() {
+            const subject = encodeURIComponent('My Barriers and Facilitators Reflection');
+            
+            let body = 'BARRIERS AND FACILITATORS REFLECTION\n';
+            body += 'Student Involvement in IEP Training\n';
+            body += 'Date: ' + new Date().toLocaleDateString() + '\n\n';
+            
+            body += '═══════════════════════════════════════\n\n';
+            
+            body += 'FACILITATORS (What Helps):\n';
+            facilitators.forEach((item, index) => {
+                body += `${index + 1}. ${item.text}\n`;
+            });
+            
+            body += '\n═══════════════════════════════════════\n\n';
+            
+            body += 'BARRIERS (What Prevents):\n';
+            barriers.forEach((item, index) => {
+                body += `${index + 1}. ${item.text}\n`;
+            });
+            
+            body += '\n═══════════════════════════════════════\n\n';
+            
+            body += 'REFLECTION RESPONSES:\n\n';
+            
+            body += 'Patterns I Notice:\n';
+            body += document.getElementById('reflection1').value || '[No response provided]';
+            body += '\n\n';
+            
+            body += 'Barrier with Biggest Impact:\n';
+            body += document.getElementById('reflection2').value || '[No response provided]';
+            body += '\n\n';
+            
+            body += 'Facilitator to Implement:\n';
+            body += document.getElementById('reflection3').value || '[No response provided]';
+            
+            const bodyEncoded = encodeURIComponent(body);
+            window.location.href = `mailto:?subject=${subject}&body=${bodyEncoded}`;
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Auto-save on input
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', saveData);
+        });
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('successModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

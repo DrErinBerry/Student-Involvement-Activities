@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDLMI Phase 1 Goal-Setting Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        .content-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .instructions h2 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+        .section-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section-container h3 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .char-count {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+        }
+        .auto-save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+        .example-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .example-box strong {
+            color: #856404;
+        }
+        .phase-box {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .phase-box h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="auto-save-indicator" id="autoSaveIndicator">Changes Saved ✓</div>
+    
+    <div class="header">
+        <h1>SDLMI Phase 1 Goal-Setting Practice</h1>
+        <p>Experience the Self-Determined Learning Model of Instruction</p>
+    </div>
+
+    <div class="content-box">
+        <div class="instructions">
+            <h2>Activity Instructions</h2>
+            <p>The best way to understand how SDLMI works is to USE it yourself. You'll be able to better explain it to students, better facilitate it in your classroom, and better understand the reflection process if you've experienced it.</p>
+            <p><strong>Your task:</strong> Work through Phase 1 of SDLMI with a personal or professional goal. Think about something YOU want to learn or improve.</p>
+            <p><strong>Why this matters:</strong> When you go through this process yourself, you'll understand the thoughtful self-reflection SDLMI requires. You'll see where students might get stuck and what kinds of support they'll need.</p>
+            <p><strong>Note:</strong> Your responses are automatically saved as you type.</p>
+        </div>
+    </div>
+
+    <form id="activityForm">
+        <!-- SECTION 1: Identify Your Goal -->
+        <div class="section-container">
+            <h3>Step 1: Identify Your Goal</h3>
+            <p>Think about something you want to learn or improve professionally. This could be:</p>
+            <ul style="margin-left: 30px; line-height: 2;">
+                <li>A teaching strategy you want to implement (e.g., "Involve students more in IEP meetings")</li>
+                <li>A classroom management technique (e.g., "Improve my transition time between activities")</li>
+                <li>A new technology skill (e.g., "Learn to use Google Classroom more effectively")</li>
+                <li>A student engagement strategy (e.g., "Increase student participation during lessons")</li>
+                <li>A professional development goal (e.g., "Better understand co-teaching models")</li>
+            </ul>
+            
+            <label for="goal-area">What area do you want to focus on?</label>
+            <select id="goal-area" name="goal-area">
+                <option value="">Select an area...</option>
+                <option value="student-involvement">Student Involvement in IEPs</option>
+                <option value="classroom-management">Classroom Management</option>
+                <option value="technology">Technology Integration</option>
+                <option value="student-engagement">Student Engagement</option>
+                <option value="co-teaching">Co-Teaching</option>
+                <option value="differentiation">Differentiation</option>
+                <option value="assessment">Assessment Strategies</option>
+                <option value="other">Other (specify below)</option>
+            </select>
+            
+            <label for="goal-other">If you selected "Other," specify your goal area:</label>
+            <input 
+                type="text" 
+                id="goal-other" 
+                name="goal-other"
+                placeholder="e.g., Behavior intervention strategies, Parent communication..."
+            >
+        </div>
+
+        <!-- SECTION 2: SDLMI Phase 1 Questions -->
+        <div class="section-container">
+            <h3>Step 2: SDLMI Phase 1 - Set a Goal</h3>
+            <p style="margin-bottom: 20px;">Phase 1 of SDLMI has you answer three critical questions. Take your time and be specific with your responses.</p>
+            
+            <div class="phase-box">
+                <h4>Question 1: What do I want to learn or improve?</h4>
+                <p style="margin-bottom: 10px;">Be as specific as possible. Instead of "be better at classroom management," try "reduce transition time between activities from 5 minutes to 2 minutes."</p>
+            </div>
+            
+            <label for="question1">Your answer to Question 1:</label>
+            <div class="example-box">
+                <strong>Example:</strong> "I want to learn how to help my students actively participate in their IEP meetings instead of just sitting quietly while adults talk about them."
+            </div>
+            <textarea 
+                id="question1" 
+                name="question1" 
+                aria-describedby="char-count-q1"
+                placeholder="I want to learn or improve..."
+            ></textarea>
+            <div id="char-count-q1" class="char-count" aria-live="polite">0 characters</div>
+            
+            <div class="phase-box" style="margin-top: 30px;">
+                <h4>Question 2: What do I know about it now?</h4>
+                <p style="margin-bottom: 10px;">Assess your current level honestly. What CAN you already do? What do you understand? What's still confusing or unclear?</p>
+            </div>
+            
+            <label for="question2">Your answer to Question 2:</label>
+            <div class="example-box">
+                <strong>Example:</strong> "I know that student involvement is important and legally required. I know there are different activities like one-pagers and SPIN statements. But I'm not sure how to actually implement this in my packed IEP schedule, and I don't know which activities to start with for my specific students."
+            </div>
+            <textarea 
+                id="question2" 
+                name="question2" 
+                aria-describedby="char-count-q2"
+                placeholder="What I currently know..."
+            ></textarea>
+            <div id="char-count-q2" class="char-count" aria-live="polite">0 characters</div>
+            
+            <div class="phase-box" style="margin-top: 30px;">
+                <h4>Question 3: What must change for me to learn what I don't know?</h4>
+                <p style="margin-bottom: 10px;">Think about the GAP between where you are now and where you want to be. What's missing? What needs to happen? Be specific about actions, resources, or support you need.</p>
+            </div>
+            
+            <label for="question3">Your answer to Question 3:</label>
+            <div class="example-box">
+                <strong>Example:</strong> "I need to choose 2-3 specific activities to try this semester instead of trying to do everything at once. I need to set aside 15 minutes before each IEP meeting to prepare the student. I need to communicate with parents ahead of time so they understand what their child will be doing. I need my administrator's support to slightly modify our IEP meeting format to allow student participation time."
+            </div>
+            <textarea 
+                id="question3" 
+                name="question3" 
+                aria-describedby="char-count-q3"
+                placeholder="What needs to change..."
+            ></textarea>
+            <div id="char-count-q3" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 3: Reflection on the Process -->
+        <div class="section-container">
+            <h3>Step 3: Reflect on the SDLMI Process</h3>
+            
+            <label for="reflection-realizations">What did you realize about your current knowledge or skills through this process?</label>
+            <textarea 
+                id="reflection-realizations" 
+                name="reflection-realizations" 
+                aria-describedby="char-count-realizations"
+                placeholder="e.g., I realized I know more than I thought, or I realized there are bigger gaps in my knowledge than I expected, or I realized I've been avoiding this because..."
+            ></textarea>
+            <div id="char-count-realizations" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="reflection-changes">What specific changes or actions do you need to take?</label>
+            <textarea 
+                id="reflection-changes" 
+                name="reflection-changes" 
+                aria-describedby="char-count-changes"
+                placeholder="List concrete next steps you identified through Question 3..."
+            ></textarea>
+            <div id="char-count-changes" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="reflection-students">How could you use this same process with your students?</label>
+            <textarea 
+                id="reflection-students" 
+                name="reflection-students" 
+                aria-describedby="char-count-students"
+                placeholder="Think about: What goals would be appropriate for your students? How would you scaffold the questions? What support would they need? When could you implement this?"
+            ></textarea>
+            <div id="char-count-students" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 4: Application Plan -->
+        <div class="section-container">
+            <h3>Step 4: Create Your Application Plan</h3>
+            
+            <label for="when-start">When will you start implementing SDLMI with your students?</label>
+            <select id="when-start" name="when-start">
+                <option value="">Select a timeframe...</option>
+                <option value="this-week">This week</option>
+                <option value="next-week">Next week</option>
+                <option value="this-month">Within this month</option>
+                <option value="next-month">Next month</option>
+                <option value="this-semester">This semester</option>
+                <option value="next-semester">Next semester</option>
+            </select>
+            
+            <label for="which-students">Which students or group will you start with?</label>
+            <textarea 
+                id="which-students" 
+                name="which-students" 
+                aria-describedby="char-count-which-students"
+                placeholder="e.g., My transition-age students, My resource room students during advisory period, One student as a pilot..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-which-students" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="what-need">What materials or resources do you need to implement SDLMI?</label>
+            <textarea 
+                id="what-need" 
+                name="what-need" 
+                aria-describedby="char-count-what-need"
+                placeholder="e.g., Download Phase 1 worksheets, Create visual supports for the three questions, Schedule 15 minutes twice weekly in my calendar..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-what-need" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="commitment">Your commitment statement:</label>
+            <div class="example-box">
+                <strong>Example:</strong> "I commit to implementing Phase 1 of SDLMI with my 5 transition students starting January 15th. We will work through the three questions together for 15 minutes every Monday and Wednesday during advisory period."
+            </div>
+            <textarea 
+                id="commitment" 
+                name="commitment" 
+                aria-describedby="char-count-commitment"
+                placeholder="I commit to..."
+                style="min-height: 100px;"
+            ></textarea>
+            <div id="char-count-commitment" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+            <button type="button" onclick="emailResults()">📧 Email My Responses</button>
+            <button type="button" onclick="downloadPDF()">📄 Download as PDF</button>
+            <button type="button" onclick="printForm()">🖨️ Print</button>
+        </div>
+    </form>
+
+    <div class="content-box" style="margin-top: 30px;">
+        <h3>Submission Instructions</h3>
+        <p>Save your completed reflection using one of the buttons above, then submit according to your instructor's directions in Canvas.</p>
+        <p><strong>Remember:</strong> The goal of this activity is for YOU to experience the SDLMI process firsthand so you can better facilitate it with your students!</p>
+    </div>
+
+    <script>
+        // Character counters
+        document.querySelectorAll('textarea').forEach(textarea => {
+            const counterId = `char-count-${textarea.id}`;
+            const counter = document.getElementById(counterId);
+            if (counter) {
+                textarea.addEventListener('input', () => {
+                    counter.textContent = `${textarea.value.length} characters`;
+                });
+            }
+        });
+
+        // Auto-save functionality
+        let saveTimeout;
+        const formElements = document.querySelectorAll('input, textarea, select');
+        
+        formElements.forEach(element => {
+            element.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveToLocalStorage, 1000);
+            });
+        });
+
+        function saveToLocalStorage() {
+            const formData = {};
+            formElements.forEach(element => {
+                formData[element.id] = element.value;
+            });
+            localStorage.setItem('sdlmiPhase1', JSON.stringify(formData));
+            showSaveIndicator();
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('sdlmiPhase1');
+            if (saved) {
+                const formData = JSON.parse(saved);
+                Object.keys(formData).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.value = formData[key];
+                    }
+                });
+            }
+        }
+
+        function showSaveIndicator() {
+            const indicator = document.getElementById('autoSaveIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 2000);
+        }
+
+        function getFormContent() {
+            let content = 'SDLMI PHASE 1 GOAL-SETTING PRACTICE\n';
+            content += '='.repeat(50) + '\n\n';
+            
+            content += 'STEP 1: MY GOAL\n';
+            content += '-'.repeat(50) + '\n';
+            content += `Goal Area: ${document.getElementById('goal-area').options[document.getElementById('goal-area').selectedIndex].text}\n`;
+            if (document.getElementById('goal-other').value) {
+                content += `Other Goal: ${document.getElementById('goal-other').value}\n`;
+            }
+            content += '\n';
+            
+            content += 'STEP 2: SDLMI PHASE 1 QUESTIONS\n';
+            content += '-'.repeat(50) + '\n';
+            content += 'Question 1: What do I want to learn or improve?\n';
+            content += `${document.getElementById('question1').value}\n\n`;
+            content += 'Question 2: What do I know about it now?\n';
+            content += `${document.getElementById('question2').value}\n\n`;
+            content += 'Question 3: What must change for me to learn what I don\'t know?\n';
+            content += `${document.getElementById('question3').value}\n\n`;
+            
+            content += 'STEP 3: REFLECTION ON THE PROCESS\n';
+            content += '-'.repeat(50) + '\n';
+            content += `What I realized: ${document.getElementById('reflection-realizations').value}\n\n`;
+            content += `Changes needed: ${document.getElementById('reflection-changes').value}\n\n`;
+            content += `How to use with students: ${document.getElementById('reflection-students').value}\n\n`;
+            
+            content += 'STEP 4: APPLICATION PLAN\n';
+            content += '-'.repeat(50) + '\n';
+            content += `When I'll start: ${document.getElementById('when-start').options[document.getElementById('when-start').selectedIndex].text}\n`;
+            content += `Students/group: ${document.getElementById('which-students').value}\n`;
+            content += `Resources needed: ${document.getElementById('what-need').value}\n`;
+            content += `My commitment: ${document.getElementById('commitment').value}\n`;
+            
+            return content;
+        }
+
+        function emailResults() {
+            const content = getFormContent();
+            const subject = 'SDLMI Phase 1 Goal-Setting Practice - My Responses';
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function downloadPDF() {
+            window.print();
+        }
+
+        function printForm() {
+            window.print();
+        }
+
+        // Load saved data on page load
+        window.addEventListener('load', loadFromLocalStorage);
+    </script>
+</body>
+</html>

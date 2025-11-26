@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6: Implementation Planning Activity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .content-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .instructions {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .instructions h2 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        .section-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section-container h3 {
+            color: #2e7d32;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .char-count {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .checkbox-group {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .checkbox-item {
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .checkbox-item label {
+            display: inline;
+            margin: 0;
+            font-weight: normal;
+        }
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.4);
+        }
+        .auto-save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+        .example-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        .tip-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .goal-level {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .goal-level h4 {
+            color: #7b1fa2;
+            margin-top: 0;
+        }
+        @media print {
+            .button-container, .auto-save-indicator {
+                display: none;
+            }
+            body {
+                background: white;
+            }
+            .section-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="autoSaveIndicator" class="auto-save-indicator">✓ Auto-saved</div>
+
+    <div class="header">
+        <h1>Module 6: Implementation Planning</h1>
+        <p>Build Your Roadmap for Sustainable Student Involvement</p>
+    </div>
+
+    <form id="implementationForm">
+        <div class="instructions">
+            <h2>Activity Instructions</h2>
+            <p>This activity helps you create a comprehensive implementation plan for student involvement in IEPs. You'll reflect on your current strengths, set goals at multiple levels, and identify resources for family engagement.</p>
+            <p><strong>Your responses auto-save</strong> as you type. Use the buttons at the bottom to email your plan to yourself, download as PDF, or print.</p>
+            <p><strong>Time needed:</strong> 15-20 minutes</p>
+        </div>
+
+        <!-- SECTION 1: Where You Are Now -->
+        <div class="section-container">
+            <h3>Part 1: Assess Your Current Status</h3>
+            
+            <label for="confidence-before">Your confidence level with student involvement BEFORE this training (1-10):</label>
+            <select id="confidence-before" name="confidence-before">
+                <option value="">Select a rating...</option>
+                <option value="1">1 - Not confident at all</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 - Somewhat confident</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10 - Very confident</option>
+            </select>
+            
+            <label for="confidence-after">Your confidence level with student involvement AFTER this training (1-10):</label>
+            <select id="confidence-after" name="confidence-after">
+                <option value="">Select a rating...</option>
+                <option value="1">1 - Not confident at all</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 - Somewhat confident</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10 - Very confident</option>
+            </select>
+            
+            <label for="growth-areas">What are your biggest areas of growth from this training?</label>
+            <textarea 
+                id="growth-areas" 
+                name="growth-areas" 
+                aria-describedby="char-count-growth"
+                placeholder="e.g., I now understand the difference between attendance and participation. I have specific tools I can use. I know how to address parent concerns. I understand age-appropriate expectations..."
+            ></textarea>
+            <div id="char-count-growth" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="challenges-remain">What challenges remain that you still need to address?</label>
+            <textarea 
+                id="challenges-remain" 
+                name="challenges-remain" 
+                aria-describedby="char-count-challenges"
+                placeholder="e.g., Finding time in my schedule, Getting administrative support, Convincing hesitant colleagues, Building student confidence, Working with parents who are resistant..."
+            ></textarea>
+            <div id="char-count-challenges" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 2: Current Strengths -->
+        <div class="section-container">
+            <h3>Part 2: Identify Your Current Strengths</h3>
+            
+            <label>What student involvement practices are you ALREADY doing? (Check all that apply)</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-1" name="current-practices" value="Students attend their IEP meetings">
+                    <label for="practice-1">Students attend their IEP meetings</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-2" name="current-practices" value="Students introduce themselves at meetings">
+                    <label for="practice-2">Students introduce themselves at meetings</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-3" name="current-practices" value="Students share their strengths or interests">
+                    <label for="practice-3">Students share their strengths or interests</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-4" name="current-practices" value="Students have input on their goals">
+                    <label for="practice-4">Students have input on their goals</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-5" name="current-practices" value="Students use one-pagers or presentations">
+                    <label for="practice-5">Students use one-pagers or presentations</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-6" name="current-practices" value="Students complete transition assessments">
+                    <label for="practice-6">Students complete transition assessments</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-7" name="current-practices" value="Bell ringers or daily self-determination activities">
+                    <label for="practice-7">Bell ringers or daily self-determination activities</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-8" name="current-practices" value="Students lead significant portions of their meetings">
+                    <label for="practice-8">Students lead significant portions of their meetings</label>
+                </div>
+            </div>
+            
+            <label for="biggest-strength">What's your BIGGEST strength when it comes to student involvement?</label>
+            <textarea 
+                id="biggest-strength" 
+                name="biggest-strength" 
+                aria-describedby="char-count-strength"
+                placeholder="e.g., I have good relationships with students, I'm organized with meeting preparation, I'm good at breaking skills down into small steps, I have supportive colleagues..."
+            ></textarea>
+            <div id="char-count-strength" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 3: SMART Goals at Multiple Levels -->
+        <div class="section-container">
+            <h3>Part 3: Set SMART Goals at Multiple Levels</h3>
+            
+            <p>Set goals at the level(s) where you have influence. Not everyone needs a district-level goal, but everyone should have at least a classroom-level goal.</p>
+            
+            <div class="goal-level">
+                <h4>🏫 Classroom Level Goal</h4>
+                <div class="example-box">
+                    <strong>Example:</strong> "By the end of this semester, 80% of my students will complete a one-pager and present at least three personal strengths during their IEP meeting."
+                </div>
+                <label for="classroom-goal">My Classroom Level SMART Goal:</label>
+                <textarea 
+                    id="classroom-goal" 
+                    name="classroom-goal" 
+                    aria-describedby="char-count-classroom"
+                    placeholder="By [date], [percentage]% of my students will [specific action] resulting in [measurable outcome]..."
+                ></textarea>
+                <div id="char-count-classroom" class="char-count" aria-live="polite">0 characters</div>
+            </div>
+            
+            <div class="goal-level">
+                <h4>🏢 School Level Goal (if applicable)</h4>
+                <div class="example-box">
+                    <strong>Example:</strong> "By the end of the school year, our special education team will implement student-led IEP meetings for 50% of students in grades 6-12."
+                </div>
+                <label for="school-goal">My School Level SMART Goal:</label>
+                <textarea 
+                    id="school-goal" 
+                    name="school-goal" 
+                    aria-describedby="char-count-school"
+                    placeholder="By [date], our team/school will [specific action] with [specific group] resulting in [measurable outcome]... (Leave blank if not applicable)"
+                    style="min-height: 80px;"
+                ></textarea>
+                <div id="char-count-school" class="char-count" aria-live="polite">0 characters</div>
+            </div>
+            
+            <div class="goal-level">
+                <h4>🏛️ District Level Goal (if applicable)</h4>
+                <div class="example-box">
+                    <strong>Example:</strong> "Within two years, all special education staff will receive training in student involvement strategies, with 90% implementing at least one evidence-based practice."
+                </div>
+                <label for="district-goal">My District Level SMART Goal:</label>
+                <textarea 
+                    id="district-goal" 
+                    name="district-goal" 
+                    aria-describedby="char-count-district"
+                    placeholder="Within [timeframe], the district will [specific action] resulting in [measurable outcome]... (Leave blank if not applicable)"
+                    style="min-height: 80px;"
+                ></textarea>
+                <div id="char-count-district" class="char-count" aria-live="polite">0 characters</div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Implementation Timeline -->
+        <div class="section-container">
+            <h3>Part 4: Your Implementation Timeline</h3>
+            
+            <div class="tip-box">
+                <strong>Remember:</strong> Start small, be consistent, and build from there. Don't try to do everything at once!
+            </div>
+            
+            <label for="this-week">This WEEK I will:</label>
+            <textarea 
+                id="this-week" 
+                name="this-week" 
+                aria-describedby="char-count-week"
+                placeholder="e.g., Download the Intro to Transition Bell Ringers, Share one parent resource with a family, Have a student introduce themselves at an IEP meeting..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-week" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="this-month">This MONTH I will:</label>
+            <textarea 
+                id="this-month" 
+                name="this-month" 
+                aria-describedby="char-count-month"
+                placeholder="e.g., Begin using bell ringers 3x per week, Have students create one-pagers, Share the I'm Determined video series with all families on my caseload..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-month" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="this-semester">This SEMESTER I will:</label>
+            <textarea 
+                id="this-semester" 
+                name="this-semester" 
+                aria-describedby="char-count-semester"
+                placeholder="e.g., Implement SDLMI with all transition-age students, Have 75% of students lead at least 3 steps of their IEP meeting, Share success data with colleagues..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-semester" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 5: Parent Resources Plan -->
+        <div class="section-container">
+            <h3>Part 5: Family Engagement Plan</h3>
+            
+            <label>Which parent resources will you share with families? (Check all you plan to use)</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="parent-1" name="parent-resources" value="Parent Center Hub">
+                    <label for="parent-1">Parent Center Hub (comprehensive transition overview)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="parent-2" name="parent-resources" value="PACER National Parent Center">
+                    <label for="parent-2">PACER National Parent Center (learning modules)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="parent-3" name="parent-resources" value="Parent Guide to Transition Planning PDF">
+                    <label for="parent-3">Parent Guide to Transition Planning PDF (printable reference)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="parent-4" name="parent-resources" value="ABCs of Transition">
+                    <label for="parent-4">ABCs of Transition (alphabetical quick reference)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="parent-5" name="parent-resources" value="I'm Determined Parent Video Series">
+                    <label for="parent-5">I'm Determined Parent Path to Success Video Series</label>
+                </div>
+            </div>
+            
+            <label for="first-family">Which family will you share resources with FIRST?</label>
+            <textarea 
+                id="first-family" 
+                name="first-family" 
+                aria-describedby="char-count-family"
+                placeholder="Describe the family (no identifying information) and why you chose them. e.g., A parent of a 9th grader who has expressed interest in their child being more involved but doesn't know how to help..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-family" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="parent-concerns">What parent concerns do you anticipate? How will you address them?</label>
+            <textarea 
+                id="parent-concerns" 
+                name="parent-concerns" 
+                aria-describedby="char-count-concerns"
+                placeholder="e.g., Some parents may worry their child will be overwhelmed. I'll explain we start small and build gradually. I'll share the video that explains how all students can participate at their level..."
+            ></textarea>
+            <div id="char-count-concerns" class="char-count" aria-live="polite">0 characters</div>
+        </div>
+
+        <!-- SECTION 6: Sustainability -->
+        <div class="section-container">
+            <h3>Part 6: Building Sustainability</h3>
+            
+            <label for="embed-routine">How will you EMBED student involvement into existing routines? (Not add, but integrate)</label>
+            <textarea 
+                id="embed-routine" 
+                name="embed-routine" 
+                aria-describedby="char-count-embed"
+                placeholder="e.g., Bell ringers will replace my current warm-up activity. One-pagers will be created during our existing beginning-of-year getting-to-know-you activities. SDLMI goal-setting will replace my current goal-tracking system..."
+            ></textarea>
+            <div id="char-count-embed" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="share-success">Who will you share your successes with? (Building support requires sharing results)</label>
+            <textarea 
+                id="share-success" 
+                name="share-success" 
+                aria-describedby="char-count-share"
+                placeholder="e.g., My mentor teacher, My department head, My special education team at monthly meetings, My administrator during observations..."
+                style="min-height: 80px;"
+            ></textarea>
+            <div id="char-count-share" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="accountability-partner">Who is your accountability partner?</label>
+            <input 
+                type="text" 
+                id="accountability-partner" 
+                name="accountability-partner"
+                placeholder="Name and role of someone who will check in on your progress"
+            >
+            
+            <label for="check-in-date">When will you check in on your progress?</label>
+            <select id="check-in-date" name="check-in-date">
+                <option value="">Select check-in timing...</option>
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Every 2 weeks</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+            </select>
+        </div>
+
+        <!-- SECTION 7: Final Commitment -->
+        <div class="section-container">
+            <h3>Part 7: Your Commitment Statement</h3>
+            
+            <p>Write a commitment statement that captures your implementation plan. This is YOUR roadmap—make it meaningful!</p>
+            
+            <div class="example-box">
+                <strong>Example:</strong> "I commit to increasing student involvement by implementing bell ringers 3x per week starting Monday, having all my students create one-pagers by October, and sharing the I'm Determined video series with families before each IEP meeting. I will know I'm successful when 80% of my students can introduce themselves and state at least one strength at their IEP meeting. My accountability partner is Mrs. Johnson, and we will check in monthly."
+            </div>
+            
+            <label for="commitment-statement">My Implementation Commitment:</label>
+            <textarea 
+                id="commitment-statement" 
+                name="commitment-statement" 
+                aria-describedby="char-count-commitment"
+                placeholder="I commit to increasing student involvement by..."
+                style="min-height: 150px;"
+            ></textarea>
+            <div id="char-count-commitment" class="char-count" aria-live="polite">0 characters</div>
+            
+            <label for="signature">Your Name and Date:</label>
+            <input 
+                type="text" 
+                id="signature" 
+                name="signature"
+                placeholder="Your Name - Today's Date"
+            >
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+            <button type="button" onclick="emailResults()">📧 Email My Plan</button>
+            <button type="button" onclick="downloadPDF()">📄 Download as PDF</button>
+            <button type="button" onclick="printForm()">🖨️ Print</button>
+        </div>
+    </form>
+
+    <div class="content-box" style="margin-top: 30px;">
+        <h3>What's Next?</h3>
+        <p>Save your completed implementation plan using one of the buttons above. This is YOUR roadmap for making student involvement happen in your setting.</p>
+        <p><strong>Key Reminder:</strong> "Start where you are, use what you have, do what you can." You don't need perfect conditions—you need to START. Pick one strategy. Try it with one student. See what happens. Build from there.</p>
+        <p>After completing this activity, return to the video to finish Module 6 and complete your final assessment.</p>
+    </div>
+
+    <script>
+        // Character counters
+        document.querySelectorAll('textarea').forEach(textarea => {
+            const counterId = `char-count-${textarea.id.replace('-', '')}`;
+            const counter = document.getElementById(counterId) || document.querySelector(`[id^="char-count-${textarea.id.split('-')[0]}"]`);
+            
+            // Match the specific counter for each textarea
+            const specificCounter = document.getElementById(`char-count-${textarea.id.replace(/-/g, '')}`);
+            if (specificCounter) {
+                textarea.addEventListener('input', () => {
+                    specificCounter.textContent = `${textarea.value.length} characters`;
+                });
+            }
+        });
+
+        // Fix character counters with more specific matching
+        const textareaCounterMap = {
+            'growth-areas': 'char-count-growth',
+            'challenges-remain': 'char-count-challenges',
+            'biggest-strength': 'char-count-strength',
+            'classroom-goal': 'char-count-classroom',
+            'school-goal': 'char-count-school',
+            'district-goal': 'char-count-district',
+            'this-week': 'char-count-week',
+            'this-month': 'char-count-month',
+            'this-semester': 'char-count-semester',
+            'first-family': 'char-count-family',
+            'parent-concerns': 'char-count-concerns',
+            'embed-routine': 'char-count-embed',
+            'share-success': 'char-count-share',
+            'commitment-statement': 'char-count-commitment'
+        };
+
+        Object.keys(textareaCounterMap).forEach(textareaId => {
+            const textarea = document.getElementById(textareaId);
+            const counter = document.getElementById(textareaCounterMap[textareaId]);
+            if (textarea && counter) {
+                textarea.addEventListener('input', () => {
+                    counter.textContent = `${textarea.value.length} characters`;
+                });
+            }
+        });
+
+        // Auto-save functionality
+        let saveTimeout;
+        const formElements = document.querySelectorAll('input, textarea, select');
+        
+        formElements.forEach(element => {
+            element.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveToLocalStorage, 1000);
+            });
+            element.addEventListener('change', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveToLocalStorage, 1000);
+            });
+        });
+
+        function saveToLocalStorage() {
+            const formData = {};
+            formElements.forEach(element => {
+                if (element.type === 'checkbox') {
+                    if (!formData.checkboxes) formData.checkboxes = {};
+                    formData.checkboxes[element.id] = element.checked;
+                } else {
+                    formData[element.id] = element.value;
+                }
+            });
+            localStorage.setItem('module6ImplementationPlan', JSON.stringify(formData));
+            showSaveIndicator();
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('module6ImplementationPlan');
+            if (saved) {
+                const formData = JSON.parse(saved);
+                Object.keys(formData).forEach(key => {
+                    if (key === 'checkboxes') {
+                        Object.keys(formData.checkboxes).forEach(cbId => {
+                            const checkbox = document.getElementById(cbId);
+                            if (checkbox) checkbox.checked = formData.checkboxes[cbId];
+                        });
+                    } else {
+                        const element = document.getElementById(key);
+                        if (element) element.value = formData[key];
+                    }
+                });
+            }
+        }
+
+        function showSaveIndicator() {
+            const indicator = document.getElementById('autoSaveIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 2000);
+        }
+
+        function getFormContent() {
+            let content = 'MODULE 6: IMPLEMENTATION PLANNING\n';
+            content += '='.repeat(50) + '\n\n';
+            
+            content += 'PART 1: CURRENT STATUS\n';
+            content += '-'.repeat(50) + '\n';
+            const confBefore = document.getElementById('confidence-before');
+            const confAfter = document.getElementById('confidence-after');
+            content += `Confidence BEFORE training: ${confBefore.options[confBefore.selectedIndex]?.text || 'Not selected'}\n`;
+            content += `Confidence AFTER training: ${confAfter.options[confAfter.selectedIndex]?.text || 'Not selected'}\n`;
+            content += `Areas of Growth: ${document.getElementById('growth-areas').value}\n`;
+            content += `Remaining Challenges: ${document.getElementById('challenges-remain').value}\n\n`;
+            
+            content += 'PART 2: CURRENT STRENGTHS\n';
+            content += '-'.repeat(50) + '\n';
+            const practices = document.querySelectorAll('input[name="current-practices"]:checked');
+            if (practices.length > 0) {
+                content += 'Current Practices:\n';
+                practices.forEach(cb => content += `  ✓ ${cb.value}\n`);
+            }
+            content += `Biggest Strength: ${document.getElementById('biggest-strength').value}\n\n`;
+            
+            content += 'PART 3: SMART GOALS\n';
+            content += '-'.repeat(50) + '\n';
+            content += `Classroom Level Goal: ${document.getElementById('classroom-goal').value}\n`;
+            if (document.getElementById('school-goal').value) {
+                content += `School Level Goal: ${document.getElementById('school-goal').value}\n`;
+            }
+            if (document.getElementById('district-goal').value) {
+                content += `District Level Goal: ${document.getElementById('district-goal').value}\n`;
+            }
+            content += '\n';
+            
+            content += 'PART 4: IMPLEMENTATION TIMELINE\n';
+            content += '-'.repeat(50) + '\n';
+            content += `This WEEK: ${document.getElementById('this-week').value}\n`;
+            content += `This MONTH: ${document.getElementById('this-month').value}\n`;
+            content += `This SEMESTER: ${document.getElementById('this-semester').value}\n\n`;
+            
+            content += 'PART 5: FAMILY ENGAGEMENT PLAN\n';
+            content += '-'.repeat(50) + '\n';
+            const parentResources = document.querySelectorAll('input[name="parent-resources"]:checked');
+            if (parentResources.length > 0) {
+                content += 'Parent Resources to Share:\n';
+                parentResources.forEach(cb => content += `  ✓ ${cb.value}\n`);
+            }
+            content += `First Family to Share With: ${document.getElementById('first-family').value}\n`;
+            content += `Anticipated Parent Concerns: ${document.getElementById('parent-concerns').value}\n\n`;
+            
+            content += 'PART 6: SUSTAINABILITY\n';
+            content += '-'.repeat(50) + '\n';
+            content += `Embedding in Routines: ${document.getElementById('embed-routine').value}\n`;
+            content += `Sharing Successes With: ${document.getElementById('share-success').value}\n`;
+            content += `Accountability Partner: ${document.getElementById('accountability-partner').value}\n`;
+            const checkIn = document.getElementById('check-in-date');
+            content += `Check-in Frequency: ${checkIn.options[checkIn.selectedIndex]?.text || 'Not selected'}\n\n`;
+            
+            content += 'PART 7: COMMITMENT\n';
+            content += '-'.repeat(50) + '\n';
+            content += `${document.getElementById('commitment-statement').value}\n\n`;
+            content += `Signed: ${document.getElementById('signature').value}\n`;
+            
+            return content;
+        }
+
+        function emailResults() {
+            const content = getFormContent();
+            const subject = 'Module 6: My Implementation Plan for Student Involvement';
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function downloadPDF() {
+            window.print();
+        }
+
+        function printForm() {
+            window.print();
+        }
+
+        // Load saved data on page load
+        window.addEventListener('load', loadFromLocalStorage);
+    </script>
+</body>
+</html>

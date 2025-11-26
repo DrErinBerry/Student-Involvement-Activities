@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Self-Determination Skills Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .instructions {
+            background: #e8f4ff;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        
+        .instructions h2 {
+            color: #1565C0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .instructions p {
+            color: #1565C0;
+            line-height: 1.6;
+        }
+        
+        .skill-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .skill-item.completed {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .skill-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5em;
+        }
+        
+        .skill-name {
+            flex: 1;
+        }
+        
+        .skill-name h3 {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .skill-description {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .rating-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            font-size: 2em;
+        }
+        
+        .star {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .star:hover {
+            transform: scale(1.2);
+        }
+        
+        .star.active {
+            animation: pop 0.3s ease;
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .rating-label {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .rating-label.low { background: #ffebee; color: #c62828; }
+        .rating-label.medium-low { background: #fff3e0; color: #ef6c00; }
+        .rating-label.medium { background: #fff8e1; color: #f9a825; }
+        .rating-label.medium-high { background: #e8f5e9; color: #2e7d32; }
+        .rating-label.high { background: #e1f5fe; color: #0277bd; }
+        
+        .results-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+            border-radius: 12px;
+        }
+        
+        .results-header h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .overall-score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+        
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .chart-bar {
+            margin-bottom: 20px;
+        }
+        
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .chart-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .chart-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .recommendations {
+            margin-top: 30px;
+        }
+        
+        .recommendation-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .recommendation-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .recommendation-card ul {
+            margin-left: 20px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 14px 28px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            width: 200px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            position: fixed;
+            animation: confetti-fall 3s linear;
+        }
+        
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .star-rating {
+                font-size: 1.8em;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+        
+        @media print {
+            .button-group {
+                display: none;
+            }
+            
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🌟 Student Skills Assessment 🌟</h1>
+            <p>Evaluate Your Students' Self-Determination Abilities</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </header>
+        
+        <main class="content">
+            <!-- Instructions Section -->
+            <div class="instructions">
+                <h2>📋 How to Complete This Assessment</h2>
+                <p>Think about your students as a group (or focus on a specific student). Rate their current abilities in each skill area using the star scale, where:</p>
+                <p style="margin-top: 10px;">
+                    ⭐ = Significant support needed<br>
+                    ⭐⭐ = Developing with support<br>
+                    ⭐⭐⭐ = Progressing independently<br>
+                    ⭐⭐⭐⭐ = Consistent demonstration<br>
+                    ⭐⭐⭐⭐⭐ = Mastery level
+                </p>
+            </div>
+            
+            <!-- Assessment Section -->
+            <div id="assessmentSection">
+                <!-- Making Choices -->
+                <div class="skill-item" data-skill="choices">
+                    <div class="skill-header">
+                        <div class="skill-icon">🎯</div>
+                        <div class="skill-name">
+                            <h3>Making Choices</h3>
+                            <p class="skill-description">Students can identify preferences and make decisions between options</p>
+                        </div>
+                    </div>
+                    <div class="rating-container">
+                        <div class="star-rating" data-skill="choices">
+                            <span class="star" data-value="1">⭐</span>
+                            <span class="star" data-value="2">⭐</span>
+                            <span class="star" data-value="3">⭐</span>
+                            <span class="star" data-value="4">⭐</span>
+                            <span class="star" data-value="5">⭐</span>
+                        </div>
+                        <span class="rating-label" id="label-choices">Not Rated</span>
+                    </div>
+                </div>
+                
+                <!-- Setting Goals -->
+                <div class="skill-item" data-skill="goals">
+                    <div class="skill-header">
+                        <div class="skill-icon">🎯</div>
+                        <div class="skill-name">
+                            <h3>Setting Goals</h3>
+                            <p class="skill-description">Students can identify what they want to achieve and create plans</p>
+                        </div>
+                    </div>
+                    <div class="rating-container">
+                        <div class="star-rating" data-skill="goals">
+                            <span class="star" data-value="1">⭐</span>
+                            <span class="star" data-value="2">⭐</span>
+                            <span class="star" data-value="3">⭐</span>
+                            <span class="star" data-value="4">⭐</span>
+                            <span class="star" data-value="5">⭐</span>
+                        </div>
+                        <span class="rating-label" id="label-goals">Not Rated</span>
+                    </div>
+                </div>
+                
+                <!-- Speaking Up for Themselves -->
+                <div class="skill-item" data-skill="advocacy">
+                    <div class="skill-header">
+                        <div class="skill-icon">💬</div>
+                        <div class="skill-name">
+                            <h3>Speaking Up for Themselves</h3>
+                            <p class="skill-description">Students can express their needs, wants, and opinions effectively</p>
+                        </div>
+                    </div>
+                    <div class="rating-container">
+                        <div class="star-rating" data-skill="advocacy">
+                            <span class="star" data-value="1">⭐</span>
+                            <span class="star" data-value="2">⭐</span>
+                            <span class="star" data-value="3">⭐</span>
+                            <span class="star" data-value="4">⭐</span>
+                            <span class="star" data-value="5">⭐</span>
+                        </div>
+                        <span class="rating-label" id="label-advocacy">Not Rated</span>
+                    </div>
+                </div>
+                
+                <!-- Understanding Their Disability -->
+                <div class="skill-item" data-skill="understanding">
+                    <div class="skill-header">
+                        <div class="skill-icon">🧠</div>
+                        <div class="skill-name">
+                            <h3>Understanding Their Disability</h3>
+                            <p class="skill-description">Students understand their strengths, challenges, and needed supports</p>
+                        </div>
+                    </div>
+                    <div class="rating-container">
+                        <div class="star-rating" data-skill="understanding">
+                            <span class="star" data-value="1">⭐</span>
+                            <span class="star" data-value="2">⭐</span>
+                            <span class="star" data-value="3">⭐</span>
+                            <span class="star" data-value="4">⭐</span>
+                            <span class="star" data-value="5">⭐</span>
+                        </div>
+                        <span class="rating-label" id="label-understanding">Not Rated</span>
+                    </div>
+                </div>
+                
+                <!-- Participating in Planning -->
+                <div class="skill-item" data-skill="participating">
+                    <div class="skill-header">
+                        <div class="skill-icon">👥</div>
+                        <div class="skill-name">
+                            <h3>Participating in Planning</h3>
+                            <p class="skill-description">Students actively engage in their IEP and educational planning</p>
+                        </div>
+                    </div>
+                    <div class="rating-container">
+                        <div class="star-rating" data-skill="participating">
+                            <span class="star" data-value="1">⭐</span>
+                            <span class="star" data-value="2">⭐</span>
+                            <span class="star" data-value="3">⭐</span>
+                            <span class="star" data-value="4">⭐</span>
+                            <span class="star" data-value="5">⭐</span>
+                        </div>
+                        <span class="rating-label" id="label-participating">Not Rated</span>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-primary" onclick="showResults()" id="viewResultsBtn" disabled>
+                        View Results 📊
+                    </button>
+                    <button class="btn-secondary" onclick="resetAssessment()">
+                        Reset Assessment 🔄
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section">
+                <div class="results-header">
+                    <h2>🎉 Assessment Complete!</h2>
+                    <div class="overall-score" id="overallScore">0.0</div>
+                    <p id="overallMessage"></p>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Skill Breakdown</h3>
+                    <div id="skillChart"></div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>📚 Recommended Next Steps</h3>
+                    <div id="recommendationCards"></div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-success" onclick="emailResults()">
+                        📧 Email Results
+                    </button>
+                    <button class="btn-primary" onclick="printResults()">
+                        🖨️ Print Results
+                    </button>
+                    <button class="btn-secondary" onclick="backToAssessment()">
+                        ← Back to Assessment
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Data storage
+        let ratings = {
+            choices: 0,
+            goals: 0,
+            advocacy: 0,
+            understanding: 0,
+            participating: 0
+        };
+        
+        const skillNames = {
+            choices: 'Making Choices',
+            goals: 'Setting Goals',
+            advocacy: 'Speaking Up',
+            understanding: 'Understanding Disability',
+            participating: 'Participating in Planning'
+        };
+        
+        const ratingLabels = [
+            'Not Rated',
+            'Needs Significant Support',
+            'Developing with Support',
+            'Progressing Independently',
+            'Consistent Demonstration',
+            'Mastery Level'
+        ];
+        
+        const ratingClasses = ['', 'low', 'medium-low', 'medium', 'medium-high', 'high'];
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupStarRatings();
+            loadSavedData();
+            updateProgress();
+        });
+        
+        function setupStarRatings() {
+            document.querySelectorAll('.star-rating').forEach(rating => {
+                const skill = rating.dataset.skill;
+                rating.querySelectorAll('.star').forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = parseInt(this.dataset.value);
+                        setRating(skill, value);
+                    });
+                    
+                    star.addEventListener('mouseover', function() {
+                        const value = parseInt(this.dataset.value);
+                        previewRating(skill, value);
+                    });
+                });
+                
+                rating.addEventListener('mouseleave', function() {
+                    showRating(skill, ratings[skill]);
+                });
+            });
+        }
+        
+        function setRating(skill, value) {
+            ratings[skill] = value;
+            showRating(skill, value);
+            
+            // Mark item as completed
+            const item = document.querySelector(`.skill-item[data-skill="${skill}"]`);
+            item.classList.add('completed');
+            
+            // Animate stars
+            const stars = document.querySelectorAll(`.star-rating[data-skill="${skill}"] .star`);
+            stars.forEach((star, index) => {
+                if (index < value) {
+                    star.classList.add('active');
+                    setTimeout(() => star.classList.remove('active'), 300);
+                }
+            });
+            
+            updateProgress();
+            saveData();
+            
+            // Show confetti for high ratings
+            if (value >= 4) {
+                createConfetti();
+            }
+        }
+        
+        function previewRating(skill, value) {
+            showRating(skill, value);
+        }
+        
+        function showRating(skill, value) {
+            const stars = document.querySelectorAll(`.star-rating[data-skill="${skill}"] .star`);
+            stars.forEach((star, index) => {
+                star.textContent = index < value ? '⭐' : '☆';
+                star.style.color = index < value ? '#ffd700' : '#ddd';
+            });
+            
+            const label = document.getElementById(`label-${skill}`);
+            label.textContent = ratingLabels[value];
+            label.className = `rating-label ${ratingClasses[value]}`;
+        }
+        
+        function updateProgress() {
+            const totalSkills = Object.keys(ratings).length;
+            const ratedSkills = Object.values(ratings).filter(r => r > 0).length;
+            const progress = (ratedSkills / totalSkills) * 100;
+            
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            const viewResultsBtn = document.getElementById('viewResultsBtn');
+            if (ratedSkills === totalSkills) {
+                viewResultsBtn.disabled = false;
+                viewResultsBtn.textContent = 'View Results 📊 ✨';
+            } else {
+                viewResultsBtn.disabled = true;
+                viewResultsBtn.textContent = `View Results (${ratedSkills}/${totalSkills} rated)`;
+            }
+        }
+        
+        function showResults() {
+            document.getElementById('assessmentSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            calculateResults();
+            generateChart();
+            generateRecommendations();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function calculateResults() {
+            const scores = Object.values(ratings);
+            const average = scores.reduce((a, b) => a + b, 0) / scores.length;
+            
+            document.getElementById('overallScore').textContent = average.toFixed(1);
+            
+            let message = '';
+            if (average >= 4.5) {
+                message = '🌟 Outstanding! Your students are demonstrating excellent self-determination skills!';
+            } else if (average >= 3.5) {
+                message = '🎯 Great progress! Your students are developing strong self-determination abilities.';
+            } else if (average >= 2.5) {
+                message = '📈 Good foundation! There are opportunities to strengthen these essential skills.';
+            } else {
+                message = '🌱 Starting point identified! Let\'s work together to build these crucial skills.';
+            }
+            
+            document.getElementById('overallMessage').textContent = message;
+        }
+        
+        function generateChart() {
+            const chartContainer = document.getElementById('skillChart');
+            chartContainer.innerHTML = '';
+            
+            Object.keys(ratings).forEach(skill => {
+                const score = ratings[skill];
+                const percentage = (score / 5) * 100;
+                
+                const chartBar = document.createElement('div');
+                chartBar.className = 'chart-bar';
+                chartBar.innerHTML = `
+                    <div class="chart-label">
+                        <span>${skillNames[skill]}</span>
+                        <span>${score}/5</span>
+                    </div>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 0%;" data-width="${percentage}">
+                            ${score > 0 ? score.toFixed(1) : ''}
+                        </div>
+                    </div>
+                `;
+                chartContainer.appendChild(chartBar);
+            });
+            
+            // Animate bars
+            setTimeout(() => {
+                document.querySelectorAll('.chart-fill').forEach(fill => {
+                    fill.style.width = fill.dataset.width + '%';
+                });
+            }, 100);
+        }
+        
+        function generateRecommendations() {
+            const container = document.getElementById('recommendationCards');
+            container.innerHTML = '';
+            
+            const recommendations = [];
+            
+            // Analyze each skill and provide targeted recommendations
+            if (ratings.choices <= 2) {
+                recommendations.push({
+                    title: '🎯 Building Choice-Making Skills',
+                    items: [
+                        'Start with simple binary choices (this or that)',
+                        'Use visual choice boards or cards',
+                        'Practice with preferred activities first',
+                        'Try the "Choice-Making Bell Ringers" resource'
+                    ]
+                });
+            }
+            
+            if (ratings.goals <= 2) {
+                recommendations.push({
+                    title: '🎯 Developing Goal-Setting Abilities',
+                    items: [
+                        'Introduce SMART goals with visual supports',
+                        'Start with short-term, achievable goals',
+                        'Use goal-tracking charts or apps',
+                        'Implement the SDLMI curriculum for structured practice'
+                    ]
+                });
+            }
+            
+            if (ratings.advocacy <= 2) {
+                recommendations.push({
+                    title: '💬 Strengthening Self-Advocacy',
+                    items: [
+                        'Practice "I" statements and scripts',
+                        'Role-play advocacy scenarios',
+                        'Create communication cards or tools',
+                        'Use the Self-Directed IEP curriculum'
+                    ]
+                });
+            }
+            
+            if (ratings.understanding <= 2) {
+                recommendations.push({
+                    title: '🧠 Building Disability Awareness',
+                    items: [
+                        'Focus on strengths-based discussions',
+                        'Use age-appropriate explanations',
+                        'Create personal "All About Me" books',
+                        'Implement the Me! Curriculum activities'
+                    ]
+                });
+            }
+            
+            if (ratings.participating <= 2) {
+                recommendations.push({
+                    title: '👥 Increasing IEP Participation',
+                    items: [
+                        'Start with one-pagers or visual supports',
+                        'Practice with mock IEP meetings',
+                        'Use student-friendly IEP templates',
+                        'Begin with small roles and gradually increase'
+                    ]
+                });
+            }
+            
+            // Add general recommendations based on overall score
+            const average = Object.values(ratings).reduce((a, b) => a + b, 0) / Object.values(ratings).length;
+            
+            if (average >= 3) {
+                recommendations.push({
+                    title: '🚀 Next Level Strategies',
+                    items: [
+                        'Consider student-led IEP meetings',
+                        'Integrate self-determination across curriculum',
+                        'Connect with I\'m Determined resources',
+                        'Explore TAGG assessment tools'
+                    ]
+                });
+            }
+            
+            // Create recommendation cards
+            recommendations.forEach(rec => {
+                const card = document.createElement('div');
+                card.className = 'recommendation-card';
+                card.innerHTML = `
+                    <h4>${rec.title}</h4>
+                    <ul>
+                        ${rec.items.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Add resource links
+            const resourceCard = document.createElement('div');
+            resourceCard.className = 'recommendation-card';
+            resourceCard.style.background = '#e8f4ff';
+            resourceCard.style.borderColor = '#2196F3';
+            resourceCard.innerHTML = `
+                <h4 style="color: #2196F3;">📚 Recommended Resources</h4>
+                <ul>
+                    <li>TAGG Assessment Suite: <a href="https://tagg.ou.edu" target="_blank">tagg.ou.edu</a></li>
+                    <li>I'm Determined: <a href="https://www.imdetermined.org" target="_blank">imdetermined.org</a></li>
+                    <li>ChoiceMaker Curriculum materials</li>
+                    <li>Self-Determined Learning Model (SDLMI)</li>
+                </ul>
+            `;
+            container.appendChild(resourceCard);
+        }
+        
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = ['#667eea', '#764ba2', '#ffd700', '#4caf50', '#ff6b6b'][Math.floor(Math.random() * 5)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+        
+        function resetAssessment() {
+            if (confirm('Are you sure you want to reset all ratings?')) {
+                Object.keys(ratings).forEach(skill => {
+                    ratings[skill] = 0;
+                    showRating(skill, 0);
+                    document.querySelector(`.skill-item[data-skill="${skill}"]`).classList.remove('completed');
+                });
+                updateProgress();
+                localStorage.removeItem('skillAssessmentRatings');
+            }
+        }
+        
+        function backToAssessment() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('assessmentSection').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function saveData() {
+            localStorage.setItem('skillAssessmentRatings', JSON.stringify(ratings));
+            localStorage.setItem('skillAssessmentDate', new Date().toISOString());
+        }
+        
+        function loadSavedData() {
+            const saved = localStorage.getItem('skillAssessmentRatings');
+            if (saved) {
+                const savedRatings = JSON.parse(saved);
+                Object.keys(savedRatings).forEach(skill => {
+                    if (savedRatings[skill] > 0) {
+                        ratings[skill] = savedRatings[skill];
+                        showRating(skill, savedRatings[skill]);
+                        document.querySelector(`.skill-item[data-skill="${skill}"]`).classList.add('completed');
+                    }
+                });
+            }
+        }
+        
+        function emailResults() {
+            const average = Object.values(ratings).reduce((a, b) => a + b, 0) / Object.values(ratings).length;
+            const date = new Date().toLocaleDateString();
+            
+            let body = `Student Self-Determination Skills Assessment Results\n`;
+            body += `Date: ${date}\n\n`;
+            body += `Overall Score: ${average.toFixed(1)}/5\n\n`;
+            body += `Individual Skill Ratings:\n`;
+            
+            Object.keys(ratings).forEach(skill => {
+                body += `• ${skillNames[skill]}: ${ratings[skill]}/5 (${ratingLabels[ratings[skill]]})\n`;
+            });
+            
+            body += `\n\nRecommended Next Steps:\n`;
+            
+            if (ratings.choices <= 2) body += `• Focus on building choice-making skills with binary choices and visual supports\n`;
+            if (ratings.goals <= 2) body += `• Develop goal-setting abilities using SMART goals framework\n`;
+            if (ratings.advocacy <= 2) body += `• Strengthen self-advocacy through role-play and communication scripts\n`;
+            if (ratings.understanding <= 2) body += `• Build disability awareness with strengths-based discussions\n`;
+            if (ratings.participating <= 2) body += `• Increase IEP participation starting with small, structured roles\n`;
+            
+            body += `\n\nKey Resources:\n`;
+            body += `• TAGG Assessment Suite: https://tagg.ou.edu\n`;
+            body += `• I'm Determined: https://www.imdetermined.org\n`;
+            body += `• ChoiceMaker Curriculum\n`;
+            body += `• Self-Determined Learning Model (SDLMI)\n`;
+            
+            const subject = encodeURIComponent('Student Self-Determination Skills Assessment Results');
+            const bodyEncoded = encodeURIComponent(body);
+            
+            window.location.href = `mailto:?subject=${subject}&body=${bodyEncoded}`;
+        }
+        
+        function printResults() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
