@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout Activity: Problem-Solving Common Challenges</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        
+        .scenario-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 12px 20px;
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .scenario-card {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .scenario-card.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .scenario-header {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .scenario-title {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .scenario-description {
+            color: #666;
+            line-height: 1.6;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .solutions-section {
+            margin-top: 25px;
+        }
+        
+        .solutions-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .solutions-header h3 {
+            color: #333;
+            font-size: 1.2em;
+        }
+        
+        .add-solution-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .solution-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .solution-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .add-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        .solutions-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            min-height: 100px;
+        }
+        
+        .solution-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .solution-number {
+            background: #4caf50;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .solution-content {
+            flex: 1;
+        }
+        
+        .solution-text {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .solution-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+        
+        .delete-btn {
+            background: #ffebee;
+            color: #c62828;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .delete-btn:hover {
+            background: #ffcdd2;
+        }
+        
+        .prompt-questions {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #ffc107;
+            margin-top: 25px;
+        }
+        
+        .prompt-questions h4 {
+            color: #f57c00;
+            margin-bottom: 15px;
+        }
+        
+        .prompt-questions ul {
+            margin-left: 20px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .tips-section {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4caf50;
+            margin-top: 25px;
+        }
+        
+        .tips-section h4 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        
+        .reflection-section {
+            background: #f3e5f5;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .reflection-section h3 {
+            color: #6a1b9a;
+            margin-bottom: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #9c27b0;
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .scenario-tabs {
+                flex-direction: column;
+            }
+            
+            .add-solution-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔧 Problem-Solving Common Challenges</h1>
+            <p>Develop creative solutions for real-world IEP implementation scenarios</p>
+        </header>
+        
+        <main class="content">
+            <div class="instructions">
+                <h2>📝 Activity Instructions (10 minutes)</h2>
+                <p>Work through these common scenarios and brainstorm practical solutions. There's no single right answer - your creative solutions might help others facing similar challenges!</p>
+            </div>
+            
+            <div class="scenario-tabs">
+                <button class="tab-button active" onclick="showScenario(1)">📅 Scenario 1: Scheduling</button>
+                <button class="tab-button" onclick="showScenario(2)">📋 Scenario 2: Paperwork</button>
+                <button class="tab-button" onclick="showScenario(3)">👥 Scenario 3: Buy-In</button>
+                <button class="tab-button" onclick="showScenario(4)">🎯 Your Challenge</button>
+            </div>
+            
+            <!-- Scenario 1: Scheduling -->
+            <div class="scenario-card active" id="scenario1">
+                <div class="scenario-header">
+                    <h2 class="scenario-title">📅 Scenario 1: Scheduling Conflicts</h2>
+                    <div class="scenario-description">
+                        <strong>The Challenge:</strong> You want to involve Maria, a 10th grade student, in her IEP meeting, but it's scheduled during her AP Chemistry class - the only time all required team members can attend. Missing this class would mean missing a important lab that can't be made up.
+                    </div>
+                </div>
+                
+                <div class="solutions-section">
+                    <div class="solutions-header">
+                        <h3>💡 Your Solutions</h3>
+                    </div>
+                    
+                    <div class="add-solution-group">
+                        <input type="text" class="solution-input" id="solution1" 
+                               placeholder="Enter your solution idea...">
+                        <button class="add-btn" onclick="addSolution(1)">+ Add Solution</button>
+                    </div>
+                    
+                    <div class="solutions-list" id="solutionsList1">
+                        <div class="empty-state">No solutions added yet. Start brainstorming!</div>
+                    </div>
+                </div>
+                
+                <div class="prompt-questions">
+                    <h4>🤔 Consider These Questions:</h4>
+                    <ul>
+                        <li>Could technology help bridge the gap?</li>
+                        <li>Is there a way to split the meeting into parts?</li>
+                        <li>What about recording or pre-meeting preparation?</li>
+                        <li>Could the student present something ahead of time?</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Scenario 2: Paperwork -->
+            <div class="scenario-card" id="scenario2">
+                <div class="scenario-header">
+                    <h2 class="scenario-title">📋 Scenario 2: Paperwork Overwhelm</h2>
+                    <div class="scenario-description">
+                        <strong>The Challenge:</strong> You're the case manager for 25 students. You want to involve students in their IEPs, but you're already working evenings and weekends just to complete the required paperwork. You're worried that adding student preparation will push you past your breaking point.
+                    </div>
+                </div>
+                
+                <div class="solutions-section">
+                    <div class="solutions-header">
+                        <h3>💡 Your Solutions</h3>
+                    </div>
+                    
+                    <div class="add-solution-group">
+                        <input type="text" class="solution-input" id="solution2" 
+                               placeholder="Enter your solution idea...">
+                        <button class="add-btn" onclick="addSolution(2)">+ Add Solution</button>
+                    </div>
+                    
+                    <div class="solutions-list" id="solutionsList2">
+                        <div class="empty-state">No solutions added yet. Start brainstorming!</div>
+                    </div>
+                </div>
+                
+                <div class="prompt-questions">
+                    <h4>🤔 Consider These Questions:</h4>
+                    <ul>
+                        <li>How might student involvement actually SAVE time in the long run?</li>
+                        <li>Could other team members help with preparation?</li>
+                        <li>Are there efficient tools or templates you could use?</li>
+                        <li>Could this be integrated into existing activities?</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Scenario 3: Buy-In -->
+            <div class="scenario-card" id="scenario3">
+                <div class="scenario-header">
+                    <h2 class="scenario-title">👥 Scenario 3: Parent and Student Resistance</h2>
+                    <div class="scenario-description">
+                        <strong>The Challenge:</strong> You want to involve James, a 7th grader, in his IEP meeting. However, his parents say "We don't want him to feel different or know about his disability," and James himself says "I don't want to go to a boring meeting with a bunch of adults."
+                    </div>
+                </div>
+                
+                <div class="solutions-section">
+                    <div class="solutions-header">
+                        <h3>💡 Your Solutions</h3>
+                    </div>
+                    
+                    <div class="add-solution-group">
+                        <input type="text" class="solution-input" id="solution3" 
+                               placeholder="Enter your solution idea...">
+                        <button class="add-btn" onclick="addSolution(3)">+ Add Solution</button>
+                    </div>
+                    
+                    <div class="solutions-list" id="solutionsList3">
+                        <div class="empty-state">No solutions added yet. Start brainstorming!</div>
+                    </div>
+                </div>
+                
+                <div class="prompt-questions">
+                    <h4>🤔 Consider These Questions:</h4>
+                    <ul>
+                        <li>How can you address parents' fears while respecting their concerns?</li>
+                        <li>What would make the meeting engaging for a 7th grader?</li>
+                        <li>Could you start with small steps that feel comfortable?</li>
+                        <li>How might you reframe "disability" in strength-based terms?</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Scenario 4: Your Challenge -->
+            <div class="scenario-card" id="scenario4">
+                <div class="scenario-header">
+                    <h2 class="scenario-title">🎯 Your Own Challenge</h2>
+                    <div class="scenario-description">
+                        <strong>Think about your specific setting:</strong> What's the biggest practical challenge YOU face (or anticipate facing) when implementing student involvement in IEPs? Describe it below and brainstorm solutions.
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <label for="yourChallenge" style="display: block; margin-bottom: 10px; font-weight: 600; color: #333;">
+                        Describe Your Challenge:
+                    </label>
+                    <textarea id="yourChallenge" placeholder="What specific challenge do you face in your school/classroom?"></textarea>
+                </div>
+                
+                <div class="solutions-section">
+                    <div class="solutions-header">
+                        <h3>💡 Your Solutions</h3>
+                    </div>
+                    
+                    <div class="add-solution-group">
+                        <input type="text" class="solution-input" id="solution4" 
+                               placeholder="Enter your solution idea...">
+                        <button class="add-btn" onclick="addSolution(4)">+ Add Solution</button>
+                    </div>
+                    
+                    <div class="solutions-list" id="solutionsList4">
+                        <div class="empty-state">No solutions added yet. Start brainstorming!</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tips-section">
+                <h4>✨ Pro Tips for Problem-Solving:</h4>
+                <ul style="margin-left: 20px; color: #666; line-height: 1.8;">
+                    <li><strong>Start small:</strong> You don't have to solve everything at once</li>
+                    <li><strong>Collaborate:</strong> Other teachers might have solutions you haven't thought of</li>
+                    <li><strong>Pilot first:</strong> Try solutions with one student before scaling up</li>
+                    <li><strong>Document what works:</strong> Build a toolkit of successful strategies</li>
+                    <li><strong>Be flexible:</strong> What works for one student might need tweaking for another</li>
+                </ul>
+            </div>
+            
+            <div class="reflection-section">
+                <h3>💭 Synthesis & Action Planning</h3>
+                <div style="margin-bottom: 20px;">
+                    <label for="synthesis" style="display: block; margin-bottom: 10px; font-weight: 600;">
+                        Looking across all scenarios, what themes or patterns do you notice in the solutions?
+                    </label>
+                    <textarea id="synthesis" placeholder="What strategies could work across multiple challenges?"></textarea>
+                </div>
+                
+                <div>
+                    <label for="nextSteps" style="display: block; margin-bottom: 10px; font-weight: 600;">
+                        What's ONE solution you could implement next week?
+                    </label>
+                    <textarea id="nextSteps" placeholder="Be specific: What will you do? With which student? When?"></textarea>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-primary" onclick="saveWork()">💾 Save My Work</button>
+                <button class="btn-secondary" onclick="emailResults()">📧 Email to Self</button>
+                <button class="btn-secondary" onclick="printResults()">🖨️ Print</button>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Data storage
+        let solutions = {
+            1: [],
+            2: [],
+            3: [],
+            4: []
+        };
+        
+        // Load saved data on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSavedData();
+        });
+        
+        function showScenario(num) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach((btn, index) => {
+                btn.classList.toggle('active', index === num - 1);
+            });
+            
+            // Update scenario cards
+            document.querySelectorAll('.scenario-card').forEach((card, index) => {
+                card.classList.toggle('active', index === num - 1);
+            });
+        }
+        
+        function addSolution(scenarioNum) {
+            const input = document.getElementById(`solution${scenarioNum}`);
+            const value = input.value.trim();
+            
+            if (value) {
+                const solution = {
+                    id: Date.now(),
+                    text: value,
+                    scenario: scenarioNum
+                };
+                
+                solutions[scenarioNum].push(solution);
+                renderSolutions(scenarioNum);
+                input.value = '';
+                saveData();
+            }
+        }
+        
+        function deleteSolution(scenarioNum, solutionId) {
+            solutions[scenarioNum] = solutions[scenarioNum].filter(s => s.id !== solutionId);
+            renderSolutions(scenarioNum);
+            saveData();
+        }
+        
+        function renderSolutions(scenarioNum) {
+            const list = document.getElementById(`solutionsList${scenarioNum}`);
+            
+            if (solutions[scenarioNum].length === 0) {
+                list.innerHTML = '<div class="empty-state">No solutions added yet. Start brainstorming!</div>';
+            } else {
+                list.innerHTML = '';
+                solutions[scenarioNum].forEach((solution, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'solution-item';
+                    div.innerHTML = `
+                        <div class="solution-number">${index + 1}</div>
+                        <div class="solution-content">
+                            <div class="solution-text">${solution.text}</div>
+                        </div>
+                        <button class="delete-btn" onclick="deleteSolution(${scenarioNum}, ${solution.id})">Delete</button>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+        }
+        
+        function saveData() {
+            const data = {
+                solutions: solutions,
+                yourChallenge: document.getElementById('yourChallenge').value,
+                synthesis: document.getElementById('synthesis').value,
+                nextSteps: document.getElementById('nextSteps').value,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('practicalChallenges', JSON.stringify(data));
+        }
+        
+        function loadSavedData() {
+            const saved = localStorage.getItem('practicalChallenges');
+            if (saved) {
+                const data = JSON.parse(saved);
+                solutions = data.solutions || { 1: [], 2: [], 3: [], 4: [] };
+                document.getElementById('yourChallenge').value = data.yourChallenge || '';
+                document.getElementById('synthesis').value = data.synthesis || '';
+                document.getElementById('nextSteps').value = data.nextSteps || '';
+                
+                // Render all solutions
+                [1, 2, 3, 4].forEach(num => renderSolutions(num));
+            }
+        }
+        
+        function saveWork() {
+            saveData();
+            alert('✅ Your work has been saved successfully!');
+        }
+        
+        function emailResults() {
+            const subject = encodeURIComponent('Practical Challenges Problem-Solving Activity');
+            
+            let body = 'PRACTICAL CHALLENGES PROBLEM-SOLVING\n';
+            body += 'Student Involvement in IEP Training\n';
+            body += 'Date: ' + new Date().toLocaleDateString() + '\n\n';
+            body += '═══════════════════════════════════════\n\n';
+            
+            // Scenario 1
+            body += 'SCENARIO 1: SCHEDULING CONFLICTS\n';
+            body += 'Solutions:\n';
+            solutions[1].forEach((s, i) => {
+                body += `${i + 1}. ${s.text}\n`;
+            });
+            
+            body += '\n═══════════════════════════════════════\n\n';
+            
+            // Scenario 2
+            body += 'SCENARIO 2: PAPERWORK OVERWHELM\n';
+            body += 'Solutions:\n';
+            solutions[2].forEach((s, i) => {
+                body += `${i + 1}. ${s.text}\n`;
+            });
+            
+            body += '\n═══════════════════════════════════════\n\n';
+            
+            // Scenario 3
+            body += 'SCENARIO 3: PARENT AND STUDENT RESISTANCE\n';
+            body += 'Solutions:\n';
+            solutions[3].forEach((s, i) => {
+                body += `${i + 1}. ${s.text}\n`;
+            });
+            
+            body += '\n═══════════════════════════════════════\n\n';
+            
+            // Your Challenge
+            body += 'MY SPECIFIC CHALLENGE:\n';
+            body += document.getElementById('yourChallenge').value || '[Not provided]';
+            body += '\n\nMy Solutions:\n';
+            solutions[4].forEach((s, i) => {
+                body += `${i + 1}. ${s.text}\n`;
+            });
+            
+            body += '\n═══════════════════════════════════════\n\n';
+            
+            body += 'SYNTHESIS:\n';
+            body += document.getElementById('synthesis').value || '[Not provided]';
+            body += '\n\nNEXT STEPS:\n';
+            body += document.getElementById('nextSteps').value || '[Not provided]';
+            
+            const bodyEncoded = encodeURIComponent(body);
+            window.location.href = `mailto:?subject=${subject}&body=${bodyEncoded}`;
+        }
+        
+        function printResults() {
+            window.print();
+        }
+        
+        // Auto-save on input
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', saveData);
+        });
+        
+        // Handle enter key in solution inputs
+        document.querySelectorAll('.solution-input').forEach((input, index) => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addSolution(index + 1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
