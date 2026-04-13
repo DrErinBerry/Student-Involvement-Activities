@@ -499,7 +499,7 @@
                 
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="playAgain()">Play Again 🔄</button>
-                    <button class="btn btn-secondary" onclick="backToTraining()">Continue Training ➡️</button>
+                    <button class="btn btn-secondary" onclick="backToTraining()">Close &amp; Return to Training ➡️</button>
                 </div>
             </div>
         </main>
@@ -678,7 +678,7 @@
             
             html += `
                 <button class="next-btn" onclick="nextQuestion()">
-                    ${currentQuestion < gameQuestions.length - 1 ? 'Next Question →' : 'See Results 🏆'}
+                    ${currentQuestion < gameQuestions.length - 1 ? 'Next Question â†’' : 'See Results 🏆'}
                 </button>
             `;
             
@@ -755,8 +755,12 @@
         }
         
         function backToTraining() {
-            alert('Great job on the brain break! When you\'re ready, continue with the next section of the training.');
-            // In a real implementation, this would navigate back to the training platform
+            if (confirm('Great job on the brain break! Click OK to close this window and return to the training.')) {
+                window.close();
+                setTimeout(function() {
+                    document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center;padding:40px;"><div style="background:white;padding:40px;border-radius:20px;max-width:500px;"><h2 style="margin-bottom:15px;color:#333;">You\'re all done!</h2><p style="font-size:1.1em;color:#666;">Please close this tab or window to return to the training.</p></div></div>';
+                }, 500);
+            }
         }
     </script>
 </body>
