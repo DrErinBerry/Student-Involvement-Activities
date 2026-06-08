@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_blank" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student-Led IEP Meeting Script — Student Involvement in the IEP</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; line-height: 1.65; color: #1a1a1a; background: #fff; }
+
+    /* Skip link */
+    .skip-link { position: absolute; top: -42px; left: 0; background: #005a9c; color: #fff; padding: 8px 14px; font-weight: bold; text-decoration: none; z-index: 999; border-bottom-right-radius: 4px; }
+    .skip-link:focus { top: 0; }
+
+    /* Header */
+    header { background: #004b8d; color: #fff; padding: 1.5rem 2rem; }
+    header h1 { font-size: 1.85rem; }
+    header p { margin-top: 0.4rem; opacity: 0.9; font-size: 0.95rem; }
+
+    /* Layout */
+    main { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* Print button */
+    .print-bar { display: flex; justify-content: flex-end; margin-bottom: 1.75rem; }
+    .btn-print { background: #005a9c; color: #fff; border: none; padding: 0.6rem 1.3rem; font-size: 0.95rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
+    .btn-print:hover, .btn-print:focus { background: #003f73; outline: 3px solid #ffb400; outline-offset: 2px; }
+
+    /* Intro blurb */
+    .intro { margin-bottom: 2rem; padding: 1rem 1.2rem; background: #f0f5fb; border-left: 4px solid #004b8d; border-radius: 0 4px 4px 0; font-size: 0.95rem; }
+
+    /* How-to-use box */
+    .howto { margin-bottom: 2.25rem; padding: 1rem 1.2rem; background: #fbf6e9; border-left: 4px solid #ffb400; border-radius: 0 4px 4px 0; font-size: 0.94rem; }
+    .howto strong { color: #8a6100; }
+    .howto ul { margin: 0.5rem 0 0 1.1rem; }
+    .howto li { margin-bottom: 0.35rem; }
+
+    /* Sections */
+    section { margin-bottom: 2.5rem; }
+    h2 { font-size: 1.3rem; color: #004b8d; border-left: 5px solid #004b8d; padding-left: 0.75rem; margin-bottom: 0.85rem; }
+    .step-tag { display: inline-block; font-size: 0.72rem; font-weight: bold; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; background: #005a9c; padding: 0.15rem 0.55rem; border-radius: 3px; vertical-align: middle; margin-left: 0.5rem; }
+
+    /* Script lines */
+    .say { font-size: 1.05rem; margin: 0.6rem 0; }
+    .say .blank { display: inline-block; min-width: 120px; border-bottom: 1.5px solid #555; }
+    .coach { font-size: 0.88rem; color: #555; font-style: italic; background: #f7f7f7; border-left: 3px solid #ccc; padding: 0.4rem 0.75rem; margin: 0.35rem 0 0.9rem; }
+    .coach strong { font-style: normal; color: #333; }
+
+    /* Facilitator note */
+    .facilitator { background: #eef4ee; border: 1px solid #cdddcd; border-left: 4px solid #2e7d32; border-radius: 0 4px 4px 0; padding: 0.85rem 1.1rem; margin: 1rem 0; font-size: 0.92rem; }
+    .facilitator strong { color: #1b5e20; }
+
+    /* Ready-to-run-the-whole-meeting callout */
+    .whole { background: #f0f5fb; border: 1px solid #c8d8ea; border-radius: 6px; padding: 1.1rem 1.25rem; margin: 1.5rem 0; }
+    .whole h3 { color: #004b8d; font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .whole ol { margin: 0.5rem 0 0 1.2rem; }
+    .whole li { margin-bottom: 0.3rem; font-size: 0.95rem; }
+
+    /* Source / credit */
+    .credit { font-size: 0.85rem; color: #555; border-top: 1px solid #e0e0e0; margin-top: 2.5rem; padding-top: 1rem; }
+
+    a { color: #005a9c; }
+    a:hover, a:focus { color: #003f73; outline: 2px solid #ffb400; outline-offset: 2px; }
+
+    /* Print styles */
+    @media print {
+      .print-bar, .skip-link { display: none; }
+      header { background: none; color: #1a1a1a; border-bottom: 2px solid #004b8d; padding-left: 0; }
+      .step-tag { background: none; color: #000; border: 1px solid #000; }
+      .intro, .howto, .facilitator, .whole { border: 1px solid #ccc; }
+      .say .blank { min-width: 160px; }
+      a { color: #1a1a1a; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header role="banner">
+    <h1>Student-Led IEP Meeting Script</h1>
+    <p>Student Involvement in the IEP &mdash; Oklahoma State Department of Education</p>
+  </header>
+
+  <main id="main-content" role="main">
+
+    <div class="print-bar">
+      <button class="btn-print" onclick="window.print()" aria-label="Print or save this script as a PDF using your browser print dialog">
+        &#128438; Print / Save as PDF
+      </button>
+    </div>
+
+    <p class="intro">This is a fill-in-the-blank script a student can use to help lead their own IEP meeting. The student fills in the blanks ahead of time and practices reading it. It is written so a student can lead the <em>opening</em> of the meeting and then hand off to a teacher or facilitator &mdash; or, when they are ready, lead the meeting from start to finish.</p>
+
+    <div class="howto" role="note" aria-label="How to use this script">
+      <strong>How to use this script</strong>
+      <ul>
+        <li>Fill in the blanks with the student before the meeting, and let them practice reading it aloud.</li>
+        <li>The italic notes in gray are coaching tips for the student or adult helper &mdash; they are not read aloud.</li>
+        <li>The student can lead as much or as little as they choose. Honor their preference to lead all, part, or none of the meeting.</li>
+        <li>Steps are labeled so you can stop at the handoff point or keep going to run the whole meeting.</li>
+      </ul>
+    </div>
+
+    <!-- PART 1: Student opens -->
+    <section aria-labelledby="s1">
+      <h2 id="s1">Welcome <span class="step-tag">Student leads</span></h2>
+      <p class="say">&ldquo;Hi, and thank you for coming to my meeting. My name is <span class="blank" aria-label="student name blank"></span>. I am <span class="blank" aria-label="age blank"></span> years old and I am in the <span class="blank" aria-label="grade blank"></span> grade.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> A simple, confident welcome sets the tone. Practice making eye contact and speaking slowly.</p>
+    </section>
+
+    <section aria-labelledby="s2">
+      <h2 id="s2">My Hopes for the Future <span class="step-tag">Student leads</span></h2>
+      <p class="say">&ldquo;After I finish high school, I want to <span class="blank" aria-label="postsecondary goal blank"></span>.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> This can be about college or technical school, a job or career, where they want to live, or what they want to learn. Even a broad idea is a great start.</p>
+    </section>
+
+    <section aria-labelledby="s3">
+      <h2 id="s3">How Last Year Went <span class="step-tag">Student leads</span></h2>
+      <p class="say">&ldquo;Now I want to share how I did on my goals last year. <span class="blank" aria-label="progress blank"></span>.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> Review the prior IEP goals together beforehand. The student can name one or two goals and say whether they met them, are getting close, or want to keep working on them.</p>
+    </section>
+
+    <section aria-labelledby="s4">
+      <h2 id="s4">My Strengths <span class="step-tag">Student leads</span></h2>
+      <p class="say">&ldquo;Here are some of my strengths: <span class="blank" aria-label="strengths blank"></span>.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> Examples to prompt with &mdash; hard worker, good listener, friendly, creative, organized, helps others, works well in a group or on my own.</p>
+      <p class="say">&ldquo;I would also like my family and teachers to share what <em>they</em> think my strengths are.&rdquo;</p>
+      <div class="facilitator"><strong>Pause here:</strong> Invite family members and teachers to add the strengths they see. Hearing others name their strengths is often a highlight for the student.</div>
+    </section>
+
+    <section aria-labelledby="s5">
+      <h2 id="s5">What Helps Me Learn <span class="step-tag">Student leads</span></h2>
+      <p class="say">&ldquo;The things that help me learn best are <span class="blank" aria-label="accommodations blank"></span>.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> Think about accommodations that worked &mdash; extra time, a quiet space, notes ahead of time, working in small groups, using a computer, checklists, or breaks.</p>
+      <p class="say">&ldquo;Some things that were hard for me last year were <span class="blank" aria-label="challenges blank"></span>.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> Framing challenges honestly helps the team plan supports. Keep it matter-of-fact and paired with what would help.</p>
+    </section>
+
+    <section aria-labelledby="s6">
+      <h2 id="s6">Things I Enjoy <span class="step-tag">Student leads</span></h2>
+      <p class="say">&ldquo;When I am not in school, I like to <span class="blank" aria-label="interests blank"></span>.&rdquo;</p>
+      <p class="say">&ldquo;I <span class="blank" aria-label="job yes or no blank"></span> have a job right now. <span class="blank" aria-label="job description blank"></span>.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> List hobbies, clubs, sports, volunteering, or faith-community activities. If they have a job, they can say what it is and whether it connects to their future goals.</p>
+    </section>
+
+    <section aria-labelledby="s7">
+      <h2 id="s7">Classes That Match My Goals <span class="step-tag">Student leads</span></h2>
+      <p class="say">&ldquo;To reach my goals after high school, the classes I would like to take are <span class="blank" aria-label="courses blank"></span>.&rdquo;</p>
+      <p class="coach"><strong>Coaching tip:</strong> Connect course choices to the future goal named earlier. The case manager can help match courses to the postsecondary goal.</p>
+    </section>
+
+    <!-- HANDOFF -->
+    <section aria-labelledby="s8">
+      <h2 id="s8">Handing Off <span class="step-tag">Handoff point</span></h2>
+      <p class="say">&ldquo;Thank you for helping me share what I want for my future and what works for me in school. For the rest of the meeting, I would like us to plan next year and the supports that will help me reach my goals.&rdquo;</p>
+      <div class="facilitator"><strong>This is the natural stopping point for a student who is leading the opening.</strong> The student can now hand the meeting to the case manager or facilitator &mdash; or keep going using the steps below if they are ready to lead the whole meeting.</div>
+    </section>
+
+    <!-- PART 2: Whole meeting -->
+    <div class="whole" aria-labelledby="whole-h">
+      <h3 id="whole-h">When the Student Is Ready to Lead the Whole Meeting</h3>
+      <p style="font-size:0.95rem;">A student who has led the opening a few times may want to lead the rest, too. When they are ready, they can continue with these steps instead of handing off. The adult facilitator stays close to support and to make sure every legal requirement is still met.</p>
+      <ol>
+        <li><strong>Review proposed goals:</strong> &ldquo;Let&rsquo;s look at the goals we are thinking about for this year. Here is what I think I need to work on: <span class="blank" aria-label="proposed goals blank" style="min-width:90px;"></span>.&rdquo;</li>
+        <li><strong>Talk through accommodations and supports:</strong> &ldquo;These are the supports I want to keep, and these are ones I want to try.&rdquo;</li>
+        <li><strong>Invite the team:</strong> &ldquo;What does everyone else think? Is there anything I am missing?&rdquo;</li>
+        <li><strong>Agree on the plan:</strong> &ldquo;Let&rsquo;s make sure we all agree on my goals and supports for this year.&rdquo;</li>
+        <li><strong>Close the meeting:</strong> &ldquo;Thank you all for coming and for helping me plan. This is my plan, and I am glad I got to lead my meeting.&rdquo;</li>
+      </ol>
+      <div class="facilitator" style="margin-top:1rem;"><strong>Facilitator reminder:</strong> Even when the student leads the whole meeting, the adult team is responsible for ensuring all required components and procedural safeguards are addressed. The student leads the conversation; the team still owns the legal process.</div>
+    </div>
+
+    <p class="credit">This script was created for the Oklahoma State Department of Education <em>Student Involvement in the IEP</em> professional learning series as an original, freely usable classroom resource. Adapt it to fit your students&rsquo; ages, communication styles, and needs. For a more guided model, see the mini-lessons and one-pager resources in Module 4 and Module 5.</p>
+
+  </main>
+
+</body>
+</html>
