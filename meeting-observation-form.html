@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meeting Observation Form — Student Involvement in the IEP</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; line-height: 1.6; color: #1a1a1a; background: #fff; }
+
+    .skip-link { position: absolute; top: -42px; left: 0; background: #005a9c; color: #fff; padding: 8px 14px; font-weight: bold; text-decoration: none; z-index: 999; border-bottom-right-radius: 4px; }
+    .skip-link:focus { top: 0; }
+
+    header { background: #004b8d; color: #fff; padding: 1.5rem 2rem; }
+    header h1 { font-size: 1.85rem; }
+    header p { margin-top: 0.4rem; opacity: 0.9; font-size: 0.95rem; }
+
+    main { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .print-bar { display: flex; justify-content: flex-end; margin-bottom: 1.75rem; }
+    .btn-print { background: #005a9c; color: #fff; border: none; padding: 0.6rem 1.3rem; font-size: 0.95rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
+    .btn-print:hover, .btn-print:focus { background: #003f73; outline: 3px solid #ffb400; outline-offset: 2px; }
+
+    .intro { margin-bottom: 1.5rem; padding: 1rem 1.2rem; background: #f0f5fb; border-left: 4px solid #004b8d; border-radius: 0 4px 4px 0; font-size: 0.95rem; }
+
+    /* Meta fields */
+    .fields { margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 2.4; }
+    .fields .blank { display: inline-block; min-width: 150px; border-bottom: 1.5px solid #555; margin: 0 1.5rem 0 0.3rem; }
+
+    /* Key */
+    .key { background: #fbf6e9; border-left: 4px solid #ffb400; border-radius: 0 4px 4px 0; padding: 0.9rem 1.2rem; margin-bottom: 2rem; font-size: 0.92rem; }
+    .key strong { color: #8a6100; }
+    .key dl { margin-top: 0.5rem; display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 0.75rem; }
+    .key dt { font-weight: bold; white-space: nowrap; }
+
+    h2 { font-size: 1.25rem; color: #004b8d; border-left: 5px solid #004b8d; padding-left: 0.75rem; margin: 2rem 0 0.85rem; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    caption { text-align: left; font-size: 0.85rem; color: #555; font-style: italic; margin-bottom: 0.4rem; }
+    th, td { border: 1px solid #ccc; padding: 0.55rem 0.6rem; text-align: left; vertical-align: top; }
+    thead th { background: #004b8d; color: #fff; font-size: 0.82rem; text-align: center; }
+    .skill-col { width: 40%; text-align: left; }
+    .mark { text-align: center; width: 9%; }
+    .notes-col { width: 24%; }
+    tbody tr:nth-child(even) td { background: #f7f9fc; }
+
+    /* Reflection */
+    .reflect { margin-top: 1.75rem; padding: 1rem 1.2rem; background: #eef4ee; border-left: 4px solid #2e7d32; border-radius: 0 4px 4px 0; font-size: 0.93rem; }
+    .reflect strong { color: #1b5e20; }
+    .reflect p { margin-top: 0.75rem; }
+    .reflect .line { display: block; border-bottom: 1px solid #bbb; height: 1.4rem; margin-top: 0.4rem; }
+
+    a { color: #005a9c; }
+    a:hover, a:focus { color: #003f73; outline: 2px solid #ffb400; outline-offset: 2px; }
+
+    @media print {
+      .print-bar, .skip-link { display: none; }
+      header { background: none; color: #1a1a1a; border-bottom: 2px solid #004b8d; padding-left: 0; }
+      thead th { background: #004b8d !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .intro, .key, .reflect { border: 1px solid #ccc; }
+      table { page-break-inside: avoid; }
+      a { color: #1a1a1a; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header role="banner">
+    <h1>Meeting Observation Form</h1>
+    <p>Student Involvement in the IEP &mdash; Oklahoma State Department of Education</p>
+  </header>
+
+  <main id="main-content" role="main">
+
+    <div class="print-bar">
+      <button class="btn-print" onclick="window.print()" aria-label="Print or save this form as a PDF using your browser print dialog">
+        &#128438; Print / Save as PDF
+      </button>
+    </div>
+
+    <p class="intro">This form helps the teacher or case manager observe and reflect on a student&rsquo;s participation during a single IEP meeting. It focuses on the IEP participation skills from the Student Progress Rubric and captures only what the student actually did <em>this meeting</em>. If a skill did not come up, mark it <strong>Not observed</strong> &mdash; that simply means there was no chance to show it, not that the student fell short. Use the form across several meetings to document progress and celebrate growth.</p>
+
+    <div class="fields">
+      Student: <span class="blank" aria-label="student name blank"></span>
+      Date of meeting: <span class="blank" aria-label="meeting date blank"></span><br />
+      Observer: <span class="blank" aria-label="observer name blank"></span>
+      Type of meeting: <span class="blank" aria-label="meeting type blank"></span>
+    </div>
+
+    <div class="key" role="note" aria-label="How to mark this form">
+      <strong>How to mark each skill</strong> &mdash; check the one that fits what you saw <em>this meeting</em>:
+      <dl>
+        <dt>Independently</dt><dd>The student did this on their own.</dd>
+        <dt>With support</dt><dd>The student did this with a prompt, reminder, or help.</dd>
+        <dt>Not yet</dt><dd>There was an opportunity, but the student did not do this yet.</dd>
+        <dt>Not observed</dt><dd>This did not come up in the meeting, so there was no chance to show it. (Not a low score &mdash; just nothing to record.)</dd>
+      </dl>
+    </div>
+
+    <h2>IEP Participation Skills Observed</h2>
+    <table aria-label="IEP participation skills observed this meeting">
+      <caption>Mark one column per skill based only on this meeting.</caption>
+      <thead>
+        <tr>
+          <th class="skill-col">Skill</th>
+          <th class="mark">Independently</th>
+          <th class="mark">With support</th>
+          <th class="mark">Not yet</th>
+          <th class="mark">Not observed</th>
+          <th class="notes-col">Notes / what I saw</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Showed they know what the IEP is and why they have one</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+        <tr><td>Recognized the people at the meeting</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+        <tr><td>Came prepared (brought notes, a one-pager, or a script)</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+        <tr><td>Attended the meeting</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+        <tr><td>Introduced themselves or spoke during the meeting</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+        <tr><td>Shared their strengths and goals</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+        <tr><td>Helped review progress on their goals</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+        <tr><td>Led part or all of the meeting</td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td class="mark"></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="reflect" role="note" aria-label="Reflection and next steps">
+      <strong>Reflection &amp; next steps</strong>
+      <p>What did the student do well this meeting? (Celebrate it!)</p>
+      <span class="line" aria-hidden="true"></span>
+      <span class="line" aria-hidden="true"></span>
+      <p>What is one skill to prepare or practice before the next meeting?</p>
+      <span class="line" aria-hidden="true"></span>
+      <span class="line" aria-hidden="true"></span>
+      <p>What support helped most, and what could we adjust next time?</p>
+      <span class="line" aria-hidden="true"></span>
+      <span class="line" aria-hidden="true"></span>
+    </div>
+
+    <p style="font-size:0.85rem; color:#555; border-top:1px solid #e0e0e0; margin-top:2rem; padding-top:1rem;">This form pairs with the Student Progress Rubric &mdash; the rubric tracks skills over the year, while this form captures a single meeting. Use them together to document growth and guide preparation for the next meeting.</p>
+
+  </main>
+
+</body>
+</html>
