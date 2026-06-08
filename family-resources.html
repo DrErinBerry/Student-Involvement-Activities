@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_blank" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Resources — Student Involvement in the IEP</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; line-height: 1.65; color: #1a1a1a; background: #fff; }
+
+    /* Skip link */
+    .skip-link { position: absolute; top: -42px; left: 0; background: #005a9c; color: #fff; padding: 8px 14px; font-weight: bold; text-decoration: none; z-index: 999; border-bottom-right-radius: 4px; }
+    .skip-link:focus { top: 0; }
+
+    /* Header */
+    header { background: #004b8d; color: #fff; padding: 1.5rem 2rem; }
+    header h1 { font-size: 1.85rem; }
+    header p { margin-top: 0.4rem; opacity: 0.9; font-size: 0.95rem; }
+
+    /* Layout */
+    main { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* Print button */
+    .print-bar { display: flex; justify-content: flex-end; margin-bottom: 1.75rem; }
+    .btn-print { background: #005a9c; color: #fff; border: none; padding: 0.6rem 1.3rem; font-size: 0.95rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
+    .btn-print:hover, .btn-print:focus { background: #003f73; outline: 3px solid #ffb400; outline-offset: 2px; }
+
+    /* Intro */
+    .intro { margin-bottom: 2rem; padding: 1rem 1.2rem; background: #f0f5fb; border-left: 4px solid #004b8d; border-radius: 0 4px 4px 0; font-size: 0.95rem; }
+
+    /* Resource cards */
+    .resource-card { border: 1px solid #d0d8e4; border-radius: 6px; padding: 1.5rem; margin-bottom: 1.75rem; }
+    .resource-card h2 { font-size: 1.2rem; color: #004b8d; margin-bottom: 0.1rem; }
+    .resource-card h2 a { color: #005a9c; text-decoration: underline; }
+    .resource-card h2 a:hover, .resource-card h2 a:focus { color: #003f73; outline: 2px solid #ffb400; outline-offset: 2px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.6rem 0 0.9rem; }
+    .tag { font-size: 0.8rem; background: #e8f0fb; color: #004b8d; border-radius: 12px; padding: 0.2rem 0.7rem; font-weight: bold; }
+    .tag.format { background: #e8f5e9; color: #1b5e20; }
+    .card-section { margin-bottom: 0.85rem; }
+    .card-section strong { font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.04em; color: #555; display: block; margin-bottom: 0.3rem; }
+    .card-section ul { padding-left: 1.2rem; font-size: 0.94rem; }
+    .card-section ul li { margin-bottom: 0.2rem; }
+    .when-box { background: #fffbea; border-left: 3px solid #f5a623; border-radius: 0 4px 4px 0; padding: 0.65rem 1rem; font-size: 0.93rem; }
+    .when-box strong { color: #7a5000; }
+
+    /* Quick reference */
+    section { margin-bottom: 2.75rem; }
+    h2.section-h { font-size: 1.3rem; color: #004b8d; border-left: 5px solid #004b8d; padding-left: 0.75rem; margin-bottom: 1rem; }
+    .qr-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; margin-top: 0.5rem; }
+    .qr-table th { background: #004b8d; color: #fff; text-align: left; padding: 0.6rem 0.9rem; }
+    .qr-table td { padding: 0.55rem 0.9rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+    .qr-table tr:nth-child(even) td { background: #f5f8fd; }
+    .qr-table a { color: #005a9c; }
+
+    /* Concerns */
+    .concern { background: #f9f9f9; border: 1px solid #ddd; border-left: 4px solid #004b8d; border-radius: 0 4px 4px 0; padding: 1rem 1.1rem; margin-bottom: 1rem; }
+    .concern .q { font-weight: bold; color: #004b8d; font-size: 0.97rem; margin-bottom: 0.45rem; }
+    .concern .a { font-size: 0.93rem; }
+
+    /* Footer note */
+    .footer-note { margin-top: 2rem; padding: 1rem 1.2rem; background: #f0f5fb; border-radius: 4px; font-size: 0.9rem; text-align: center; color: #444; }
+
+    /* Links */
+    a { color: #005a9c; }
+    a:hover, a:focus { color: #003f73; outline: 2px solid #ffb400; outline-offset: 2px; }
+
+    /* Print */
+    @media print {
+      .print-bar, .skip-link { display: none; }
+      header { background: none; color: #1a1a1a; border-bottom: 2px solid #004b8d; padding-left: 0; }
+      a { color: #1a1a1a; text-decoration: none; }
+      a::after { content: " (" attr(href) ")"; font-size: 0.78em; color: #555; word-break: break-all; }
+      .resource-card { break-inside: avoid; border: 1px solid #aaa; }
+      .qr-table th { background: #eee; color: #1a1a1a; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header role="banner">
+    <h1>Family Resources</h1>
+    <p>Student Involvement in the IEP &mdash; Oklahoma State Department of Education</p>
+  </header>
+
+  <main id="main-content" role="main">
+
+    <div class="print-bar">
+      <button class="btn-print" onclick="window.print()" aria-label="Print or save this page as a PDF using your browser print dialog">
+        &#128438; Print / Save as PDF
+      </button>
+    </div>
+
+    <p class="intro">These resources can be shared directly with families to help them understand and support student involvement in the IEP process. Each entry includes a description, key topics, and guidance on <em>when</em> to share it — so you can match the right resource to the right family at the right moment. Bookmark this page as a quick reference!</p>
+
+    <!-- Resource 1 -->
+    <article class="resource-card" aria-labelledby="res1-h">
+      <h2 id="res1-h"><a href="https://www.parentcenterhub.org/transitionadult/" target="_blank" rel="noopener noreferrer">Resource 1: Parent Center Hub</a></h2>
+      <div class="tag-row">
+        <span class="tag">Best for: Parents new to transition planning</span>
+        <span class="tag format">Website &bull; Available in English and Spanish</span>
+      </div>
+      <div class="card-section">
+        <strong>Key Topics</strong>
+        <ul>
+          <li>IDEA transition definition and legal requirements</li>
+          <li>Transition services overview</li>
+          <li>Five domains of adult life</li>
+          <li>Activities families can do at home to support self-determination</li>
+        </ul>
+      </div>
+      <div class="when-box">
+        <strong>When to share:</strong> With parents who are new to transition planning or want a solid foundation of understanding before their child&rsquo;s first transition-focused IEP meeting.
+      </div>
+    </article>
+
+    <!-- Resource 2 -->
+    <article class="resource-card" aria-labelledby="res2-h">
+      <h2 id="res2-h"><a href="https://www.pacer.org/transition/" target="_blank" rel="noopener noreferrer">Resource 2: PACER National Parent Center</a></h2>
+      <div class="tag-row">
+        <span class="tag">Best for: Parents of middle/high school students wanting structured learning</span>
+        <span class="tag format">Online self-paced learning modules</span>
+      </div>
+      <div class="card-section">
+        <strong>Key Topics</strong>
+        <ul>
+          <li>Understanding IDEA and IEPs</li>
+          <li>Supporting the IEP team as a family member</li>
+          <li>College planning for students with disabilities</li>
+          <li>Employment preparation and work-based learning</li>
+          <li>Key differences between high school and adult services</li>
+        </ul>
+      </div>
+      <div class="when-box">
+        <strong>When to share:</strong> With parents who prefer structured, self-paced learning and want to develop a deep understanding of the full transition process at their own pace.
+      </div>
+    </article>
+
+    <!-- Resource 3 -->
+    <article class="resource-card" aria-labelledby="res3-h">
+      <h2 id="res3-h"><a href="https://tinyurl.com/ITPparentguide" target="_blank" rel="noopener noreferrer">Resource 3: Parent Guide to Transition Planning (PDF)</a></h2>
+      <div class="tag-row">
+        <span class="tag">Best for: Parents who prefer printable reference materials</span>
+        <span class="tag format">Downloadable PDF</span>
+      </div>
+      <div class="card-section">
+        <strong>Key Topics</strong>
+        <ul>
+          <li>Four domains of transition: education, employment, community living, and independent living</li>
+          <li>Common parent concerns addressed in plain language</li>
+          <li>Parent roles as advocate, mentor, and life coach</li>
+          <li>Questions to ask at IEP meetings</li>
+        </ul>
+      </div>
+      <div class="when-box">
+        <strong>When to share:</strong> Email before an IEP meeting so parents can review and bring questions, or provide printed copies at parent conferences and family nights.
+      </div>
+    </article>
+
+    <!-- Resource 4 -->
+    <article class="resource-card" aria-labelledby="res4-h">
+      <h2 id="res4-h"><a href="https://tinyurl.com/TR4parents" target="_blank" rel="noopener noreferrer">Resource 4: Transition Resources for Parents (NASET)</a></h2>
+      <div class="tag-row">
+        <span class="tag">Best for: Parents with specific questions about transition topics</span>
+        <span class="tag format">Web-based resource collection with links</span>
+      </div>
+      <div class="card-section">
+        <strong>Section 1 &mdash; The ABCs of Transition</strong>
+        <ul>
+          <li>Understanding transition planning basics and timelines</li>
+          <li>Parent roles in the IEP process</li>
+          <li>Self-determination resources for families</li>
+          <li>Parent brief series from the National Center on Secondary Education and Transition (NCSET)</li>
+        </ul>
+      </div>
+      <div class="card-section">
+        <strong>Section 2 &mdash; Specific Transition Topics</strong>
+        <ul>
+          <li>Age of majority and legal status changes</li>
+          <li>SSI and Social Security benefits</li>
+          <li>Employment and work-based learning</li>
+          <li>Postsecondary education and testing accommodations (GED, SAT)</li>
+          <li>Financial aid for students with disabilities</li>
+        </ul>
+      </div>
+      <div class="when-box">
+        <strong>When to share:</strong> When parents have a specific question about one particular topic — they can go directly to the relevant section without reading the whole site.
+      </div>
+    </article>
+
+    <!-- Resource 5 -->
+    <article class="resource-card" aria-labelledby="res5-h">
+      <h2 id="res5-h"><a href="https://tinyurl.com/IDparents" target="_blank" rel="noopener noreferrer">Resource 5: I&rsquo;m Determined Parent Video Series</a></h2>
+      <div class="tag-row">
+        <span class="tag">Best for: All parents, especially those who prefer video over reading</span>
+        <span class="tag format">Short videos &bull; Under 5 minutes each</span>
+      </div>
+      <div class="card-section">
+        <strong>Key Topics</strong>
+        <ul>
+          <li>Why student involvement matters and what it looks like at home</li>
+          <li>Supporting self-determination at home, at school, and in the community</li>
+          <li>How to partner effectively with schools on self-determination goals</li>
+          <li>Real families sharing their authentic experiences</li>
+        </ul>
+      </div>
+      <div class="when-box">
+        <strong>When to share:</strong> Perfect for busy parents who can watch during a lunch break or while waiting for an appointment. Also ideal for parent nights, family workshops, and school newsletters. The short format removes the barrier of a long read.
+      </div>
+    </article>
+
+    <!-- Quick Reference -->
+    <section aria-labelledby="qr-h">
+      <h2 class="section-h" id="qr-h">Quick Reference: Which Resource, When?</h2>
+      <table class="qr-table" aria-label="Guide to matching the right resource to the right family situation">
+        <thead>
+          <tr>
+            <th scope="col">If the parent&hellip;</th>
+            <th scope="col">Share this resource</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Is new to transition planning</td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://www.parentcenterhub.org/transitionadult/">Parent Center Hub</a></td>
+          </tr>
+          <tr>
+            <td>Wants structured, in-depth learning at their own pace</td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://www.pacer.org/transition/">PACER National Parent Center</a></td>
+          </tr>
+          <tr>
+            <td>Prefers printable materials they can hold and annotate</td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://tinyurl.com/ITPparentguide">Parent Guide to Transition Planning (PDF)</a></td>
+          </tr>
+          <tr>
+            <td>Has a specific question (SSI, college, etc.)</td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://tinyurl.com/TR4parents">Transition Resources for Parents (NASET)</a></td>
+          </tr>
+          <tr>
+            <td>Is short on time or prefers watching over reading</td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://tinyurl.com/IDparents">I&rsquo;m Determined Parent Video Series</a></td>
+          </tr>
+          <tr>
+            <td>Speaks Spanish as their primary language</td>
+            <td><a target="_blank" rel="noopener noreferrer" href="https://www.parentcenterhub.org/transitionadult/">Parent Center Hub</a> &mdash; available in Spanish</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Concerns -->
+    <section aria-labelledby="concerns-h">
+      <h2 class="section-h" id="concerns-h">Addressing Common Parent Concerns</h2>
+      <p style="margin-bottom:1.25rem; font-size:0.94rem;"><strong>Remember: Parents are partners, not obstacles.</strong> Most families <em>want</em> their children to be more independent &mdash; they just need guidance on how to help. Use these responses to open conversations, not close them.</p>
+
+      <div class="concern">
+        <p class="q">&ldquo;My child is too shy to participate.&rdquo;</p>
+        <p class="a">We start small &mdash; maybe just reading a prepared statement or sharing one strength. We practice beforehand in a comfortable setting, so there are no surprises. Shy students often bloom when given structure, preparation, and support rather than open-ended expectations.</p>
+      </div>
+
+      <div class="concern">
+        <p class="q">&ldquo;This seems like too much pressure on my child.&rdquo;</p>
+        <p class="a">We take a gradual approach and always start with what your child is comfortable doing. The goal is empowerment, not stress. Multiple supports are in place at every step, and we lead with strengths before introducing challenges.</p>
+      </div>
+
+      <div class="concern">
+        <p class="q">&ldquo;Will important information be missed if my child leads?&rdquo;</p>
+        <p class="a">All legal requirements will still be covered. Adults guide the process &mdash; students participate in it; they do not replace the team. Student involvement actually <em>adds</em> information by including the one perspective the team cannot get anywhere else: your child&rsquo;s own voice about their life and goals.</p>
+      </div>
+
+      <div class="concern">
+        <p class="q">&ldquo;My child doesn&rsquo;t understand their disability.&rdquo;</p>
+        <p class="a">That is exactly why we teach self-awareness! We start with strengths and build understanding gradually using age-appropriate language and activities. Knowing themselves &mdash; what they need, what they are good at, and what they want &mdash; helps students advocate more effectively for themselves both now and in adulthood.</p>
+      </div>
+    </section>
+
+    <p class="footer-note">These resources are provided by the Oklahoma State Department of Education as part of the Student Involvement in the IEP professional learning series. For questions, contact your OSDE regional specialist.</p>
+
+  </main>
+
+</body>
+</html>
